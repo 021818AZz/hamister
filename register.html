@@ -210,6 +210,12 @@
             width: 20px;
             height: 20px;
         }
+        
+        /* Botão desabilitado */
+        .login-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 
@@ -242,7 +248,7 @@
                 <div data-v-6698f844="" class="wrap">
                     <div data-v-6698f844="" class="head-box">
                         <img data-v-6698f844="" src="https://i.postimg.cc/NMXGxjG2/Chat-GPT-Image-18-de-jan-de-2026-15-20-17.png" alt="" class="logo2-img">
-                        <p data-v-6698f844="" class="join">Seja bem-vindo a Oracle<br></p>
+                        <p data-v-6698f844="" class="join">   Seja bem-vindo a Oracle<br></p>
                     </div>
                 </div>
                 <div data-v-6698f844="" class="wrap-body">
@@ -283,7 +289,7 @@
                                             <div class="van-field__body">
                                                 <input type="tel" name="phone" id="mobile" inputmode="numeric"
                                                     class="van-field__control"
-                                                    placeholder="9XXXXXXXX (ex: 912345678)">
+                                                    placeholder="Digite o número de telefone">
                                             </div>
                                         </div>
                                     </div>
@@ -330,8 +336,8 @@
                                 <div data-v-6698f844="" class="signup"></div>
                             </div>
 
-                            <!-- Botão de Registro -->
-                            <div id="submitBtn" data-v-6698f844="" class="login-btn" onclick="registerApp.handleRegister()">
+                            <!-- Botão de Registro - REMOVIDO O ONCLICK -->
+                            <div id="submitBtn" data-v-6698f844="" class="login-btn">
                                 <p data-v-6698f844="" class="tit">Registro</p>
                             </div>
 
@@ -357,6 +363,9 @@
     <script>
         // Configuração da API
         const API_BASE_URL = 'https://bd-p4q7.onrender.com';
+        
+        // Variável para controlar se o registro está em andamento
+        let isRegistering = false;
         
         // Função para extrair parâmetros da URL (query string)
         function getUrlParameter(name) {
@@ -493,6 +502,8 @@
             
             if (submitBtn) {
                 submitBtn.disabled = true;
+                submitBtn.style.opacity = '0.7';
+                submitBtn.style.cursor = 'not-allowed';
                 submitBtn.querySelector('.tit').textContent = 'Processando...';
             }
         }
@@ -507,8 +518,15 @@
             
             if (submitBtn) {
                 submitBtn.disabled = false;
+                submitBtn.style.opacity = '1';
+                submitBtn.style.cursor = 'pointer';
                 submitBtn.querySelector('.tit').textContent = 'Registro';
             }
+            
+            // Resetar a flag de registro
+            setTimeout(() => {
+                isRegistering = false;
+            }, 1000);
         }
         
         // Função para validar número de telefone de Angola
@@ -574,12 +592,21 @@
         
         // Função principal de registro
         async function performRegister(mobile, password, inviteCode) {
+            // Verificar se já está registrando
+            if (isRegistering) {
+                console.log('Registro já em andamento, ignorando clique duplo');
+                return;
+            }
+            
+            isRegistering = true;
+            
             // Formatar o número para o banco de dados
             const fullPhoneForDB = formatPhoneForDatabase(mobile);
             
             if (!fullPhoneForDB) {
                 showToast('Número de telefone inválido');
                 hideLoading();
+                isRegistering = false;
                 return;
             }
             
@@ -626,17 +653,25 @@
                 } else {
                     hideLoading();
                     showToast(data.message || 'Erro ao criar conta');
+                    isRegistering = false;
                 }
                 
             } catch (error) {
                 console.error('Erro no registro:', error);
                 hideLoading();
                 showToast('Erro de conexão com o servidor');
+                isRegistering = false;
             }
         }
         
         // Função para lidar com o clique no botão de cadastro
         function handleRegister() {
+            // Verificar se já está registrando
+            if (isRegistering) {
+                console.log('Registro já em andamento, aguarde...');
+                return;
+            }
+            
             // Obter valores dos campos
             const mobile = document.getElementById('mobile').value.trim();
             const password = document.getElementById('password').value;
@@ -707,7 +742,7 @@
                 // Dica quando o campo recebe foco
                 phoneInput.addEventListener('focus', function() {
                     if (!this.value) {
-                        this.placeholder = '912345678';
+                        this.placeholder = '';
                     }
                 });
                 
@@ -717,6 +752,19 @@
                     }
                 });
             }
+        }
+        
+        // Função para prevenir envio duplo rápido
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
         }
         
         // Inicializar quando o DOM estiver carregado
@@ -730,11 +778,12 @@
             // 2. Configurar formatação do telefone
             setupPhoneFormatting();
             
-            // 3. Adicionar evento ao botão de cadastro
+            // 3. Adicionar evento ao botão de cadastro com debounce
             const submitBtn = document.getElementById('submitBtn');
             if (submitBtn) {
-                submitBtn.addEventListener('click', handleRegister);
-                console.log('Botão de cadastro configurado');
+                // Adicionar event listener apenas uma vez
+                submitBtn.addEventListener('click', debounce(handleRegister, 500));
+                console.log('Botão de cadastro configurado (com proteção contra duplo clique)');
             }
             
             // 4. Permitir submit com Enter nos campos
