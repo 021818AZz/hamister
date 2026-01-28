@@ -1,0 +1,339 @@
+.pass[data-v-de395cd8] {
+    min-height: 100vh;
+    position: relative;
+    background: #f5f5f5;
+    z-index: 1;
+    padding-top: 5rem
+}
+
+.pass[data-v-de395cd8]:after {
+    content: "";
+    width: 75rem;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    background: url(/lendlease/dist/img/bg.7ab2eac0.png) no-repeat top/100% auto;
+    height: 22rem
+}
+
+.pass .navback[data-v-de395cd8] {
+    display: flex;
+    align-items: center;
+    padding: 0 3rem
+}
+
+.pass .navback .back-img[data-v-de395cd8] {
+    width: 4.8rem;
+    height: 4rem
+}
+
+.pass .navback .logo-img[data-v-de395cd8] {
+    width: 7.2rem;
+    height: 7.2rem;
+    margin-left: 1rem
+}
+
+.pass .navback p[data-v-de395cd8] {
+    font-weight: 500;
+    font-size: 4.5rem;
+    color: #333;
+    margin-left: 2rem
+}
+
+.pass .pas-img[data-v-de395cd8] {
+    display: block;
+    width: 65.2rem;
+    height: 42.1rem;
+    margin: 3rem auto;
+    margin-top: 5rem
+}
+
+.pass .wrap-pass[data-v-de395cd8] {
+    padding: 0 3rem
+}
+
+.pass .wrap-pass .bank-box[data-v-de395cd8] {
+    margin: 3rem 0
+}
+
+.pass .wrap-pass .bank-box .banktitle[data-v-de395cd8] {
+    font-size: 2.8rem;
+    color: #333;
+    text-align: left;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center
+}
+
+.pass .wrap-pass .bank-box .banktitle img[data-v-de395cd8] {
+    width: 4rem;
+    height: 4rem;
+    margin-right: 1rem
+}
+
+.pass .wrap-pass .bankbtn[data-v-de395cd8] {
+    margin-top: 10rem
+}
+
+.pass .wrap-pass .bankbtn button[data-v-de395cd8] {
+    width: 69rem;
+    height: 8.8rem;
+    background: #000;
+    border-radius: 3.2rem;
+    font-weight: 700;
+    font-size: 3.6rem;
+    color: #fff
+}
+
+[data-v-de395cd8] .nav-box {
+    overflow: hidden;
+    width: 75rem;
+    height: 15rem;
+    background: none;
+    padding-top: 5rem
+}
+
+[data-v-de395cd8] .nav-box .van-nav-bar__content .van-nav-bar__left img {
+    width: 2.6rem;
+    height: 3rem
+}
+
+[data-v-de395cd8] .nav-box .van-nav-bar__content .van-nav-bar__left i {
+    color: #000;
+    font-size: 4rem
+}
+
+[data-v-de395cd8] .nav-box .van-nav-bar__content .van-nav-bar__title {
+    max-width: 80%;
+    padding: .5rem 0
+}
+
+[data-v-de395cd8] .nav-box .van-nav-bar__content .van-nav-bar__title p {
+    font-size: 3.8rem;
+    font-weight: 700;
+    color: #000
+}
+
+[data-v-de395cd8] .nav-box:after {
+    display: none
+}
+
+[data-v-de395cd8] .input-box {
+    height: 8.8rem;
+    background: #fff;
+    border-radius: .8rem;
+    margin-bottom: 2.5rem;
+    margin-top: 1rem
+}
+
+[data-v-de395cd8] .input-box .van-field__left-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem
+}
+
+[data-v-de395cd8] .input-box .van-field__left-icon img {
+    width: 4rem;
+    height: 4rem
+}
+
+[data-v-de395cd8] .input-box .van-field__right-icon img {
+    width: 5rem;
+    height: 5rem
+}
+
+[data-v-de395cd8] .input-box .van-field__right-icon button {
+    width: 10rem;
+    height: 5.4rem;
+    background: #35774a;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 3.2rem
+}
+
+[data-v-de395cd8] .input-box input {
+    color: #000;
+    font-size: 2.4rem
+}
+
+[data-v-de395cd8] .input-box input::placeholder {
+    color: #7f7f7f
+}
+
+[data-v-de395cd8] .input-box .van-cell__value {
+    display: flex;
+    align-items: center
+}
+
+[data-v-de395cd8] .input-box .van-cell__value .van-field__body {
+    width: 100%
+}
+
+[data-v-de395cd8] .popup-boxtu {
+    width: 67rem;
+    background: #fff;
+    padding: 2.8rem 2rem 4rem;
+    border-radius: 1rem;
+    border: 0
+}
+
+[data-v-de395cd8] .popup-boxtu .entert {
+    text-align: left;
+    font-weight: 700;
+    color: #333c40;
+    font-size: 3rem;
+    margin-bottom: 4rem;
+    padding: 0 2rem
+}
+
+[data-v-de395cd8] .popup-boxtu .btn {
+    margin-top: 5rem
+}
+
+[data-v-de395cd8] .popup-boxtu .btn .btn-cancel {
+    width: 20rem;
+    height: 7rem;
+    font-size: 3.4rem;
+    font-weight: 700;
+    color: #333c40;
+    margin-right: 10rem
+}
+
+[data-v-de395cd8] .popup-boxtu .btn .bull-btn {
+    width: 20rem;
+    height: 7rem;
+    background: #35774a;
+    border-radius: .8rem;
+    font-size: 3.6rem;
+    font-weight: 700;
+    color: #fff
+}
+
+[data-v-de395cd8] .popup-boxtu i {
+    color: red
+}
+
+[data-v-de395cd8] .popup-boxtu .line {
+    width: 90%;
+    height: .1rem;
+    margin: .5rem auto;
+    background: #cecece
+}
+
+[data-v-de395cd8] .popup-boxtu .input-title {
+    background: none;
+    height: 8.8rem;
+    border-radius: 4.4rem;
+    align-items: center;
+    border: 0
+}
+
+[data-v-de395cd8] .popup-boxtu .input-title input {
+    color: #333 !important
+}
+
+[data-v-de395cd8] .popup-boxtu .input-title .van-field__control {
+    font-weight: 500;
+    font-size: 3.2rem
+}
+
+[data-v-de395cd8] .popup-boxtu .input-title input::placeholder {
+    font-size: 3.2rem;
+    font-weight: 400
+}
+
+[data-v-de395cd8] .popup-boxtu .input-title .van-field__right-icon .sendbtn {
+    padding: 0 1.8rem;
+    background: #35774a;
+    border-radius: 1rem;
+    height: 6rem
+}
+
+[data-v-de395cd8] .popup-boxtu .input-title .van-field__right-icon .sendbtn .van-button__content span {
+    font-size: 2.8rem;
+    font-weight: 500;
+    color: #fff
+}
+
+[data-v-de395cd8] .popup-boxtu .input-title .van-field__right-icon .eyeimg {
+    width: 3.4rem;
+    height: 2.2rem
+}
+
+[data-v-de395cd8] .popup-boxtu .input-title input::placeholder {
+    color: #999;
+    font-size: 3rem
+}
+
+[data-v-de395cd8] .popup-boxtu .input-title input {
+    color: #012cf9;
+    font-size: 3rem
+}
+
+[data-v-de395cd8] .popup-boxtu .input-title:after {
+    display: none
+}
+
+[data-v-de395cd8] .sel-input {
+    background: rgba(53, 119, 74, .05);
+    border: .2rem solid #35774a
+}
+
+[data-v-de395cd8] .sel-input input {
+    color: #35774a
+}
+
+[data-v-de395cd8] .sel-input input::placeholder {
+    font-weight: 400;
+    color: #35774a
+}
+
+[data-v-de395cd8] .tabs-box {
+    margin-top: 3rem
+}
+
+[data-v-de395cd8] .tabs-box .van-tabs__wrap {
+    background: #fff;
+    border-radius: .8rem;
+    height: 8.8rem
+}
+
+[data-v-de395cd8] .tabs-box .van-tabs__wrap .van-tabs__nav {
+    width: 100%;
+    z-index: 1;
+    box-sizing: border-box;
+    margin: 0 auto;
+    justify-content: space-around
+}
+
+[data-v-de395cd8] .tabs-box .van-tabs__wrap .van-tabs__nav .van-tab {
+    height: 7rem;
+    flex: none;
+    border-radius: .8rem
+}
+
+[data-v-de395cd8] .tabs-box .van-tabs__wrap .van-tabs__nav .van-tab span {
+    font-size: 3.2rem;
+    font-weight: 400;
+    color: #333
+}
+
+[data-v-de395cd8] .tabs-box .van-tabs__wrap .van-tabs__nav .van-tab--active {
+    border: 0
+}
+
+[data-v-de395cd8] .tabs-box .van-tabs__wrap .van-tabs__nav .van-tab--active span {
+    font-weight: 700;
+    font-size: 3.2rem
+}
+
+[data-v-de395cd8] .tabs-box .van-tabs__wrap .van-tabs__nav .van-tabs__line {
+    background: #35774a;
+    bottom: 1rem
+}
+
+[data-v-de395cd8] .tabs-box .van-tabs__content {
+    margin-top: 1rem
+}

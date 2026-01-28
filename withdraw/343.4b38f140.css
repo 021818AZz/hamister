@@ -1,0 +1,342 @@
+.bank[data-v-603fb372] {
+    min-height: 100vh;
+    position: relative;
+    background: #f7f6f3;
+    z-index: 1
+}
+
+.bank[data-v-603fb372]:after {
+    content: "";
+    width: 75rem;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    background: url(/lendlease/dist/img/bg.7ab2eac0.png) no-repeat top/100% auto;
+    height: 22rem
+}
+
+.bank .wrap-bank[data-v-603fb372] {
+    margin-top: 5rem;
+    padding: 0 3rem;
+    position: relative
+}
+
+.bank .wrap-bank .select-usdt[data-v-603fb372] {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 3rem
+}
+
+.bank .wrap-bank .select-usdt .l-tile[data-v-603fb372] {
+    width: 30%;
+    font-size: 4rem;
+    border-radius: .8rem;
+    background: #f5f5f5;
+    color: #333c40;
+    padding: 1rem 2rem
+}
+
+.bank .wrap-bank .select-usdt .select[data-v-603fb372] {
+    color: #35774a;
+    font-weight: 700;
+    border: .2rem solid #35774a
+}
+
+.bank .wrap-bank .boxed[data-v-603fb372] {
+    background: #fff;
+    border-radius: 2rem;
+    padding: 2rem
+}
+
+.bank .wrap-bank .wrap-top[data-v-603fb372] {
+    display: flex;
+    align-items: center;
+    margin: 2rem 0;
+    margin-bottom: 5rem
+}
+
+.bank .wrap-bank .wrap-top img[data-v-603fb372] {
+    width: 4.4rem;
+    height: 4.4rem
+}
+
+.bank .wrap-bank .wrap-top p[data-v-603fb372] {
+    font-size: 3.4rem;
+    color: #333;
+    margin-left: 1rem;
+    font-weight: 700
+}
+
+.bank .wrap-bank .bank-box .banktitle[data-v-603fb372] {
+    font-size: 2.8rem;
+    color: #333;
+    text-align: left;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    font-family: fontbold
+}
+
+.bank .wrap-bank .bank-box .bankname[data-v-603fb372] {
+    height: 10rem;
+    background: #f7f7f7;
+    border-radius: .8rem;
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 0 3rem
+}
+
+.bank .wrap-bank .bank-box .bankname .l-bank[data-v-603fb372] {
+    display: flex;
+    align-items: center
+}
+
+.bank .wrap-bank .bank-box .bankname .l-bank img[data-v-603fb372] {
+    width: 4rem;
+    height: 4rem
+}
+
+.bank .wrap-bank .bank-box .bankname .l-bank .l-name[data-v-603fb372] {
+    margin-left: 1rem;
+    color: #7f7f7f;
+    font-size: 2.4rem
+}
+
+.bank .wrap-bank .bank-box .bankname i[data-v-603fb372] {
+    font-size: 3rem;
+    color: #000
+}
+
+.bank .wrap-bank .bank-tip[data-v-603fb372] {
+    margin-top: 5rem;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 2rem
+}
+
+.bank .wrap-bank .bank-tip img[data-v-603fb372] {
+    width: 4.8rem;
+    height: 4.8rem
+}
+
+.bank .wrap-bank .bank-tip p[data-v-603fb372] {
+    font-size: 2.6rem;
+    font-family: fontbold
+}
+
+.bank .wrap-bank .remove[data-v-603fb372] {
+    color: red;
+    text-align: right
+}
+
+.bank .wrap-bank .bankbtn[data-v-603fb372] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8rem
+}
+
+.bank .wrap-bank .bankbtn button[data-v-603fb372] {
+    width: 69rem;
+    height: 8.8rem;
+    background: #000;
+    border-radius: .8rem;
+    margin: 0 auto;
+    color: #fff;
+    font-weight: 700;
+    font-size: 4rem
+}
+
+[data-v-603fb372] .nav-box {
+    overflow: hidden;
+    width: 75rem;
+    height: 15rem;
+    background: none;
+    padding-top: 5rem
+}
+
+[data-v-603fb372] .nav-box .van-nav-bar__content .van-nav-bar__left img {
+    width: 2.6rem;
+    height: 3rem
+}
+
+[data-v-603fb372] .nav-box .van-nav-bar__content .van-nav-bar__left i {
+    color: #000;
+    font-size: 4rem
+}
+
+[data-v-603fb372] .nav-box .van-nav-bar__content .van-nav-bar__title {
+    max-width: 80%
+}
+
+[data-v-603fb372] .nav-box .van-nav-bar__content .van-nav-bar__title p {
+    font-size: 3.8rem;
+    font-family: bold;
+    font-weight: 400;
+    color: #000
+}
+
+[data-v-603fb372] .nav-box:after {
+    display: none
+}
+
+[data-v-603fb372] .input-box {
+    height: 10rem;
+    background: #f7f7f7;
+    border-radius: .8rem;
+    margin-bottom: 2.5rem
+}
+
+[data-v-603fb372] .input-box:after {
+    border-bottom: 1px solid #999
+}
+
+[data-v-603fb372] .input-box .van-field__left-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem
+}
+
+[data-v-603fb372] .input-box .van-field__left-icon img {
+    width: 4rem;
+    height: 4rem
+}
+
+[data-v-603fb372] .input-box input {
+    color: #000;
+    font-size: 2.4rem
+}
+
+[data-v-603fb372] .input-box input::placeholder {
+    color: #7f7f7f
+}
+
+[data-v-603fb372] .input-box .van-cell__value {
+    display: flex;
+    align-items: center
+}
+
+[data-v-603fb372] .input-box .van-cell__value .van-field__body {
+    width: 100%
+}
+
+[data-v-603fb372] .trpassword {
+    width: 67rem;
+    background: #fff;
+    border-radius: 4rem;
+    padding: 4rem 3rem
+}
+
+[data-v-603fb372] .trpassword .tip {
+    color: #ffa400;
+    font-weight: 700;
+    font-size: 5rem;
+    margin-top: -1rem
+}
+
+[data-v-603fb372] .trpassword .input-box {
+    height: 8rem
+}
+
+[data-v-603fb372] .trpassword .input-box .eyeimg {
+    width: 4rem;
+    height: 4rem;
+    margin-top: 1rem
+}
+
+[data-v-603fb372] .trpassword .input-box input {
+    font-size: 3rem
+}
+
+[data-v-603fb372] .trpassword .input-box input::placeholder {
+    color: #000
+}
+
+[data-v-603fb372] .trpassword .areyour {
+    font-size: 3rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #ff5614;
+    margin-top: 3rem
+}
+
+[data-v-603fb372] .trpassword .oldpas {
+    text-align: left;
+    margin-bottom: 1rem;
+    font-size: 3rem;
+    color: #fff
+}
+
+[data-v-603fb372] .trpassword .transtn {
+    margin-top: 5rem
+}
+
+[data-v-603fb372] .trpassword .transtn :first-child {
+    background: #000;
+    border-radius: 1rem;
+    width: 53rem;
+    height: 8rem;
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: #fff
+}
+
+[data-v-603fb372] .bankpop {
+    padding: 2rem 0 3rem
+}
+
+[data-v-603fb372] .bankpop .top-sear {
+    box-sizing: border-box;
+    padding: 1rem;
+    width: 90%;
+    margin: 0 auto;
+    background: #f3f3f3;
+    border-radius: 1.3rem
+}
+
+[data-v-603fb372] .bankpop .top-sear .van-search__content {
+    background: none
+}
+
+[data-v-603fb372] .bankpop .top-sear .van-cell__value .van-field__body input {
+    color: #333;
+    font-size: 3rem
+}
+
+[data-v-603fb372] .bankpop .van-picker {
+    margin-top: 1rem
+}
+
+[data-v-603fb372] .bankpop .van-picker .van-picker__toolbar {
+    display: flex;
+    box-sizing: border-box;
+    margin-top: 3rem;
+    padding: 0 3rem
+}
+
+[data-v-603fb372] .bankpop .van-picker .van-picker__toolbar .van-picker__cancel {
+    width: 28rem;
+    height: 8rem;
+    background: #e7e7e7;
+    border-radius: 1.2rem;
+    font-size: 3rem;
+    font-weight: 600;
+    color: #999
+}
+
+[data-v-603fb372] .bankpop .van-picker .van-picker__toolbar .van-picker__confirm {
+    width: 28rem;
+    height: 8rem;
+    background: #000;
+    border-radius: 1.2rem;
+    font-size: 3rem;
+    font-weight: 600;
+    color: #fff
+}

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="icon" href="http://orac-le.online/lend/login/lendlease/dist/favicon.ico">
+    <title>Oracle | Login</title>
+
+    <link href="css/chunk-vendors.317e4ea8.css" rel="stylesheet">
+    <link href="css/app.3d111502.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/65.2ad687df.css">
+
+    <style>
+        .login[data-v-6698f844]:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 70.6rem;
+            background: url(img/oracle.jpg) no-repeat 50%/100% 100%;
+        }
+        
+        /* Estilos para o Toast - SEMPRE PRETO */
+        .custom-toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px 30px;
+            border-radius: 10px;
+            color: white;
+            font-weight: 500;
+            z-index: 9999;
+            animation: fadeIn 0.3s ease-in-out;
+            max-width: 80%;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 250px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* TODOS os toasts são pretos - removidas as cores */
+        .toast-success,
+        .toast-error,
+        .toast-info,
+        .toast-warning,
+        .toast-loading {
+            background-color: rgba(0, 0, 0, 0.95) !important;
+        }
+        
+        .toast-loading .loading-gif {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 10px;
+        }
+        
+        .toast-message {
+            margin-top: 10px;
+            font-size: 16px;
+            color: white;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+        
+        /* Estilos para o Loading Overlay - TAMBÉM PRETO */
+        #loadingOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9998;
+            flex-direction: column;
+        }
+        
+        .loading-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            min-width: 200px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .loading-gif {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+        }
+        
+        .loading-text {
+            color: white;
+            font-size: 16px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body __processed_441fae6c-3cde-4fbd-b1e4-f9a42d413f21__="true"
+    bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWllZ29tY29uIiwiYWRibG9ja2VyU3RhdHVzIjp7IkRJU1BMQVkiOiJkaXNhYmxlZCIsIkZBQ0VCT09LIjoiZGlzYWJsZWQiLCJUV0lUVEVSIjoiZGlzYWJsZWQiLCJSRURESVQiOiJkaXNhYmxlZCIsIlBJTlRFUkVTVCI6ImRpc2FibGVkIiwiSU5TVEFHUkFNIjoiZGlzYWJsZWQiLCJMSU5LRURJTiI6ImRpc2FibGVkIiwiQ09ORklHIjoiZGlzYWJsZWQifSwidmVyc2lvbiI6IjIuMC4yNCIsInNjb3JlIjoyMDAyNH1d"
+    class="">
+    
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay">
+        <div class="loading-content">
+            <img src="img/loading.gif" class="loading-gif" alt="Carregando">
+            <div class="loading-text">Processando login...</div>
+        </div>
+    </div>
+
+    <svg aria-hidden="true" style="position: absolute; width: 0px; height: 0px; overflow: hidden;">
+        <!-- SVG content -->
+    </svg>
+    
+    <form id="loginForm" onsubmit="return false;">
+        <input type="hidden" name="_token" value="hAtlqQAFSB701MYM00uT5Z3q5g1Sa5DTFZZMCfMp">
+        <div id="app" data-v-app="" bis_skin_checked="1">
+            <div data-v-6698f844="" class="login" bis_skin_checked="1">
+                <div data-v-6698f844="" class="wrap" bis_skin_checked="1">
+                    <div data-v-6698f844="" class="head-box" bis_skin_checked="1">
+                        <img data-v-6698f844="" src="img/logo2.png" alt="Oracle Logo" class="logo2-img">
+                        <p data-v-6698f844="" class="join">Seja bem-vindo a Oracle</p>
+                    </div>
+                </div>
+                <div data-v-6698f844="" class="wrap-body" bis_skin_checked="1">
+                    <section data-v-6698f844="" class="section-box">
+                        <div data-v-6698f844="" class="content" bis_skin_checked="1">
+                            <div data-v-6698f844="" class="userinfo" bis_skin_checked="1">
+                                <!-- Campo País -->
+                                <div data-v-6698f844="" bis_skin_checked="1">
+                                    <div data-v-6698f844="" class="box-title" bis_skin_checked="1">
+                                        <img data-v-6698f844="" src="img/internet.png" alt="País">
+                                        <p data-v-6698f844="" class="title">País</p>
+                                    </div>
+                                    <div data-v-6698f844="" class="van-dropdown-menu item-boxi" bis_skin_checked="1">
+                                        <div class="van-dropdown-menu__bar" bis_skin_checked="1">
+                                            <div id="van-dropdown-menu-1-0" role="button" tabindex="0"
+                                                class="van-dropdown-menu__item van-haptics-feedback"
+                                                bis_skin_checked="1">
+                                                <span class="van-dropdown-menu__title">
+                                                    <div class="van-ellipsis" bis_skin_checked="1">
+                                                        <p data-v-6698f844="" class="icon-img">
+                                                            <img data-v-6698f844="" src="img/angola.png" alt="Angola" style="width: 20px;">
+                                                            Angola (+244)
+                                                        </p>
+                                                    </div>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Campo Telefone -->
+                                <div data-v-6698f844="" bis_skin_checked="1">
+                                    <div data-v-6698f844="" class="box-title" bis_skin_checked="1">
+                                        <img data-v-6698f844="" src="img/telefone.png" alt="Telefone">
+                                        <p data-v-6698f844="" class="title">Telefone</p>
+                                    </div>
+                                    <div data-v-6698f844="" class="van-cell van-field input-box sel-input" bis_skin_checked="1">
+                                        <div class="van-cell__value van-cell__value--alone van-field__value" bis_skin_checked="1">
+                                            <div class="van-field__body" bis_skin_checked="1">
+                                                <input type="tel"
+                                                       name="phone"
+                                                       id="phone"
+                                                       inputmode="numeric"
+                                                       class="van-field__control"
+                                                       placeholder="Digite seu número de telefone"
+                                                       maxlength="9"
+                                                       autocomplete="tel"
+                                                       required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Campo Senha -->
+                                <div data-v-6698f844="" bis_skin_checked="1" style="margin-top: 3rem;">
+                                    <div data-v-6698f844="" class="box-title" bis_skin_checked="1">
+                                        <img data-v-6698f844="" src="img/senha.png" alt="Senha">
+                                        <p data-v-6698f844="" class="title">Senha</p>
+                                    </div>
+                                    <div data-v-6698f844="" class="van-cell van-field input-box" bis_skin_checked="1">
+                                        <div class="van-cell__value van-cell__value--alone van-field__value" bis_skin_checked="1">
+                                            <div class="van-field__body" bis_skin_checked="1">
+                                                <input name="password"
+                                                       type="password"
+                                                       id="password"
+                                                       class="van-field__control"
+                                                       placeholder="Digite sua senha "
+                                                       minlength="6"
+                                                       autocomplete="current-password"
+                                                       required>
+                                                <div class="van-field__right-icon" id="passwordToggle" bis_skin_checked="1" title="Mostrar/Esconder senha">
+                                                    <img data-v-6698f844="" src="img/vista.png" alt="Mostrar senha" id="eyeIcon">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div data-v-6698f844="" class="goforget flex" bis_skin_checked="1">
+                            <div data-v-6698f844="" class="signup" bis_skin_checked="1"></div>
+                        </div>
+                        
+                        <!-- Botão de Login -->
+                        <div data-v-6698f844="" class="login-btn btnlog" bis_skin_checked="1" onclick="handleLogin()">
+                            <p data-v-6698f844="" class="tit">Login</p>
+                        </div>
+                        
+                        <p data-v-6698f844="" class="sig">
+                            Ainda não tem uma conta??
+                            <span data-v-6698f844="" onclick="window.location.href='/register.html'">
+                                Vá para o registro
+                            </span>
+                        </p>
+                        
+                        <div style="cursor: pointer;" data-v-6698f844="" class="downloadapp" bis_skin_checked="1">
+                            <img data-v-6698f844="" src="img/telegrama.png" alt="Telegram" onclick="window.location.href='https://t.me/oracleoficial'">
+                            <p data-v-6698f844="" style="color: white !important;"></p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <style>
+        /* Estilos para o preloader existente - TAMBÉM PRETO */
+        #preloade {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9997;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .van-toast {
+            background-color: rgba(0, 0, 0, 0.95) !important;
+            color: white !important;
+        }
+    </style>
+
+    <script>
+        // Configuração da API
+        const API_BASE_URL = 'https://bd-p4q7.onrender.com';
+        const TOKEN_EXPIRY_HOURS = 5;
+
+        // Função para mostrar toast PRETO com GIF
+        function showToast(message, type = 'info') {
+            // Remove toast anterior se existir
+            const existingToast = document.querySelector('.custom-toast');
+            if (existingToast) {
+                existingToast.remove();
+            }
+            
+            // Cria novo toast - SEMPRE PRETO
+            const toast = document.createElement('div');
+            toast.className = `custom-toast toast-${type}`;
+            
+            // Se for loading, adiciona o GIF
+            if (type === 'loading') {
+                toast.innerHTML = `
+                    <img src="img/loading.gif" class="loading-gif" alt="Carregando">
+                    <div class="toast-message">${message}</div>
+                `;
+            } else {
+                toast.innerHTML = `<div class="toast-message">${message}</div>`;
+            }
+            
+            document.body.appendChild(toast);
+            
+            // Se não for loading, remove após 3 segundos
+            if (type !== 'loading') {
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.remove();
+                    }
+                }, 3000);
+            }
+            
+            return toast; // Retorna a referência para poder remover depois
+        }
+
+        // Função para remover toast específico
+        function removeToast(toastElement) {
+            if (toastElement && toastElement.parentNode) {
+                toastElement.remove();
+            }
+        }
+
+        // Função para mostrar/ocultar loading overlay
+        function showLoading() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            if (loadingOverlay) {
+                loadingOverlay.style.display = 'flex';
+            }
+        }
+
+        function hideLoading() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            if (loadingOverlay) {
+                loadingOverlay.style.display = 'none';
+            }
+        }
+
+        // Função para validar número de telefone de Angola (9 dígitos)
+        function checkAngolanMobile(mobile) {
+            // Remove qualquer caractere não numérico
+            const cleanNumber = mobile.replace(/\D/g, '');
+            
+            // Verifica se tem exatamente 9 dígitos
+            if (cleanNumber.length !== 9) {
+                return false;
+            }
+            
+            // Verifica se começa com 9
+            if (!cleanNumber.startsWith('9')) {
+                return false;
+            }
+            
+            return true;
+        }
+
+        // Função para formatar o número para envio ao BD
+        function formatPhoneForBD(phone) {
+            // Remove qualquer caractere não numérico
+            const cleanNumber = phone.replace(/\D/g, '');
+            
+            // Adiciona o código do país 244 na frente
+            // Resultado: 244 + 9 dígitos = 12 dígitos total
+            return '244' + cleanNumber;
+        }
+
+        // Função para alternar visibilidade da senha
+        function setupPasswordToggle() {
+            const passwordToggle = document.getElementById('passwordToggle');
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIcon');
+            
+            if (passwordToggle && passwordInput && eyeIcon) {
+                passwordToggle.addEventListener('click', function() {
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        eyeIcon.src = 'img/eye-closed.png'; // Ícone de olho fechado
+                        eyeIcon.alt = 'Esconder senha';
+                    } else {
+                        passwordInput.type = 'password';
+                        eyeIcon.src = 'img/vista.png'; // Ícone de olho aberto
+                        eyeIcon.alt = 'Mostrar senha';
+                    }
+                });
+            }
+        }
+
+        // Função para verificar se o token no localStorage ainda é válido
+        function isTokenValid() {
+            const tokenData = localStorage.getItem('user_token');
+            
+            if (!tokenData) return false;
+            
+            try {
+                const { expiry } = JSON.parse(tokenData);
+                
+                // Verificar se o token expirou
+                if (Date.now() > expiry) {
+                    // Token expirado, remover do localStorage
+                    localStorage.removeItem('user_token');
+                    localStorage.removeItem('user_id');
+                    return false;
+                }
+                
+                return true;
+            } catch (e) {
+                console.error('Erro ao verificar token:', e);
+                return false;
+            }
+        }
+
+        // Função principal de login
+        async function performLogin(phone, password) {
+            // Formatar o número para envio ao BD: 244 + 9 dígitos = 12 dígitos
+            const fullPhoneForBD = formatPhoneForBD(phone);
+            
+            // Mostrar toast de loading PRETO
+            const loadingToast = showToast('Conectando ao servidor...', 'loading');
+            
+            try {
+                console.log('Enviando para API:', {
+                    mobile: fullPhoneForBD,
+                    password_length: password.length
+                });
+                
+                // Fazer requisição para a API de login
+                const response = await fetch(`${API_BASE_URL}/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        mobile: fullPhoneForBD, // 12 dígitos: 244XXXXXXXXX
+                        password: password
+                    })
+                });
+
+                const data = await response.json();
+                console.log('Resposta da API:', data);
+
+                // Remover toast de loading
+                removeToast(loadingToast);
+                
+                if (data.success) {
+                    // Login bem-sucedido - Armazenar no localStorage com expiração
+                    const tokenData = {
+                        token: data.data.token,
+                        expiry: Date.now() + (TOKEN_EXPIRY_HOURS * 60 * 60 * 1000)
+                    };
+                    
+                    // Salvar no localStorage
+                    localStorage.setItem('user_token', JSON.stringify(tokenData));
+                    localStorage.setItem('user_id', data.data.user.id);
+                    
+                    // Lembrar o número de telefone
+                    rememberPhone(phone);
+                    
+                    hideLoading();
+                    // Toast PRETO para sucesso também
+                    showToast('Login realizado com sucesso!');
+                    
+                    // Redirecionar após um breve delay
+                    setTimeout(() => {
+                        window.location.href = '/home.html';
+                    }, 1500);
+                } else {
+                    hideLoading();
+                    // Toast PRETO para erro também
+                    showToast(data.message || 'Erro ao fazer login');
+                }
+            } catch (error) {
+                console.error('Erro no login:', error);
+                // Remover toast de loading em caso de erro
+                removeToast(loadingToast);
+                hideLoading();
+                // Toast PRETO para erro de conexão
+                showToast('Erro de conexão com o servidor');
+            }
+        }
+
+        // Função para lidar com o clique no botão de login
+        function handleLogin() {
+            const phoneInput = document.getElementById('phone');
+            const passwordInput = document.getElementById('password');
+            
+            if (!phoneInput || !passwordInput) {
+                showToast('Elementos do formulário não encontrados');
+                return;
+            }
+            
+            const phone = phoneInput.value.trim();
+            const password = passwordInput.value.trim();
+            
+            console.log('Dados do login:', {
+                phone_entered: phone,
+                phone_for_bd: formatPhoneForBD(phone),
+                password_length: password.length
+            });
+
+            // Validações
+            if (!phone) {
+                showToast('Digite o número de telefone...');
+                phoneInput.focus();
+                return;
+            }
+
+            if (!checkAngolanMobile(phone)) {
+                showToast('Número de telefone inválido. Digite 9 dígitos começando com 9. Exemplo: 912345678');
+                phoneInput.focus();
+                return;
+            }
+            
+            if (!password) {
+                showToast('Digite a senha...');
+                passwordInput.focus();
+                return;
+            }
+
+            if (password.length < 6) {
+                showToast('A senha deve ter pelo menos 6 caracteres');
+                passwordInput.focus();
+                return;
+            }
+
+            showLoading();
+            performLogin(phone, password);
+        }
+
+        // Função para lembrar número (chamar quando o login for bem-sucedido)
+        function rememberPhone(phone) {
+            localStorage.setItem('remembered_phone', phone);
+        }
+
+        // Função para formatar o telefone enquanto digita
+        function setupPhoneFormatting() {
+            const phoneInput = document.getElementById('phone');
+            
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function(e) {
+                    // Remove qualquer caractere não numérico
+                    let value = this.value.replace(/\D/g, '');
+                    
+                    // Limita a 9 dígitos
+                    if (value.length > 9) {
+                        value = value.substring(0, 9);
+                    }
+                    
+                    // Atualiza o valor
+                    this.value = value;
+                });
+            }
+        }
+
+        // Inicializar quando o DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Inicializando sistema de login...');
+            
+            // Verificar se há token válido no localStorage
+            if (isTokenValid()) {
+                console.log('Token válido encontrado, redirecionando...');
+                showToast('Sessão ativa detectada, redirecionando...');
+                setTimeout(() => {
+                    window.location.href = '/home.html';
+                }, 1000);
+                return;
+            }
+            
+            // Configurar formatação do telefone
+            setupPhoneFormatting();
+            
+            // Configurar toggle da senha
+            setupPasswordToggle();
+            
+            // Adicionar evento ao botão de login
+            const loginButton = document.querySelector('.btnlog');
+            if (loginButton) {
+                loginButton.addEventListener('click', handleLogin);
+                console.log('Botão de login configurado');
+            } else {
+                console.error('Botão de login não encontrado!');
+            }
+            
+            // Permitir submit com Enter no campo de senha
+            const passwordInput = document.getElementById('password');
+            if (passwordInput) {
+                passwordInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        handleLogin();
+                    }
+                });
+            }
+            
+            // Permitir submit com Enter no campo de telefone também
+            const phoneInput = document.getElementById('phone');
+            if (phoneInput) {
+                phoneInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        handleLogin();
+                    }
+                });
+            }
+            
+            // Verificar se há número salvo no localStorage para "lembrar"
+            const savedPhone = localStorage.getItem('remembered_phone');
+            if (savedPhone && phoneInput) {
+                phoneInput.value = savedPhone;
+            }
+            
+            console.log('Sistema de login inicializado com sucesso!');
+        });
+
+        // Função global para login (mantida para compatibilidade)
+        window.login = function() {
+            handleLogin();
+        };
+
+        // Exportar funções para uso global
+        window.loginApp = {
+            handleLogin,
+            isTokenValid,
+            formatPhoneForBD,
+            showToast,
+            hideLoading
+        };
+    </script>
+
+    <!-- Preloader existente (mantido para compatibilidade) -->
+    <div class="loaderd" id="preloade">
+        <center>
+            <div class="loaderd">
+                <div class="van-toast van-toast--middle loadingcss" bis_skin_checked="1">
+                    <i class="van-icon van-toast__icon"><img src="img/loading.gif" class="van-icon__image"></i>
+                </div>
+            </div>
+        </center>
+    </div>
+
+    <script src="http://orac-le.online/public/assets/p.js"></script>
+</body>
+</html>

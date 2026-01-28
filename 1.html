@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="icon" href="/lendlease/dist/favicon.ico">
+    <title>Equipe Nível 1 | Oracle</title>
+
+    <link href="css/chunk-vendors.317e4ea8.css" rel="stylesheet">
+    <link href="css/app.33d111502.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/9912.1262dfcf.css">
+
+    <style>
+        .teamuis .nav-top[data-v-4b56c3a1] {
+            width: 100%;
+            height: 42rem;
+            background: url() no-repeat;
+            background-size: cover;
+            padding: 10rem 2.8rem 2rem
+        }
+
+        .teamuis .lease-banner[data-v-4b56c3a1] {
+            height: 29rem;
+            width: 69.6rem;
+            margin: 3rem auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: url(img/futuro.jpg) no-repeat top/100% auto;
+            position: relative
+        }
+        
+        /* Estilos adicionais para a lista de membros */
+        .members-container {
+            margin: 15px;
+        }
+        
+        .member-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+        }
+        
+        .member-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            margin-right: 15px;
+        }
+        
+        .member-info {
+            flex: 1;
+        }
+        
+        .member-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .member-phone {
+            font-weight: 500;
+            color: #333;
+            font-size: 16px;
+        }
+        
+        .member-status {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+        
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-inactive {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .member-details {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .detail-item {
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        .detail-label {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+        
+        .detail-value {
+            font-weight: 500;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .loading-state {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            background: white;
+            border-radius: 10px;
+            margin: 15px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            background: white;
+            border-radius: 10px;
+            margin: 15px;
+        }
+        
+        .empty-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+            opacity: 0.5;
+        }
+        
+        .error-state {
+            text-align: center;
+            padding: 30px;
+            color: #721c24;
+            background: #f8d7da;
+            border-radius: 10px;
+            margin: 15px;
+        }
+        
+        .retry-btn {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" data-v-app="" bis_skin_checked="1">
+        <div data-v-4b56c3a1="" class="teamuis" bis_skin_checked="1">
+            <!-- Header com seta de voltar -->
+            <div data-v-4b56c3a1="" class="lease-top" bis_skin_checked="1" style="position: relative;">
+                <a href="javascript:history.back()" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: white; text-decoration: none; font-size: 18px;">←</a>
+                <p data-v-4b56c3a1="" class="" style="text-align: center;">Equipe - Nível 1</p>
+            </div>
+            
+            <!-- Banner com estatísticas do nível 1 -->
+            <div data-v-4b56c3a1="" class="lease-banner" bis_skin_checked="1">
+                <div data-v-4b56c3a1="" class="accum" bis_skin_checked="1">
+                    <p data-v-4b56c3a1="" class="accum-t1">Total de Membros</p>
+                    <p data-v-4b56c3a1="" class="accum-t2" id="totalMembers">0</p>
+                </div>
+                <div data-v-4b56c3a1="" class="existing" bis_skin_checked="1">
+                    <div data-v-4b56c3a1="" class="left" bis_skin_checked="1">
+                        <p data-v-4b56c3a1="">Ativos</p>
+                        <span data-v-4b56c3a1="" class="income" id="activeMembers">0</span>
+                    </div>
+                    <div data-v-4b56c3a1="" class="rightu" bis_skin_checked="1">
+                        <p data-v-4b56c3a1="">Inativos</p>
+                        <span data-v-4b56c3a1="" class="income" id="inactiveMembers">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Container principal -->
+            <section data-v-4b56c3a1="" class="section-box">
+                <div data-v-4b56c3a1="" class="product-title" bis_skin_checked="1">
+                    <p data-v-4b56c3a1="" class="list-tit bold">Membros do Nível 1</p>
+                </div>
+                
+                <!-- Lista de membros -->
+                <div class="members-container">
+                    <div id="membersList">
+                        <div class="loading-state">Carregando membros...</div>
+                    </div>
+                    
+                    <!-- Estados vazios e erro -->
+                    <div class="empty-state" id="emptyState" style="display: none;">
+                        <div class="empty-icon">👥</div>
+                        <p>Nenhum membro encontrado no nível 1</p>
+                        <p style="font-size: 12px; margin-top: 10px;">Convide amigos para começar a construir sua equipe!</p>
+                    </div>
+                    
+                    <div class="error-state" id="errorState" style="display: none;">
+                        <p>Ocorreu um erro ao carregar os membros</p>
+                        <button class="retry-btn" onclick="loadTeamMembers()">Tentar Novamente</button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Menu inferior -->
+            <div data-v-5ca38804="" data-v-64ec28b8="" class="bottom" bis_skin_checked="1">
+                <div data-v-5ca38804="" class="flex flex-bom" bis_skin_checked="1">
+                    <div data-v-5ca38804="" class="item" bis_skin_checked="1"
+                        onclick="window.location.href='/home.html'">
+                        <div data-v-5ca38804="" class="img-box" bis_skin_checked="1"><img data-v-5ca38804=""
+                                class="imgc" src="https://i.postimg.cc/gjTHMg94/20250828-135951.png" alt="">
+                        </div>
+                        <p data-v-5ca38804="" class="item-pone">Início</p>
+                    </div>
+                    <div data-v-5ca38804="" class="item" bis_skin_checked="1"
+                        onclick="window.location.href='/ordered.html'">
+                        <div data-v-5ca38804="" class="img-box" bis_skin_checked="1"><img data-v-5ca38804=""
+                                class="imgc" src="https://i.postimg.cc/81F0b85w/20250828-140043.png" alt="">
+                        </div>
+                        <p data-v-5ca38804="" class="item-pone">Investido</p>
+                    </div>
+                    <div data-v-5ca38804="" class="item active" bis_skin_checked="1"
+                        onclick="window.location.href='/my-team.html'">
+                        <div data-v-5ca38804="" class="img-box" bis_skin_checked="1"><img data-v-5ca38804=""
+                                class="imgc" src="https://i.postimg.cc/PfWQtnCH/20250828-140134.png" alt="">
+                        </div>
+                        <p data-v-5ca38804="" class="item-pone item-color">Equipe</p>
+                    </div>
+                    <div data-v-5ca38804="" class="item" bis_skin_checked="1"
+                        onclick="window.location.href='/profile.html'">
+                        <div data-v-5ca38804="" class="img-box" bis_skin_checked="1"><img data-v-5ca38804=""
+                                class="imgc" src="https://i.postimg.cc/kgLwH44s/20250828-140201.png" alt="">
+                        </div>
+                        <p data-v-5ca38804="" class="item-pone">Perfil</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast messages -->
+    <div id="snackbar"></div>
+    <div id="snackbar_error"></div>
+
+    <style>
+        #snackbar, #snackbar_error {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: rgba(31, 28, 28, 0.9);
+            color: white;
+            text-align: center;
+            border-radius: 10px;
+            padding: 16px;
+            position: fixed;
+            z-index: 10000;
+            left: 50%;
+            bottom: 30px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        #snackbar_error {
+            background-color: rgba(245, 245, 245, 0.95);
+            color: black;
+        }
+
+        #snackbar.show, #snackbar_error.show {
+            visibility: visible;
+            opacity: 1;
+            animation: fadeinout 3s ease-in-out;
+        }
+
+        @keyframes fadeinout {
+            0%, 100% { opacity: 0; }
+            10%, 90% { opacity: 1; }
+        }
+    </style>
+
+    <script>
+        // Configuração da API
+        const API_BASE_URL = 'https://bd-p4q7.onrender.com';
+        
+        // Função para obter token
+        function getAuthToken() {
+            try {
+                const tokenData = localStorage.getItem('user_token');
+                if (!tokenData) return null;
+                
+                const { token, expiry } = JSON.parse(tokenData);
+                
+                if (expiry && Date.now() > expiry) {
+                    localStorage.removeItem('user_token');
+                    localStorage.removeItem('user_id');
+                    return null;
+                }
+                
+                return token;
+            } catch (error) {
+                console.error('Erro ao obter token:', error);
+                return null;
+            }
+        }
+        
+        // Função para mostrar toast
+        function showToast(message, type = 'info') {
+            const toastId = type === 'error' ? 'snackbar_error' : 'snackbar';
+            const toast = document.getElementById(toastId);
+            
+            if (!toast) return;
+            
+            toast.textContent = message;
+            toast.className = "show";
+            
+            setTimeout(() => {
+                toast.className = toast.className.replace("show", "");
+            }, 3000);
+        }
+        
+        // Formatar moeda
+        function formatCurrency(value) {
+            if (!value && value !== 0) return 'Kz 0';
+            const numValue = Number(value);
+            if (isNaN(numValue)) return 'Kz 0';
+            return `Kz ${numValue.toLocaleString('pt-AO', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        }
+        
+        // Formatar data
+        function formatDate(dateString) {
+            if (!dateString) return 'N/A';
+            try {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('pt-AO', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric'
+                });
+            } catch (e) {
+                return 'N/A';
+            }
+        }
+        
+        // Formatar telefone
+        function formatPhone(phone) {
+            if (!phone) return 'N/A';
+            const phoneStr = phone.toString();
+            // Se começar com 244, remover
+            if (phoneStr.startsWith('244')) {
+                return phoneStr.substring(3);
+            }
+            return phoneStr;
+        }
+        
+        // Obter inicial para avatar
+        function getInitial(phone) {
+            if (!phone) return 'U';
+            const cleanPhone = phone.toString().replace(/\D/g, '');
+            return cleanPhone.charAt(cleanPhone.length - 1) || 'U';
+        }
+        
+        // Carregar membros do nível 1
+        async function loadTeamMembers() {
+            const token = getAuthToken();
+            
+            if (!token) {
+                showError('Faça login para acessar');
+                setTimeout(() => window.location.href = '/index.html', 2000);
+                return;
+            }
+            
+            // Mostrar loading
+            document.getElementById('membersList').innerHTML = '<div class="loading-state">Carregando membros...</div>';
+            document.getElementById('emptyState').style.display = 'none';
+            document.getElementById('errorState').style.display = 'none';
+            
+            try {
+                // Tentar API de membros detalhados primeiro
+                const response = await fetch(`${API_BASE_URL}/api/team/members-detailed?level=1`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.status === 401) {
+                    localStorage.removeItem('user_token');
+                    localStorage.removeItem('user_id');
+                    showError('Sessão expirada. Faça login novamente.');
+                    setTimeout(() => window.location.href = '/index.html', 2000);
+                    return;
+                }
+                
+                if (!response.ok) {
+                    // Tentar API alternativa
+                    return await loadTeamMembersAlternative(token);
+                }
+                
+                const data = await response.json();
+                
+                if (data.success && data.data && data.data.members) {
+                    renderTeamMembers(data.data.members);
+                    updateStats(data.data.members);
+                } else {
+                    throw new Error(data.message || 'Dados inválidos recebidos');
+                }
+                
+            } catch (error) {
+                console.error('Erro ao carregar membros:', error);
+                showError('Erro ao carregar membros da equipe');
+            }
+        }
+        
+        // Método alternativo para carregar membros
+        async function loadTeamMembersAlternative(token) {
+            try {
+                // Tentar API de membros básica
+                const response = await fetch(`${API_BASE_URL}/api/team/members?level=1`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Erro HTTP: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.success && data.data && data.data.members) {
+                    // Buscar detalhes adicionais para cada membro
+                    const detailedMembers = await enhanceMembersData(data.data.members, token);
+                    renderTeamMembers(detailedMembers);
+                    updateStats(detailedMembers);
+                } else {
+                    throw new Error('Nenhum membro encontrado');
+                }
+                
+            } catch (error) {
+                console.error('Erro no método alternativo:', error);
+                // Carregar dados de exemplo
+                loadExampleData();
+            }
+        }
+        
+        // Melhorar dados dos membros
+        async function enhanceMembersData(members, token) {
+            const enhancedMembers = [];
+            
+            for (const member of members) {
+                try {
+                    // Buscar compras do membro
+                    let totalInvested = 0;
+                    try {
+                        const purchasesResponse = await fetch(`${API_BASE_URL}/api/user/recent-purchases?user_id=${member.user_id}`, {
+                            method: 'GET',
+                            headers: {
+                                'Authorization': `Bearer ${token}`,
+                                'Content-Type': 'application/json'
+                            }
+                        });
+                        
+                        if (purchasesResponse.ok) {
+                            const purchasesData = await purchasesResponse.json();
+                            if (purchasesData.success && purchasesData.data && purchasesData.data.recent_purchases) {
+                                totalInvested = purchasesData.data.recent_purchases.reduce((sum, purchase) => sum + (purchase.amount || 0), 0);
+                            }
+                        }
+                    } catch (e) {
+                        console.log('Erro ao buscar compras:', e);
+                    }
+                    
+                    // Buscar comissões
+                    let commission = 0;
+                    try {
+                        const commissionsResponse = await fetch(`${API_BASE_URL}/api/team/commissions?level=1`, {
+                            method: 'GET',
+                            headers: {
+                                'Authorization': `Bearer ${token}`,
+                                'Content-Type': 'application/json'
+                            }
+                        });
+                        
+                        if (commissionsResponse.ok) {
+                            const commissionsData = await commissionsResponse.json();
+                            if (commissionsData.success && commissionsData.data && commissionsData.data.commissions) {
+                                const memberCommissions = commissionsData.data.commissions.filter(
+                                    commission => commission.referred_user_id === member.user_id
+                                );
+                                commission = memberCommissions.reduce((sum, c) => sum + (c.bonus_amount || 0), 0);
+                            }
+                        }
+                    } catch (e) {
+                        console.log('Erro ao buscar comissões:', e);
+                    }
+                    
+                    enhancedMembers.push({
+                        id: member.user_id,
+                        mobile: member.mobile || 'N/A',
+                        registration_date: member.created_at || member.registration_date,
+                        total_recharge: totalInvested,
+                        generated_bonus: commission,
+                        level: 1
+                    });
+                    
+                } catch (error) {
+                    console.error('Erro ao melhorar dados do membro:', error);
+                    // Adicionar com dados básicos
+                    enhancedMembers.push({
+                        id: member.user_id,
+                        mobile: member.mobile || 'N/A',
+                        registration_date: member.created_at || member.registration_date,
+                        total_recharge: 0,
+                        generated_bonus: 0,
+                        level: 1
+                    });
+                }
+            }
+            
+            return enhancedMembers;
+        }
+        
+        // Renderizar membros
+        function renderTeamMembers(members) {
+            const membersList = document.getElementById('membersList');
+            
+            if (!members || members.length === 0) {
+                membersList.innerHTML = '';
+                document.getElementById('emptyState').style.display = 'block';
+                return;
+            }
+            
+            let html = '';
+            
+            members.forEach((member, index) => {
+                const phone = formatPhone(member.mobile);
+                const initial = getInitial(member.mobile);
+                const registrationDate = formatDate(member.registration_date || member.created_at);
+                const totalInvested = formatCurrency(member.total_recharge || member.total_invested || 0);
+                const commission = formatCurrency(member.generated_bonus || member.commission || 0);
+                const isActive = (member.total_recharge || member.total_invested || 0) > 0;
+                
+                html += `
+                    <div class="member-card">
+                        <div class="member-avatar">${initial}</div>
+                        <div class="member-info">
+                            <div class="member-header">
+                                <div class="member-phone">${phone}</div>
+                                <div class="member-status ${isActive ? 'status-active' : 'status-inactive'}">
+                                    ${isActive ? 'ATIVO' : 'INATIVO'}
+                                </div>
+                            </div>
+                            <div class="member-details">
+                                <div class="detail-item">
+                                    <div class="detail-label">Investimento</div>
+                                    <div class="detail-value">${totalInvested}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Sua Comissão</div>
+                                    <div class="detail-value">${commission}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Cadastrou em</div>
+                                    <div class="detail-value">${registrationDate}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            membersList.innerHTML = html;
+            document.getElementById('emptyState').style.display = 'none';
+        }
+        
+        // Atualizar estatísticas
+        function updateStats(members) {
+            if (!members || members.length === 0) {
+                document.getElementById('totalMembers').textContent = '0';
+                document.getElementById('activeMembers').textContent = '0';
+                document.getElementById('inactiveMembers').textContent = '0';
+                return;
+            }
+            
+            let totalMembers = members.length;
+            let activeMembers = 0;
+            
+            members.forEach(member => {
+                const invested = member.total_recharge || member.total_invested || 0;
+                if (invested > 0) {
+                    activeMembers++;
+                }
+            });
+            
+            const inactiveMembers = totalMembers - activeMembers;
+            
+            document.getElementById('totalMembers').textContent = totalMembers;
+            document.getElementById('activeMembers').textContent = activeMembers;
+            document.getElementById('inactiveMembers').textContent = inactiveMembers;
+        }
+        
+        // Mostrar erro
+        function showError(message) {
+            document.getElementById('membersList').innerHTML = '';
+            document.getElementById('errorState').style.display = 'block';
+            document.getElementById('emptyState').style.display = 'none';
+            showToast(message, 'error');
+        }
+        
+        // Carregar dados de exemplo
+        function loadExampleData() {
+            const exampleMembers = [
+                {
+                    id: 1,
+                    mobile: '912345678',
+                    registration_date: '2024-01-15T10:30:00Z',
+                    total_recharge: 5000,
+                    generated_bonus: 1250,
+                    level: 1
+                },
+                {
+                    id: 2,
+                    mobile: '923456789',
+                    registration_date: '2024-01-20T14:45:00Z',
+                    total_recharge: 3000,
+                    generated_bonus: 750,
+                    level: 1
+                },
+                {
+                    id: 3,
+                    mobile: '934567890',
+                    registration_date: '2024-02-01T09:15:00Z',
+                    total_recharge: 0,
+                    generated_bonus: 0,
+                    level: 1
+                },
+                {
+                    id: 4,
+                    mobile: '945678901',
+                    registration_date: '2024-02-10T16:20:00Z',
+                    total_recharge: 8000,
+                    generated_bonus: 2000,
+                    level: 1
+                },
+                {
+                    id: 5,
+                    mobile: '956789012',
+                    registration_date: '2024-02-15T11:10:00Z',
+                    total_recharge: 2000,
+                    generated_bonus: 500,
+                    level: 1
+                }
+            ];
+            
+            renderTeamMembers(exampleMembers);
+            updateStats(exampleMembers);
+            showToast('Dados de exemplo carregados', 'info');
+        }
+        
+        // Inicializar
+        async function init() {
+            const token = getAuthToken();
+            
+            if (!token) {
+                showError('Faça login para acessar');
+                setTimeout(() => window.location.href = '/index.html', 2000);
+                return;
+            }
+            
+            // Carregar membros
+            await loadTeamMembers();
+            
+            // Atualizar a cada 30 segundos
+            setInterval(() => {
+                const token = getAuthToken();
+                if (token) {
+                    loadTeamMembers();
+                }
+            }, 30000);
+        }
+        
+        // Carregar quando a página abrir
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

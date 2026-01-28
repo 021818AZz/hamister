@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="icon" href="/lendlease/dist/favicon.ico">
+    <title>Contas Bancárias | Oracle</title>
+
+    <link href="css/chunk-vendors.317e4ea8.css" rel="stylesheet">
+    <link href="css/aapp.3d111502.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/lendlease/dist/css/420.5f445c7e.css">
+
+    <link rel="stylesheet" type="text/css" href="css/912.1262dfcf.css">
+    <link rel="stylesheet" type="text/css" href="css/64.2a449246.css">
+    <link rel="stylesheet" type="text/css" href="css/652.4e50c868.css">
+    <link rel="stylesheet" type="text/css" href="css/377.26257b54.css">
+    <link rel="stylesheet" type="text/css" href="css/899.3e60963b.css">
+    <link rel="stylesheet" type="text/css" href="css/723.528a9236.css">
+    <link rel="stylesheet" type="text/css" href="css/13.1a4c9703.css">
+    <link rel="stylesheet" type="text/css" href="css/34.4b38f140.css">
+    
+    <style>
+        /* Toast messages */
+        #snackbar {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: rgba(31, 28, 28, 0.5);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            color: white;
+            text-align: center;
+            border-radius: 10px;
+            padding: 16px;
+            position: fixed;
+            z-index: 10000;
+            left: 50%;
+            bottom: 50%;
+            font-size: 17px;
+        }
+
+        #snackbar.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        #snackbar_error {
+            visibility: hidden;
+            width: 40%;
+            margin-left: 5px;
+            background-color: rgb(33, 30, 30);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            color: black;
+            text-align: center;
+            border-radius: 10px;
+            padding: 16px;
+            position: fixed;
+            z-index: 10000;
+            left: 30%;
+            bottom: 50%;
+            font-size: 17px;
+        }
+
+        #snackbar_error.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @-webkit-keyframes fadein {
+            from {
+                bottom: 50%;
+                opacity: 0;
+            }
+            to {
+                bottom: 50%;
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeout {
+            from {
+                bottom: 50%;
+                opacity: 1;
+            }
+            to {
+                bottom: 50%;
+                opacity: 0;
+            }
+        }
+
+        @media (min-width: 576px) and (max-width: 767px) {
+            #snackbar_error {
+                width: 60%;
+                left: 20%;
+                bottom: 70px;
+                font-size: 12px;
+            }
+            #snackbar {
+                width: 50%;
+                left: 25%;
+                bottom: 70px;
+                font-size: 12px;
+            }
+        }
+        @media (max-width: 575.99px) {
+            #snackbar_error {
+                width: 80%;
+                margin-left: 5px;
+                left: 10%;
+                font-size: 12px;
+            }
+            #snackbar {
+                width: 80%;
+                margin-left: 5px;
+                left: 10%;
+                font-size: 12px;
+            }
+        }
+
+        /* Styles for the preloader */
+        #preloade {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+        }
+
+        .loadingcss {
+            background-color: transparent !important;
+        }
+
+        /* Estilos para cartões de conta */
+        .account-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .account-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(45deg);
+        }
+
+        .account-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .account-card-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .account-card-iban {
+            font-family: monospace;
+            font-size: 16px;
+            letter-spacing: 1px;
+            background: rgba(0,0,0,0.2);
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .account-card-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .account-card-detail {
+            text-align: center;
+        }
+
+        .account-card-label {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .account-card-value {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Botões de ação - CORRIGIDOS */
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .action-buttons button {
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            flex: 1;
+            font-weight: bold;
+            font-size: 16px;
+            color: white !important;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: #4CAF50 !important;
+            color: white !important;
+        }
+
+        .btn-secondary {
+            background: #2196F3 !important;
+            color: white !important;
+        }
+
+        .btn-danger {
+            background: #f44336 !important;
+            color: white !important;
+        }
+
+        /* Botão adicionar conta */
+        button.btn-secondary {
+            background: #2196F3 !important;
+            color: white !important;
+            border: none !important;
+            padding: 12px 24px !important;
+            border-radius: 8px !important;
+            cursor: pointer !important;
+            width: 100% !important;
+            font-weight: bold !important;
+            font-size: 16px !important;
+        }
+
+        /* Formulário de adicionar conta */
+        .add-account-form {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .add-account-form.show {
+            display: block;
+        }
+
+        /* Modal para seleção de banco - CORRIGIDO */
+        .bank-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9998;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bank-modal-content {
+            background: #ffffff;
+            color: #000000;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 10px;
+            padding: 20px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .bank-modal-content h3 {
+            color: #1a237e;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .bank-option {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            cursor: pointer;
+            color: #212121;
+            font-size: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .bank-option:last-child {
+            border-bottom: none;
+        }
+
+        .bank-option:hover {
+            background: #f0f7ff;
+            color: #1976d2;
+        }
+
+        .bank-option.selected {
+            background: #1976d2;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .bank-modal-content button {
+            padding: 10px 25px;
+            background: #f44336;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            color: white !important;
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 15px;
+            transition: background 0.3s ease;
+        }
+
+        .bank-modal-content button:hover {
+            background: #d32f2f;
+        }
+
+        /* Estilos específicos para sobrescrever outros CSS */
+        #addAccountForm .action-buttons button {
+            color: white !important;
+            font-weight: bold !important;
+        }
+        
+        /* Botão de remover conta */
+        .account-card .btn-danger {
+            background: #f44336 !important;
+            color: white !important;
+            border: none !important;
+            padding: 12px 24px !important;
+            border-radius: 8px !important;
+            cursor: pointer !important;
+            width: 100% !important;
+            font-weight: bold !important;
+            font-size: 16px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Toast messages -->
+    <div id="snackbar"></div>
+    <div id="snackbar_error"></div>
+
+    <!-- Preloader -->
+    <div class="loaderd" id="preloade" style="display: none;">
+        <center>
+            <div class="van-toast van-toast--middle loadingcss" bis_skin_checked="1">
+                <i class="van-icon van-toast__icon">
+                    <img src="https://orac-le.online/lend/loading.gif" class="van-icon__image">
+                </i>
+                <div class="van-toast__text">Processando...</div>
+            </div>
+        </center>
+    </div>
+
+    <!-- Modal para seleção de banco - CORRIGIDO -->
+    <div id="bankModal" class="bank-modal">
+        <div class="bank-modal-content">
+            <h3>Selecione o Banco</h3>
+            <div id="bankList">
+                <!-- Bancos serão carregados aqui -->
+            </div>
+            <div style="text-align: center; margin-top: 15px;">
+                <button onclick="closeBankModal()">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="app" data-v-app="" bis_skin_checked="1">
+        <div data-v-603fb372="" class="bank" bis_skin_checked="1">
+            <div data-v-603fb372="" class="van-nav-bar van-hairline--bottom nav-box" bis_skin_checked="1">
+                <div class="van-nav-bar__content" bis_skin_checked="1">
+                    <div class="van-nav-bar__left van-haptics-feedback" bis_skin_checked="1" onclick="goBack()">
+                        <i class="van-badge__wrapper van-icon van-icon-arrow-left van-nav-bar__arrow"></i>
+                    </div>
+                    <div class="van-nav-bar__title van-ellipsis" bis_skin_checked="1">
+                        <p data-v-603fb372="">Contas Bancárias</p>
+                    </div>
+                </div>
+            </div>
+            <div data-v-603fb372="" class="wrap-bank" bis_skin_checked="1">
+                <div data-v-603fb372="" class="boxed" bis_skin_checked="1">
+                    <div data-v-603fb372="" class="wrap-top" bis_skin_checked="1">
+                        <img data-v-603fb372="" src="img/lapis.png" alt="">
+                        <p data-v-603fb372="">Minhas Contas Bancárias</p>
+                    </div>
+
+                    <!-- Seção de contas existentes -->
+                    <div id="accountsContainer">
+                        <!-- As contas serão carregadas aqui -->
+                    </div>
+
+                    <!-- Botão para adicionar nova conta -->
+                    <div style="text-align: center; margin: 20px 0;">
+                        <button onclick="toggleAddAccountForm()" class="btn-secondary">
+                            <span id="addAccountText">+ Adicionar Nova Conta</span>
+                        </button>
+                    </div>
+
+                    <!-- Formulário para adicionar nova conta -->
+                    <div id="addAccountForm" class="add-account-form">
+                        <div data-v-603fb372="" class="bank-box" bis_skin_checked="1">
+                            <p data-v-603fb372="" class="banktitle">Banco</p>
+                            <div data-v-603fb372="" class="van-cell van-field input-box" bis_skin_checked="1">
+                                <div class="van-field__left-icon" bis_skin_checked="1">
+                                    <img data-v-603fb372="" src="https://i.postimg.cc/cLx2BHGF/money-1.png" alt="">
+                                </div>
+                                <div class="van-cell__value van-cell__value--alone van-field__value" bis_skin_checked="1">
+                                    <div class="van-field__body" bis_skin_checked="1">
+                                        <input type="text" id="bankName" class="van-field__control" placeholder="Selecione o banco"
+                                               readonly onclick="openBankModal()">
+                                        <input type="hidden" id="bankCode">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div data-v-603fb372="" class="bank-box" bis_skin_checked="1">
+                            <p data-v-603fb372="" class="banktitle">IBAN (21 dígitos)</p>
+                            <div data-v-603fb372="" class="van-cell van-field input-box" bis_skin_checked="1">
+                                <div class="van-field__left-icon" bis_skin_checked="1">
+                                    <img data-v-603fb372="" src="https://i.postimg.cc/cLx2BHGF/money-1.png" alt="">
+                                </div>
+                                <div class="van-cell__value van-cell__value--alone van-field__value" bis_skin_checked="1">
+                                    <div class="van-field__body" bis_skin_checked="1">
+                                        <input type="text" id="ibanNumber" class="van-field__control"
+                                               placeholder="AO06 0000 0000 1234 5678 9"
+                                               maxlength="25"
+                                               oninput="formatIBAN(this)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div data-v-603fb372="" class="bank-box" bis_skin_checked="1">
+                            <p data-v-603fb372="" class="banktitle"></p>
+                            <div data-v-603fb372="" class="van-cell van-field input-box" bis_skin_checked="1">
+                                <div class="van-field__left-icon" bis_skin_checked="1">
+                                    <img data-v-603fb372="" src="https://i.postimg.cc/HnPz0pwh/user-1.png" alt="">
+                                </div>
+                                <div class="van-cell__value van-cell__value--alone van-field__value" bis_skin_checked="1">
+                                    <div class="van-field__body" bis_skin_checked="1">
+                                        <input type="text" id="branchCode" class="van-field__control"
+                                               placeholder="coloque seu watsapp">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div data-v-603fb372="" class="bank-box" bis_skin_checked="1">
+                            <p data-v-603fb372="" class="banktitle">Nome do Titular</p>
+                            <div data-v-603fb372="" class="van-cell van-field input-box" bis_skin_checked="1">
+                                <div class="van-field__left-icon" bis_skin_checked="1">
+                                    <img data-v-603fb372="" src="https://i.postimg.cc/HnPz0pwh/user-1.png" alt="">
+                                </div>
+                                <div class="van-cell__value van-cell__value--alone van-field__value" bis_skin_checked="1">
+                                    <div class="van-field__body" bis_skin_checked="1">
+                                        <input type="text" id="accountHolder" class="van-field__control"
+                                               placeholder="Nome completo do titular">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button type="button" onclick="cancelAddAccount()" class="btn-danger">Cancelar</button>
+                            <button type="button" onclick="addNewAccount()" class="btn-primary">Adicionar</button>
+                        </div>
+                    </div>
+
+                    <!-- Informações importantes -->
+                    <div data-v-603fb372="" class="bank-tip" bis_skin_checked="1" style="margin-top: 20px;">
+                        <img data-v-603fb372="" src="img/perigo.png" alt="">
+                        <p data-v-603fb372="">
+                            <strong>IMPORTANTE:</strong><br>
+                            • IBAN deve ter exatamente 21 dígitos<br>
+                            • Você pode adicionar até 3 contas bancárias<br>
+                            • Verifique cuidadosamente todos os dados antes de enviar<br>
+                            • Para remover uma conta, clique no botão vermelho correspondente
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuração da API
+        const API_BASE_URL = 'https://bd-p4q7.onrender.com';
+        
+        // Lista de bancos angolanos (apenas abreviações)
+        const angolanBanks = [
+            { code: 'BFA', name: 'BFA' },
+            { code: 'BAI', name: 'BAI' },
+            { code: 'BIC', name: 'BIC' },
+            { code: 'ATL', name: 'ATL' }
+        ];
+
+        // Função para obter token do localStorage
+        function getAuthToken() {
+            try {
+                const tokenData = localStorage.getItem('user_token');
+                if (!tokenData) return null;
+                
+                const { token, expiry } = JSON.parse(tokenData);
+                
+                if (expiry && Date.now() > expiry) {
+                    localStorage.removeItem('user_token');
+                    localStorage.removeItem('user_id');
+                    return null;
+                }
+                
+                return token;
+            } catch (e) {
+                console.error('Erro ao obter token:', e);
+                return null;
+            }
+        }
+
+        // Função para mostrar mensagem de toast
+        function showToast(message, type = 'info') {
+            const toastId = type === 'error' ? 'snackbar_error' : 'snackbar';
+            const toast = document.getElementById(toastId);
+            
+            if (!toast) return;
+            
+            toast.textContent = message;
+            toast.className = "show";
+            
+            setTimeout(() => {
+                toast.className = toast.className.replace("show", "");
+            }, 3000);
+        }
+
+        // Função para mostrar/ocultar preloader
+        function showLoader(show) {
+            const loader = document.getElementById('preloade');
+            if (loader) {
+                loader.style.display = show ? 'flex' : 'none';
+            }
+        }
+
+        // Função para voltar à página anterior
+        function goBack() {
+            window.location.href = '/profile.html';
+        }
+
+        // Função para alternar o formulário de adicionar conta
+        function toggleAddAccountForm() {
+            const form = document.getElementById('addAccountForm');
+            const buttonText = document.getElementById('addAccountText');
+            
+            if (form.classList.contains('show')) {
+                form.classList.remove('show');
+                buttonText.textContent = '+ Adicionar Nova Conta';
+            } else {
+                form.classList.add('show');
+                buttonText.textContent = '− Ocultar Formulário';
+                resetForm();
+            }
+        }
+
+        // Função para cancelar adição de conta
+        function cancelAddAccount() {
+            toggleAddAccountForm();
+        }
+
+        // Função para resetar o formulário
+        function resetForm() {
+            document.getElementById('bankName').value = '';
+            document.getElementById('bankCode').value = '';
+            document.getElementById('ibanNumber').value = '';
+            document.getElementById('branchCode').value = '';
+            document.getElementById('accountHolder').value = '';
+        }
+
+        // Função para formatar IBAN
+        function formatIBAN(input) {
+            let value = input.value.replace(/\s/g, '').toUpperCase();
+            
+            // Limitar a 21 caracteres
+            if (value.length > 21) {
+                value = value.substring(0, 21);
+            }
+            
+            // Formatar com espaços a cada 4 caracteres
+            let formatted = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formatted += ' ';
+                }
+                formatted += value[i];
+            }
+            
+            input.value = formatted;
+        }
+
+        // Função para abrir modal de seleção de banco
+        function openBankModal() {
+            const modal = document.getElementById('bankModal');
+            const bankList = document.getElementById('bankList');
+            
+            // Carregar lista de bancos
+            bankList.innerHTML = '';
+            angolanBanks.forEach(bank => {
+                const option = document.createElement('div');
+                option.className = 'bank-option';
+                option.textContent = bank.name;
+                option.onclick = () => selectBank(bank);
+                bankList.appendChild(option);
+            });
+            
+            modal.style.display = 'flex';
+        }
+
+        // Função para fechar modal de seleção de banco
+        function closeBankModal() {
+            document.getElementById('bankModal').style.display = 'none';
+        }
+
+        // Função para selecionar um banco
+        function selectBank(bank) {
+            document.getElementById('bankName').value = bank.name;
+            document.getElementById('bankCode').value = bank.code;
+            closeBankModal();
+        }
+
+        // Função para carregar contas bancárias
+        async function loadBankAccounts() {
+            const token = getAuthToken();
+            if (!token) {
+                showToast('Sessão expirada. Faça login novamente.', 'error');
+                setTimeout(() => window.location.href = '/index.html', 1500);
+                return;
+            }
+            
+            showLoader(true);
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/user/bank-account`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const accountsContainer = document.getElementById('accountsContainer');
+                accountsContainer.innerHTML = '';
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.success && data.data) {
+                        const accounts = Array.isArray(data.data) ? data.data : [data.data];
+                        
+                        if (accounts.length === 0) {
+                            accountsContainer.innerHTML = `
+                                <div style="text-align: center; padding: 40px 20px; color: #666;">
+                                    <p>Nenhuma conta bancária cadastrada.</p>
+                                    <p>Adicione sua primeira conta para poder fazer saques.</p>
+                                </div>
+                            `;
+                        } else {
+                            accounts.forEach((account, index) => {
+                                const accountCard = createAccountCard(account, index + 1);
+                                accountsContainer.appendChild(accountCard);
+                            });
+                        }
+                    } else {
+                        accountsContainer.innerHTML = `
+                            <div style="text-align: center; padding: 40px 20px; color: #666;">
+                                <p>Nenhuma conta bancária cadastrada.</p>
+                                <p>Adicione sua primeira conta para poder fazer saques.</p>
+                            </div>
+                        `;
+                    }
+                } else if (response.status === 404) {
+                    accountsContainer.innerHTML = `
+                        <div style="text-align: center; padding: 40px 20px; color: #666;">
+                            <p>Nenhuma conta bancária cadastrada.</p>
+                            <p>Adicione sua primeira conta para poder fazer saques.</p>
+                        </div>
+                    `;
+                } else {
+                    showToast('Erro ao carregar contas bancárias.', 'error');
+                }
+            } catch (error) {
+                console.error('Erro ao carregar contas:', error);
+                showToast('Erro de conexão.', 'error');
+            } finally {
+                showLoader(false);
+            }
+        }
+
+        // Função para criar cartão de conta
+        function createAccountCard(account, number) {
+            const card = document.createElement('div');
+            card.className = 'account-card';
+            
+            // Formatar IBAN para exibição
+            let formattedIBAN = account.account_number || '';
+            if (formattedIBAN.length >= 21) {
+                formattedIBAN = formattedIBAN.match(/.{1,4}/g).join(' ');
+            }
+            
+            card.innerHTML = `
+                <div class="account-card-header">
+                    <div class="account-card-title">
+                        <span style="font-size: 14px; opacity: 0.9;"></span><br>
+                        Conta ${number}
+                    </div>
+                    <div style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 20px; font-size: 14px;">
+                        ${account.bank_name || account.bank_code || 'Banco'}
+                    </div>
+                </div>
+                
+                <div class="account-card-iban">
+                    ${formattedIBAN}
+                </div>
+                
+                <div class="account-card-details">
+                    <div class="account-card-detail">
+                        <div class="account-card-label">Titular</div>
+                        <div class="account-card-value">${account.account_holder || 'Não informado'}</div>
+                    </div>
+                    <div class="account-card-detail">
+                        <div class="account-card-label">Agência</div>
+                        <div class="account-card-value">${account.branch_code || 'N/A'}</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 15px;">
+                    <button onclick="removeAccount('${account.id}')" class="btn-danger" style="width: 100%;">
+                        Remover Conta
+                    </button>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Função para adicionar nova conta
+        async function addNewAccount() {
+            const token = getAuthToken();
+            if (!token) {
+                showToast('Sessão expirada. Faça login novamente.', 'error');
+                setTimeout(() => window.location.href = '/index.html', 1500);
+                return;
+            }
+            
+            // Validar campos
+            const bankName = document.getElementById('bankName').value.trim();
+            const bankCode = document.getElementById('bankCode').value.trim();
+            let ibanNumber = document.getElementById('ibanNumber').value.trim();
+            const branchCode = document.getElementById('branchCode').value.trim();
+            const accountHolder = document.getElementById('accountHolder').value.trim();
+            
+            if (!bankName || !bankCode) {
+                showToast('Por favor, selecione um banco.', 'error');
+                return;
+            }
+            
+            // Remover espaços do IBAN e verificar se tem 21 dígitos
+            ibanNumber = ibanNumber.replace(/\s/g, '');
+            if (ibanNumber.length !== 21) {
+                showToast('IBAN deve ter exatamente 21 dígitos.', 'error');
+                return;
+            }
+            
+            if (!branchCode) {
+                showToast('Por favor, digite o código da agência.', 'error');
+                return;
+            }
+            
+            if (!accountHolder) {
+                showToast('Por favor, digite o nome do titular.', 'error');
+                return;
+            }
+            
+            showLoader(true);
+            
+            try {
+                // Primeiro, verificar quantas contas já existem
+                const checkResponse = await fetch(`${API_BASE_URL}/api/user/bank-account`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                let accountsCount = 0;
+                if (checkResponse.ok) {
+                    const checkData = await checkResponse.json();
+                    if (checkData.success && checkData.data) {
+                        const accounts = Array.isArray(checkData.data) ? checkData.data : [checkData.data];
+                        accountsCount = accounts.length;
+                    }
+                }
+                
+                // Limitar a 3 contas
+                if (accountsCount >= 3) {
+                    showToast('Limite máximo de 3 contas bancárias atingido.', 'error');
+                    showLoader(false);
+                    return;
+                }
+                
+                // Preparar dados
+                const bankData = {
+                    bank_name: bankName,
+                    bank_code: bankCode,
+                    account_number: ibanNumber,
+                    branch_code: branchCode,
+                    account_holder: accountHolder
+                };
+                
+                // Enviar dados para a API
+                const response = await fetch(`${API_BASE_URL}/api/user/bank-account`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(bankData)
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.success) {
+                        showToast('Conta adicionada com sucesso!', 'success');
+                        resetForm();
+                        toggleAddAccountForm();
+                        loadBankAccounts(); // Recarregar a lista de contas
+                    } else {
+                        showToast(data.message || 'Erro ao adicionar conta.', 'error');
+                    }
+                } else {
+                    const errorData = await response.json();
+                    showToast(errorData.message || 'Erro ao adicionar conta.', 'error');
+                }
+            } catch (error) {
+                console.error('Erro ao adicionar conta:', error);
+                showToast('Erro de conexão. Tente novamente.', 'error');
+            } finally {
+                showLoader(false);
+            }
+        }
+
+        // Função para remover conta
+        async function removeAccount(accountId) {
+            if (!confirm('Tem certeza que deseja remover esta conta?')) {
+                return;
+            }
+            
+            const token = getAuthToken();
+            if (!token) {
+                showToast('Sessão expirada. Faça login novamente.', 'error');
+                setTimeout(() => window.location.href = '/index.html', 1500);
+                return;
+            }
+            
+            showLoader(true);
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/user/bank-account`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.success) {
+                        showToast('Conta removida com sucesso!', 'success');
+                        loadBankAccounts(); // Recarregar a lista de contas
+                    } else {
+                        showToast(data.message || 'Erro ao remover conta.', 'error');
+                    }
+                } else {
+                    const errorData = await response.json();
+                    showToast(errorData.message || 'Erro ao remover conta.', 'error');
+                }
+            } catch (error) {
+                console.error('Erro ao remover conta:', error);
+                showToast('Erro de conexão. Tente novamente.', 'error');
+            } finally {
+                showLoader(false);
+            }
+        }
+
+        // Carregar contas bancárias quando a página carregar
+        window.addEventListener('DOMContentLoaded', () => {
+            loadBankAccounts();
+            
+            // Adicionar evento para fechar modal ao clicar fora
+            document.getElementById('bankModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeBankModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

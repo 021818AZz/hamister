@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="icon" href="/lendlease/dist/favicon.ico">
+    <title>Histórico Completo | Oracle</title>
+    
+    <!-- Estilos existentes mantidos -->
+    <link href="css/chunk-vendors.317e4ea8.css" rel="stylesheet">
+    <link href="appp.3d111502.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/420.5f445c7e.css">
+    <link rel="stylesheet" type="text/css" href="912.1262dfcf.css">
+    <link rel="stylesheet" type="text/css" href="64.2a449246.css">
+    <link rel="stylesheet" type="text/css" href="652.4e50c868.css">
+    <link rel="stylesheet" type="text/css" href="377.26257b54.css">
+    <link rel="stylesheet" type="text/css" href="899.3e60963b.css">
+    <link rel="stylesheet" type="text/css" href="723.528a9236.css">
+    <link rel="stylesheet" type="text/css" href="13.1a4c9703.css">
+    <link rel="stylesheet" type="text/css" href="343.4b38f140.css">
+    <link rel="stylesheet" type="text/css" href="615.ea9d5457.css">
+    <link rel="stylesheet" type="text/css" href="45.85bc4b92.css">
+    
+    <style>
+        /* ESTILOS EXATAMENTE IGUAIS AO ORIGINAL - Só adicionei cores para tipos diferentes */
+        .withdrawals-list {
+            padding: 5px;
+        }
+        
+        .withdrawal-item {
+            background: #ffffff;
+            border-radius: 4px;
+            padding: 6px 8px;
+            margin-bottom: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            border-left: 2px solid #4CAF50;
+            position: relative;
+            transition: all 0.2s ease;
+            height: 65px;
+            overflow: hidden;
+        }
+        
+        .item-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4px;
+            height: 100%;
+        }
+        
+        .left-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .iban-display {
+            font-family: 'Courier New', monospace;
+            font-size: 9px;
+            font-weight: bold;
+            color: #333;
+            letter-spacing: 0.1px;
+            line-height: 1.1;
+            margin-bottom: 2px;
+            word-break: break-all;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        
+        .desc-display {
+            font-size: 9px;
+            color: #666;
+            line-height: 1.2;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            font-size: 9px;
+            font-weight: 600;
+            padding: 2px 5px;
+            border-radius: 10px;
+            line-height: 1;
+            width: fit-content;
+            margin-top: 2px;
+        }
+        
+        .status-confirmed {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .status-failed {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        
+        .status-rejected {
+            background-color: #fff3e0;
+            color: #ef6c00;
+        }
+        
+        .status-pending {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .status-completed {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .right-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
+            text-align: right;
+        }
+        
+        .net-amount-container {
+            text-align: right;
+        }
+        
+        .net-amount-label {
+            font-size: 8px;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 1px;
+            line-height: 1;
+        }
+        
+        .net-amount-value {
+            font-size: 11px;
+            font-weight: bold;
+            line-height: 1.1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+        
+        .amount-positive {
+            color: #4CAF50;
+        }
+        
+        .amount-negative {
+            color: #ff6b6b;
+        }
+        
+        .date-time {
+            font-size: 9px;
+            color: #888;
+            font-weight: 500;
+            background: #f8f9fa;
+            padding: 2px 5px;
+            border-radius: 3px;
+            line-height: 1;
+            white-space: nowrap;
+        }
+        
+        .type-badge {
+            font-size: 8px;
+            padding: 1px 4px;
+            border-radius: 3px;
+            background: #f0f0f0;
+            color: #666;
+            margin-right: 3px;
+        }
+        
+        /* Bordas coloridas para tipos diferentes */
+        .border-withdrawal { border-left-color: #ff6b6b !important; }
+        .border-deposit { border-left-color: #4CAF50 !important; }
+        .border-transaction { border-left-color: #3498db !important; }
+        
+        /* Filtros - mantendo simples */
+        .history-filters {
+            margin: 5px;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        
+        .filter-select {
+            width: 100%;
+            padding: 6px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+        
+        .filter-btn {
+            width: 100%;
+            padding: 8px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        /* Botão de recarregar no cabeçalho */
+        .header-reload-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 22px;
+            height: 22px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+            color: #3498db;
+            transition: all 0.3s ease;
+            line-height: 1;
+        }
+        
+        .header-reload-btn:hover {
+            background: rgba(52, 152, 219, 0.2);
+        }
+        
+        /* Loading */
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 10px;
+            background: url('img/loading.gif') center center no-repeat;
+            background-size: contain;
+        }
+        
+        /* Botão de carregar mais */
+        .load-more-btn {
+            display: block;
+            width: calc(100% - 10px);
+            margin: 5px;
+            padding: 8px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            line-height: 1;
+        }
+        
+        .load-more-btn:hover {
+            background: #2980b9;
+        }
+        
+        /* Cabeçalho de contador */
+        .counter-header {
+            margin: 5px;
+            padding: 6px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 10px;
+            color: #3498db;
+            font-weight: bold;
+            line-height: 1;
+        }
+        
+        /* Quando não há dados */
+        .no-withdrawals {
+            text-align: center;
+            padding: 25px 12px;
+            color: #666;
+        }
+        
+        .no-withdrawals-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <!-- Toast notifications -->
+    <div id="snackbar"></div>
+    <div id="snackbar_error"></div>
+    
+    <div id="app" data-v-app="" bis_skin_checked="1">
+        <div data-v-f0ecb9c6="" class="records" bis_skin_checked="1">
+            <div data-v-f0ecb9c6="" class="wrap" bis_skin_checked="1">
+                <div data-v-f0ecb9c6="" class="navback" bis_skin_checked="1" onclick="window.history.back()">
+                    <img data-v-f0ecb9c6="" src="https://i.postimg.cc/CLQLWWMH/20250902-065546.png" alt="" class="back-img">
+                    <p data-v-f0ecb9c6="">Histórico Completo</p>
+                </div>
+            </div>
+            
+            <!-- Filtros simples -->
+            <div class="history-filters">
+                <select id="filterType" class="filter-select">
+                    <option value="all">Todas as Transações</option>
+                    <option value="withdrawal">Apenas Retiradas</option>
+                    <option value="deposit">Apenas Depósitos</option>
+                    <option value="transaction">Apenas Transações</option>
+                </select>
+                <button onclick="applyFilters()" class="filter-btn">Filtrar</button>
+            </div>
+            
+            <div data-v-f0ecb9c6="" class="listrecore withdrawals-list" bis_skin_checked="1" id="historyContainer">
+                <div class="loading-container">
+                    <div class="loading-spinner"></div>
+                    <p>Carregando seu histórico...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==============================================
+        // CONFIGURAÇÕES
+        // ==============================================
+        const API_BASE_URL = 'https://bd-p4q7.onrender.com';
+        const ITEMS_PER_PAGE = 15;
+        let currentPage = 1;
+        let allHistoryItems = [];
+        let filteredItems = [];
+        let isLoading = false;
+        let hasMoreData = true;
+        let currentFilter = 'all';
+        
+        // ==============================================
+        // FUNÇÕES DE UTILIDADE (MANTENDO SUAS)
+        // ==============================================
+        
+        function showToast(message, type = 'info') {
+            const toastId = type === 'error' ? 'snackbar_error' : 'snackbar';
+            const toast = document.getElementById(toastId);
+            
+            if (toast) {
+                toast.textContent = message;
+                toast.className = "show";
+                
+                setTimeout(() => {
+                    toast.className = toast.className.replace("show", "");
+                }, 3000);
+            }
+        }
+        
+        function isAuthenticated() {
+            try {
+                const tokenData = localStorage.getItem('user_token');
+                if (!tokenData) return false;
+                
+                const { expiry, token } = JSON.parse(tokenData);
+                return token && expiry && Date.now() < expiry;
+            } catch (error) {
+                return false;
+            }
+        }
+        
+        function getAuthToken() {
+            try {
+                const tokenData = localStorage.getItem('user_token');
+                if (!tokenData) return null;
+                
+                const { token } = JSON.parse(tokenData);
+                return token;
+            } catch (error) {
+                return null;
+            }
+        }
+        
+        function formatCurrency(value) {
+            if (value === null || value === undefined) return '0 KZ';
+            const numValue = parseFloat(value);
+            if (isNaN(numValue)) return '0 KZ';
+            
+            return `${numValue.toLocaleString('pt-AO', { 
+                minimumFractionDigits: 0, 
+                maximumFractionDigits: 0 
+            })} KZ`;
+        }
+        
+        function formatDateTime(dateString) {
+            if (!dateString) return '--/--/----';
+            try {
+                const date = new Date(dateString);
+                const day = date.getDate().toString().padStart(2, '0');
+                const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                const year = date.getFullYear();
+                const hours = date.getHours().toString().padStart(2, '0');
+                const minutes = date.getMinutes().toString().padStart(2, '0');
+                
+                return `${day}/${month}/${year} ${hours}:${minutes}`;
+            } catch (error) {
+                return '--/--/----';
+            }
+        }
+        
+        function getStatusInfo(status) {
+            const statusLower = (status || '').toLowerCase();
+            
+            switch(statusLower) {
+                case 'completed':
+                case 'confirmed':
+                case 'success':
+                    return {
+                        text: 'Confirmado',
+                        class: 'status-confirmed'
+                    };
+                case 'failed':
+                case 'failure':
+                    return {
+                        text: 'Falhou',
+                        class: 'status-failed'
+                    };
+                case 'rejected':
+                case 'denied':
+                    return {
+                        text: 'Rejeitado',
+                        class: 'status-rejected'
+                    };
+                case 'pending':
+                    return {
+                        text: 'Pendente',
+                        class: 'status-pending'
+                    };
+                default:
+                    return {
+                        text: 'Processado',
+                        class: 'status-completed'
+                    };
+            }
+        }
+        
+        // ==============================================
+        // FUNÇÕES PARA BUSCAR DADOS DAS SUAS APIS REAIS
+        // ==============================================
+        
+        // 1. Buscar retiradas (SUA API EXISTENTE)
+        async function fetchWithdrawals() {
+            const token = getAuthToken();
+            if (!token) return [];
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/withdrawals?limit=100`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (!response.ok) return [];
+                
+                const data = await response.json();
+                return data.data?.withdrawals || [];
+            } catch (error) {
+                console.error('Erro ao buscar retiradas:', error);
+                return [];
+            }
+        }
+        
+        // 2. Buscar depósitos (SUA API EXISTENTE)
+        async function fetchDeposits() {
+            const token = getAuthToken();
+            if (!token) return [];
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/deposits?limit=100`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (!response.ok) return [];
+                
+                const data = await response.json();
+                return data.data?.deposits || [];
+            } catch (error) {
+                console.error('Erro ao buscar depósitos:', error);
+                return [];
+            }
+        }
+        
+        // 3. Buscar transações (SUA API EXISTENTE)
+        async function fetchTransactions() {
+            const token = getAuthToken();
+            if (!token) return [];
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/user/transactions?limit=100`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (!response.ok) return [];
+                
+                const data = await response.json();
+                return data.data?.transactions || [];
+            } catch (error) {
+                console.error('Erro ao buscar transações:', error);
+                return [];
+            }
+        }
+        
+        // 4. Buscar TODOS os dados e combinar
+        async function fetchAllHistoryData() {
+            try {
+                console.log('🔄 Buscando dados de todas as APIs...');
+                
+                // Buscar de todas as APIs em paralelo
+                const [withdrawals, deposits, transactions] = await Promise.all([
+                    fetchWithdrawals(),
+                    fetchDeposits(),
+                    fetchTransactions()
+                ]);
+                
+                console.log(`✅ Dados recebidos: ${withdrawals.length} retiradas, ${deposits.length} depósitos, ${transactions.length} transações`);
+                
+                // Combinar tudo em um array
+                const combinedItems = [];
+                
+                // Adicionar retiradas
+                withdrawals.forEach(item => {
+                    combinedItems.push({
+                        ...item,
+                        record_type: 'withdrawal',
+                        display_type: 'Retirada Bancária',
+                        border_class: 'border-withdrawal',
+                        amount_display: item.net_amount || item.amount,
+                        is_negative: true,
+                        description: `Retirada para ${item.bank_name || 'Banco'}`
+                    });
+                });
+                
+                // Adicionar depósitos
+                deposits.forEach(item => {
+                    combinedItems.push({
+                        ...item,
+                        record_type: 'deposit',
+                        display_type: 'Depósito',
+                        border_class: 'border-deposit',
+                        amount_display: item.amount,
+                        is_negative: false,
+                        description: `Depósito de ${item.bank_name || 'Banco'}`
+                    });
+                });
+                
+                // Adicionar transações
+                transactions.forEach(item => {
+                    let displayType = 'Transação';
+                    let borderClass = 'border-transaction';
+                    
+                    switch(item.type) {
+                        case 'deposit':
+                            displayType = 'Depósito';
+                            borderClass = 'border-deposit';
+                            break;
+                        case 'withdrawal':
+                            displayType = 'Retirada';
+                            borderClass = 'border-withdrawal';
+                            break;
+                        case 'referral_bonus':
+                            displayType = 'Bônus de Indicação';
+                            break;
+                        case 'daily_checkin':
+                            displayType = 'Check-in Diário';
+                            break;
+                        case 'product_income':
+                        case 'income':
+                            displayType = 'Rendimento';
+                            break;
+                        case 'purchase':
+                            displayType = 'Compra';
+                            break;
+                        case 'admin_addition':
+                            displayType = 'Bônus Admin';
+                            break;
+                    }
+                    
+                    combinedItems.push({
+                        ...item,
+                        record_type: 'transaction',
+                        display_type: displayType,
+                        border_class: borderClass,
+                        amount_display: item.amount,
+                        is_negative: item.amount < 0,
+                        status: 'completed',
+                        iban: 'N/A',
+                        bank_name: 'Sistema'
+                    });
+                });
+                
+                return combinedItems;
+                
+            } catch (error) {
+                console.error('Erro ao combinar dados:', error);
+                return [];
+            }
+        }
+        
+        // ==============================================
+        // FUNÇÕES DE FILTRO
+        // ==============================================
+        
+        function applyFilters() {
+            currentFilter = document.getElementById('filterType').value;
+            currentPage = 1;
+            
+            filterItems();
+            renderHistoryPage(1);
+        }
+        
+        function filterItems() {
+            if (currentFilter === 'all') {
+                filteredItems = [...allHistoryItems];
+                return;
+            }
+            
+            filteredItems = allHistoryItems.filter(item => 
+                item.record_type === currentFilter
+            );
+        }
+        
+        // ==============================================
+        // FUNÇÕES PARA RENDERIZAR (MANTENDO SEU DESIGN)
+        // ==============================================
+        
+        function renderHistoryPage(page = 1) {
+            const container = document.getElementById('historyContainer');
+            
+            if (!filteredItems || filteredItems.length === 0) {
+                container.innerHTML = `
+                    <div class="no-withdrawals">
+                        <div class="no-withdrawals-icon">📊</div>
+                        <h3 style="font-size: 13px; margin-bottom: 6px;">Nenhum histórico</h3>
+                        <p style="font-size: 11px; margin-bottom: 12px;">Nenhuma transação encontrada com os filtros atuais.</p>
+                        <button onclick="resetFilters()" 
+                                style="background: #3498db; color: white; border: none; 
+                                       padding: 6px 12px; border-radius: 3px; cursor: pointer;
+                                       font-size: 10px;">
+                            Ver todas
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Ordenar por data (mais recentes primeiro)
+            const sortedItems = [...filteredItems].sort((a, b) => 
+                new Date(b.created_at || b.date || 0) - new Date(a.created_at || a.date || 0)
+            );
+            
+            // Calcular itens para a página atual
+            const startIndex = 0;
+            const endIndex = page * ITEMS_PER_PAGE;
+            const pageItems = sortedItems.slice(startIndex, endIndex);
+            
+            let historyHTML = '';
+            
+            pageItems.forEach((item) => {
+                const statusInfo = getStatusInfo(item.status);
+                const createdDate = formatDateTime(item.created_at || item.date);
+                const amount = formatCurrency(item.amount_display || item.amount);
+                const ibanText = item.iban && item.iban !== 'N/A' ? item.iban : item.description || item.display_type;
+                
+                historyHTML += `
+                    <div class="withdrawal-item ${item.border_class || ''}">
+                        <div class="item-content">
+                            <div class="left-side">
+                                <div class="iban-display" title="${ibanText}">
+                                    ${ibanText}
+                                </div>
+                                <div class="desc-display">
+                                    <span class="type-badge">${item.display_type}</span>
+                                    ${item.bank_name || ''}
+                                </div>
+                                <div class="status-indicator ${statusInfo.class}" title="${statusInfo.text}">
+                                    ${statusInfo.text}
+                                </div>
+                            </div>
+                            
+                            <div class="right-side">
+                                <div class="net-amount-container">
+                                    <div class="net-amount-label">Valor</div>
+                                    <div class="net-amount-value ${item.is_negative ? 'amount-negative' : 'amount-positive'}" 
+                                         title="Valor: ${amount}">
+                                        ${item.is_negative ? '- ' : '+ '}${amount}
+                                    </div>
+                                </div>
+                                <div class="date-time" title="${createdDate}">
+                                    ${createdDate}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // Adicionar contador
+            const totalCount = sortedItems.length;
+            const showingCount = Math.min(endIndex, totalCount);
+            
+            const headerHTML = `
+                <div class="counter-header">
+                    ${showingCount}/${totalCount} transações
+                </div>
+                ${historyHTML}
+            `;
+            
+            container.innerHTML = headerHTML;
+            
+            // Adicionar botão de carregar mais se houver mais dados
+            if (totalCount > showingCount) {
+                const loadMoreBtn = document.createElement('button');
+                loadMoreBtn.className = 'load-more-btn';
+                loadMoreBtn.id = 'loadMoreBtn';
+                loadMoreBtn.textContent = `Carregar mais ${Math.min(ITEMS_PER_PAGE, totalCount - showingCount)}`;
+                loadMoreBtn.title = 'Carregar mais transações';
+                loadMoreBtn.onclick = loadMoreHistory;
+                
+                container.appendChild(loadMoreBtn);
+                hasMoreData = true;
+            } else {
+                hasMoreData = false;
+            }
+        }
+        
+        function loadMoreHistory() {
+            if (isLoading || !hasMoreData) return;
+            
+            isLoading = true;
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            
+            if (loadMoreBtn) {
+                loadMoreBtn.disabled = true;
+                loadMoreBtn.textContent = 'Carregando...';
+            }
+            
+            setTimeout(() => {
+                currentPage++;
+                renderHistoryPage(currentPage);
+                
+                isLoading = false;
+                if (loadMoreBtn && !hasMoreData) {
+                    loadMoreBtn.remove();
+                }
+                
+                showToast('Mais transações carregadas');
+            }, 400);
+        }
+        
+        function resetFilters() {
+            document.getElementById('filterType').value = 'all';
+            applyFilters();
+        }
+        
+        // ==============================================
+        // CARREGAMENTO INICIAL
+        // ==============================================
+        
+        async function loadInitialData() {
+            if (!isAuthenticated()) {
+                showToast('Sessão expirada. Faça login novamente.', 'error');
+                setTimeout(() => window.location.href = '/index.html', 2000);
+                return;
+            }
+            
+            try {
+                console.log('🔄 Iniciando carregamento do histórico...');
+                
+                // Buscar todos os dados
+                allHistoryItems = await fetchAllHistoryData();
+                
+                if (allHistoryItems.length === 0) {
+                    console.log('⚠️ Nenhum dado encontrado');
+                    showToast('Nenhuma transação encontrada', 'info');
+                } else {
+                    console.log(`✅ Total de ${allHistoryItems.length} transações carregadas`);
+                }
+                
+                // Aplicar filtros e renderizar
+                filterItems();
+                renderHistoryPage(1);
+                
+                showToast('Histórico carregado com sucesso!');
+                
+            } catch (error) {
+                console.error('❌ Erro ao carregar dados:', error);
+                
+                if (error.message === 'Sessão expirada') {
+                    showToast('Sessão expirada. Faça login novamente.', 'error');
+                    setTimeout(() => window.location.href = '/index.html', 2000);
+                } else {
+                    showToast('Erro ao carregar histórico. Tente novamente.', 'error');
+                    
+                    // Mostrar estado vazio
+                    const container = document.getElementById('historyContainer');
+                    container.innerHTML = `
+                        <div class="no-withdrawals">
+                            <div class="no-withdrawals-icon">⚠️</div>
+                            <h3 style="font-size: 13px; margin-bottom: 6px;">Erro ao carregar</h3>
+                            <p style="font-size: 11px; margin-bottom: 12px;">Não foi possível carregar seu histórico.</p>
+                            <button onclick="location.reload()" 
+                                    style="background: #3498db; color: white; border: none; 
+                                           padding: 6px 12px; border-radius: 3px; cursor: pointer;
+                                           font-size: 10px;">
+                                Tentar novamente
+                            </button>
+                        </div>
+                    `;
+                }
+            }
+        }
+        
+        // ==============================================
+        // INICIALIZAÇÃO
+        // ==============================================
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Adicionar botão de recarregar no cabeçalho
+            const navback = document.querySelector('.navback');
+            if (navback) {
+                const reloadBtn = document.createElement('div');
+                reloadBtn.className = 'header-reload-btn';
+                reloadBtn.innerHTML = '🔄';
+                reloadBtn.title = 'Recarregar histórico';
+                
+                reloadBtn.onclick = function() {
+                    this.style.transform = 'translateY(-50%) rotate(180deg)';
+                    loadInitialData();
+                    
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-50%)';
+                    }, 500);
+                };
+                
+                navback.style.position = 'relative';
+                navback.appendChild(reloadBtn);
+            }
+            
+            // Carregar dados iniciais
+            loadInitialData();
+        });
+    </script>
+</body>
+</html>

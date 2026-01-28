@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="icon" href="/lendlease/dist/favicon.ico">
+    <title>Equipe | Oracle</title>
+
+    <link href="css/chunk-vendors.317e4ea8.css" rel="stylesheet">
+    <link href="css/app.33d111502.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/9912.1262dfcf.css">
+
+    <style>
+        .teamuis .nav-top[data-v-4b56c3a1] {
+            width: 100%;
+            height: 42rem;
+            background: url() no-repeat;
+            background-size: cover;
+            padding: 10rem 2.8rem 2rem
+        }
+
+        .teamuis .lease-banner[data-v-4b56c3a1] {
+            height: 29rem;
+            width: 69.6rem;
+            margin: 3rem auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: url(img/futuro.jpg) no-repeat top/100% auto;
+            position: relative
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="css/420.5f445c7e.css">
+    <link rel="stylesheet" type="text/css" href="css/62.2a449246.css">
+    
+    <style>
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 140px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 150%;
+            left: 50%;
+            margin-left: -75px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        /* Estilos para os modais simplificados */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-container {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #4A90E2, #2C3E50);
+            color: white;
+            padding: 15px 20px;
+            position: relative;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .close-modal:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .modal-body {
+            padding: 20px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .member-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            transition: background 0.3s;
+        }
+
+        .member-item:hover {
+            background: #f9f9f9;
+        }
+
+        .member-item:last-child {
+            border-bottom: none;
+        }
+
+        .member-info {
+            flex: 1;
+        }
+
+        .member-phone {
+            font-weight: bold;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .member-date {
+            font-size: 12px;
+            color: #666;
+            margin-top: 3px;
+        }
+
+        .member-status {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            min-width: 70px;
+            text-align: center;
+        }
+
+        .status-active {
+            background: rgba(76, 175, 80, 0.1);
+            color: #2E7D32;
+            border: 1px solid #4CAF50;
+        }
+
+        .status-inactive {
+            background: rgba(244, 67, 54, 0.1);
+            color: #c62828;
+            border: 1px solid #f44336;
+        }
+
+        .no-members {
+            text-align: center;
+            padding: 30px 20px;
+            color: #666;
+        }
+
+        .no-members p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .modal-loading {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .spinner {
+            width: 30px;
+            height: 30px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Toast notifications */
+        #snackbar, #snackbar_error {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: rgba(31, 28, 28, 0.9);
+            color: white;
+            text-align: center;
+            border-radius: 10px;
+            padding: 16px;
+            position: fixed;
+            z-index: 10000;
+            left: 50%;
+            bottom: 30px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        #snackbar_error {
+            background-color: rgba(245, 245, 245, 0.95);
+            color: black;
+        }
+
+        #snackbar.show, #snackbar_error.show {
+            visibility: visible;
+            opacity: 1;
+            animation: fadeinout 3s ease-in-out;
+        }
+
+        @keyframes fadeinout {
+            0%, 100% { opacity: 0; }
+            10%, 90% { opacity: 1; }
+        }
+    </style>
+</head>
+
+<body>
+    <svg aria-hidden="true" style="position: absolute; width: 0px; height: 0px; overflow: hidden;">
+        <!-- SVG content mantido -->
+    </svg>
+
+    <!-- Modais simplificados -->
+    <div id="level1Modal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>Membros do Nível 1</h3>
+                <button class="close-modal" onclick="closeModal('level1Modal')">&times;</button>
+            </div>
+            <div class="modal-body" id="level1MembersContent">
+                <div class="modal-loading">
+                    <div class="spinner"></div>
+                    <p>Carregando membros...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="level2Modal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>Membros do Nível 2</h3>
+                <button class="close-modal" onclick="closeModal('level2Modal')">&times;</button>
+            </div>
+            <div class="modal-body" id="level2MembersContent">
+                <div class="modal-loading">
+                    <div class="spinner"></div>
+                    <p>Carregando membros...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="level3Modal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>Membros do Nível 3</h3>
+                <button class="close-modal" onclick="closeModal('level3Modal')">&times;</button>
+            </div>
+            <div class="modal-body" id="level3MembersContent">
+                <div class="modal-loading">
+                    <div class="spinner"></div>
+                    <p>Carregando membros...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="app" data-v-app="" bis_skin_checked="1">
+        <div data-v-4b56c3a1="" class="teamuis" bis_skin_checked="1">
+            <div data-v-4b56c3a1="" class="lease-top" bis_skin_checked="1">
+                <p data-v-4b56c3a1="" class="">Equipe</p>
+            </div>
+            <div data-v-4b56c3a1="" class="lease-banner" bis_skin_checked="1">
+                <div data-v-4b56c3a1="" class="accum" bis_skin_checked="1">
+                    <p data-v-4b56c3a1="" class="accum-t1">Investimento total da equipe</p>
+                    <p data-v-4b56c3a1="" class="accum-t2" id="totalTeamInvestment">Kz 0</p>
+                </div>
+                <div data-v-4b56c3a1="" class="existing" bis_skin_checked="1">
+                    <div data-v-4b56c3a1="" class="left" bis_skin_checked="1">
+                        <p data-v-4b56c3a1="">Total de pessoas</p><span data-v-4b56c3a1="" class="income" id="totalPeople">0</span>
+                    </div>
+                    <div data-v-4b56c3a1="" class="rightu" bis_skin_checked="1">
+                        <p data-v-4b56c3a1="">Bônus total</p><span data-v-4b56c3a1="" class="income" id="totalBonus">Kz 0</span>
+                    </div>
+                </div>
+            </div>
+            <section data-v-4b56c3a1="" class="section-box">
+                <div data-v-4b56c3a1="" class="product-title" bis_skin_checked="1">
+                    <p data-v-4b56c3a1="" class="list-tit bold">Informações da Equipes</p>
+                </div>
+                <div data-v-4b56c3a1="" class="wrap-list" bis_skin_checked="1">
+                    <!-- Nível 1 -->
+                    <div data-v-4b56c3a1="" class="listlevel" bis_skin_checked="1">
+                        <div data-v-4b56c3a1="" class="listlevel-top" bis_skin_checked="1">
+                            <div data-v-4b56c3a1="" class="l-show" bis_skin_checked="1">
+                                <img data-v-4b56c3a1="" src="https://orac-le.online/lend/team/lendlease/dist/img/11.9c9be801.png" alt="" class="img1">
+                                <p data-v-4b56c3a1="" class="bold list-title"> Lv1. (Bônus:
+                                    <span data-v-4b56c3a1="" id="level1BonusPercent">25%</span>)
+                                </p>
+                            </div>
+                            <div data-v-4b56c3a1="" class="r-show" bis_skin_checked="1">
+                                <p data-v-4b56c3a1="" onclick="showLevelMembers(1)">
+                                    <i data-v-4b56c3a1="" class="van-badge__wrapper van-icon van-icon-arrow"></i>
+                                </p>
+                            </div>
+                        </div>
+                        <p data-v-4b56c3a1="" class="linee"></p>
+                        <div data-v-4b56c3a1="" class="listlevel-bottom" bis_skin_checked="1">
+                            <div data-v-4b56c3a1="" class="people team-title afte" bis_skin_checked="1">
+                                <span data-v-4b56c3a1="" class="bold titlevel-span" id="level1Bonus" style="color: rgb(0 255 48);">Kz 0</span>
+                                <p data-v-4b56c3a1="">Comissão</p>
+                            </div>
+                            <div data-v-4b56c3a1="" class="people team-title" bis_skin_checked="1">
+                                <span data-v-4b56c3a1="" class="bold" id="level1People">0</span>
+                                <p data-v-4b56c3a1="" class="titlevel">Pessoas</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Nível 2 -->
+                    <div data-v-4b56c3a1="" class="listlevel" bis_skin_checked="1">
+                        <div data-v-4b56c3a1="" class="listlevel-top" bis_skin_checked="1">
+                            <div data-v-4b56c3a1="" class="l-show" bis_skin_checked="1">
+                                <img data-v-4b56c3a1="" src="https://orac-le.online/lend/team/lendlease/dist/img/22.7dc4f8ab.png" alt="" class="img1">
+                                <p data-v-4b56c3a1="" class="bold list-title"> Lv2. (Bônus:
+                                    <span data-v-4b56c3a1="" id="level2BonusPercent">2%</span>)
+                                </p>
+                            </div>
+                            <div data-v-4b56c3a1="" class="r-show" bis_skin_checked="1">
+                                <p data-v-4b56c3a1="" onclick="showLevelMembers(2)">
+                                    <i data-v-4b56c3a1="" class="van-badge__wrapper van-icon van-icon-arrow"></i>
+                                </p>
+                            </div>
+                        </div>
+                        <p data-v-4b56c3a1="" class="linee"></p>
+                        <div data-v-4b56c3a1="" class="listlevel-bottom" bis_skin_checked="1">
+                            <div data-v-4b56c3a1="" class="people team-title afte" bis_skin_checked="1">
+                                <span data-v-4b56c3a1="" class="bold titlevel-span" id="level2Bonus" style="color:rgb(0 255 48);">Kz 0</span>
+                                <p data-v-4b56c3a1="">Comissão</p>
+                            </div>
+                            <div data-v-4b56c3a1="" class="people team-title" bis_skin_checked="1">
+                                <span data-v-4b56c3a1="" class="bold" id="level2People">0</span>
+                                <p data-v-4b56c3a1="" class="titlevel">Pessoas</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Nível 3 -->
+                    <div data-v-4b56c3a1="" class="listlevel" bis_skin_checked="1">
+                        <div data-v-4b56c3a1="" class="listlevel-top" bis_skin_checked="1">
+                            <div data-v-4b56c3a1="" class="l-show" bis_skin_checked="1">
+                                <img data-v-4b56c3a1="" src="https://orac-le.online/lend/team/lendlease/dist/img/33.cecb74c8.png" alt="" class="img1">
+                                <p data-v-4b56c3a1="" class="bold list-title"> Lv3. (Bônus:
+                                    <span data-v-4b56c3a1="" id="level3BonusPercent">1%</span>)
+                                </p>
+                            </div>
+                            <div data-v-4b56c3a1="" class="r-show" bis_skin_checked="1">
+                                <p data-v-4b56c3a1="" onclick="showLevelMembers(3)">
+                                    <i data-v-4b56c3a1="" class="van-badge__wrapper van-icon van-icon-arrow"></i>
+                                </p>
+                            </div>
+                        </div>
+                        <div data-v-4b56c3a1="" class="listlevel-bottom" bis_skin_checked="1">
+                            <div data-v-4b56c3a1="" class="people team-title afte" bis_skin_checked="1">
+                                <span data-v-4b56c3a1="" class="bold titlevel-span" id="level3Bonus" style="color: rgb(0 255 48);">Kz 0</span>
+                                <p data-v-4b56c3a1="">Comissão</p>
+                            </div>
+                            <div data-v-4b56c3a1="" class="people team-title" bis_skin_checked="1">
+                                <span data-v-4b56c3a1="" class="bold" id="level3People">0</span>
+                                <p data-v-4b56c3a1="" class="titlevel">Pessoas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div data-v-4b56c3a1="" class="invitation" bis_skin_checked="1">
+                    <div data-v-4b56c3a1="" class="wrap-code" bis_skin_checked="1">
+                        <img data-v-4b56c3a1="" src="https://i.postimg.cc/q7xJwXL9/add-group.png" alt="" class="code-img">
+                        <div data-v-4b56c3a1="" class="r-code" bis_skin_checked="1">
+                            <div data-v-4b56c3a1="" class="l-til" bis_skin_checked="1">
+                                <p data-v-4b56c3a1="" class="til">Código de convite</p>
+                                <p data-v-4b56c3a1="" class="code" id="invitationCode" style="font-size: 2.6rem;">
+                                    Carregando...
+                                </p>
+                            </div>
+                            <div data-v-4b56c3a1="" class="r-copy" bis_skin_checked="1" id="myToolti" onclick="copyCode()" onmouseout="outFun()">Copiar</div>
+                        </div>
+                    </div>
+                    <div data-v-4b56c3a1="" class="wrap-code" style="margin-top: 3rem;" bis_skin_checked="1">
+                        <img data-v-4b56c3a1="" src="https://i.postimg.cc/QMh9jMnZ/chain.png" alt="" class="code-img">
+                        <div data-v-4b56c3a1="" class="r-code" bis_skin_checked="1">
+                            <div data-v-4b56c3a1="" class="l-til" bis_skin_checked="1">
+                                <p data-v-4b56c3a1="" class="til">Link de convite </p>
+                                <p data-v-4b56c3a1="" class="code" id="invitationLink">
+                                    Carregando...
+                                </p>
+                            </div>
+                            <div data-v-4b56c3a1="" class="r-copy" bis_skin_checked="1" id="myTooltip" onclick="copyLink()" onmouseout="outFunc()">Copiar</div>
+                        </div>
+                    </div>
+                </div>
+                <div data-v-4b56c3a1="" class="box" bis_skin_checked="1">
+                    <p data-v-4b56c3a1="" class="whyteam bold">
+                        <img data-v-4b56c3a1="" src="img/caixa.png" alt=""> Regras
+                    </p>
+                    <p data-v-4b56c3a1="" class="textui">
+                        Se você quiser ganhar mais dinheiro, pode convidar seus amigos para se cadastrarem e se juntarem a nós, e você pode receber até <span style="color: rgb(255, 0, 0);">23%</span> em reembolso de investimento da equipe e 12% sobre compras recorrentes.
+                    </p>
+                </div>
+            </section>
+            <div data-v-5ca38804="" data-v-64ec28b8="" class="bottom" bis_skin_checked="1">
+                <div data-v-5ca38804="" class="flex flex-bom" bis_skin_checked="1">
+                    <div data-v-5ca38804="" class="item" bis_skin_checked="1" onclick="window.location.href='/home.html'">
+                        <div data-v-5ca38804="" class="img-box" bis_skin_checked="1">
+                            <img data-v-5ca38804="" class="imgc" src="https://i.postimg.cc/gjTHMg94/20250828-135951.png" alt="">
+                        </div>
+                        <p data-v-5ca38804="" class="item-pone">Início</p>
+                    </div>
+                    <div data-v-5ca38804="" class="item" bis_skin_checked="1" onclick="window.location.href='/ordered.html'">
+                        <div data-v-5ca38804="" class="img-box" bis_skin_checked="1">
+                            <img data-v-5ca38804="" class="imgc" src="https://i.postimg.cc/81F0b85w/20250828-140043.png" alt="">
+                        </div>
+                        <p data-v-5ca38804="" class="item-pone">Investido</p>
+                    </div>
+                    <div data-v-5ca38804="" class="item active" bis_skin_checked="1" onclick="window.location.href='/my-team.html'">
+                        <div data-v-5ca38804="" class="img-box" bis_skin_checked="1">
+                            <img data-v-5ca38804="" class="imgc" src="https://i.postimg.cc/PfWQtnCH/20250828-140134.png" alt="">
+                        </div>
+                        <p data-v-5ca38804="" class="item-pone item-color">Equipe</p>
+                    </div>
+                    <div data-v-5ca38804="" class="item" bis_skin_checked="1" onclick="window.location.href='/profile.html'">
+                        <div data-v-5ca38804="" class="img-box" bis_skin_checked="1">
+                            <img data-v-5ca38804="" class="imgc" src="https://i.postimg.cc/kgLwH44s/20250828-140201.png" alt="">
+                        </div>
+                        <p data-v-5ca38804="" class="item-pone">Perfil</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast messages -->
+    <div id="snackbar"></div>
+    <div id="snackbar_error"></div>
+
+    <script>
+        // Configuração da API
+        const API_BASE_URL = 'https://bd-p4q7.onrender.com';
+        
+        // ==============================================
+        // FUNÇÕES DE TOKEN E AUTENTICAÇÃO
+        // ==============================================
+        
+        // Verificar se o token é válido
+        function isTokenValid() {
+            const tokenData = localStorage.getItem('user_token');
+            if (!tokenData) return false;
+            
+            try {
+                const { expiry } = JSON.parse(tokenData);
+                if (Date.now() > expiry) {
+                    localStorage.removeItem('user_token');
+                    localStorage.removeItem('user_id');
+                    return false;
+                }
+                return true;
+            } catch (e) {
+                console.error('Erro ao verificar token:', e);
+                return false;
+            }
+        }
+        
+        // Obter token do usuário
+        function getUserToken() {
+            const tokenData = localStorage.getItem('user_token');
+            if (!tokenData) return null;
+            
+            try {
+                const { token } = JSON.parse(tokenData);
+                return token;
+            } catch (e) {
+                console.error('Erro ao obter token:', e);
+                return null;
+            }
+        }
+        
+        // Obter ID do usuário
+        function getUserId() {
+            return localStorage.getItem('user_id');
+        }
+        
+        // ==============================================
+        // FUNÇÕES DE UI
+        // ==============================================
+        
+        // Função para mostrar toast
+        function showToast(message, type = 'info') {
+            const toastId = type === 'error' ? 'snackbar_error' : 'snackbar';
+            const toast = document.getElementById(toastId);
+            
+            if (!toast) return;
+            
+            toast.textContent = message;
+            toast.className = "show";
+            
+            setTimeout(() => {
+                toast.className = toast.className.replace("show", "");
+            }, 3000);
+        }
+        
+        // Formatar moeda
+        function formatCurrency(value) {
+            if (!value && value !== 0) return 'Kz 0';
+            const numValue = Number(value);
+            if (isNaN(numValue)) return 'Kz 0';
+            return `Kz ${numValue.toLocaleString('pt-AO', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+        }
+        
+        // ==============================================
+        // FUNÇÕES DE CARREGAMENTO DE DADOS
+        // ==============================================
+        
+        // Função principal para carregar dados da equipe
+        async function loadTeamData() {
+            // Verificar se está logado
+            if (!isTokenValid()) {
+                setTimeout(() => {
+                    window.location.href = '/login.html';
+                }, 100);
+                return;
+            }
+            
+            const token = getUserToken();
+            if (!token) {
+                window.location.href = '/login.html';
+                return;
+            }
+            
+            try {
+                // Carregar perfil (código de convite)
+                await loadUserProfile(token);
+                
+                // Carregar estatísticas da equipe
+                await loadTeamStatistics(token);
+                
+            } catch (error) {
+                console.error('Erro ao carregar dados da equipe:', error);
+                showToast('Erro ao carregar dados da equipe', 'error');
+                loadFallbackData();
+            }
+        }
+        
+        // Carregar perfil do usuário para obter código de convite
+        async function loadUserProfile(token) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/user/profile`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.status === 401) {
+                    // Token expirado
+                    localStorage.removeItem('user_token');
+                    localStorage.removeItem('user_id');
+                    showToast('Sessão expirada', 'error');
+                    setTimeout(() => window.location.href = '/login.html', 1500);
+                    return;
+                }
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.success && data.data) {
+                        // Atualizar código de convite e link
+                        updateInvitationData(data.data);
+                    } else {
+                        showToast('Erro ao carregar perfil', 'error');
+                    }
+                } else {
+                    throw new Error('Erro na resposta da API');
+                }
+                
+            } catch (error) {
+                console.error('Erro ao carregar perfil:', error);
+                showToast('Erro ao carregar código de convite', 'error');
+            }
+        }
+        
+        // Carregar estatísticas da equipe
+        async function loadTeamStatistics(token) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/team/statistics`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.status === 401) {
+                    localStorage.removeItem('user_token');
+                    localStorage.removeItem('user_id');
+                    showToast('Sessão expirada', 'error');
+                    setTimeout(() => window.location.href = '/login.html', 1500);
+                    return;
+                }
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.success && data.data) {
+                        updateTeamStatistics(data.data);
+                    } else {
+                        showToast('Erro ao carregar estatísticas', 'error');
+                    }
+                } else {
+                    throw new Error('Erro na resposta da API');
+                }
+                
+            } catch (error) {
+                console.error('Erro ao carregar estatísticas:', error);
+                showToast('Erro ao carregar dados da equipe', 'error');
+            }
+        }
+        
+        // ==============================================
+        // FUNÇÕES DE ATUALIZAÇÃO DE UI
+        // ==============================================
+        
+        // Atualizar dados de convite
+        function updateInvitationData(profileData) {
+            if (profileData.invitation_code) {
+                // Atualizar código de convite
+                document.getElementById('invitationCode').textContent = profileData.invitation_code;
+                
+                // Atualizar link de convite
+                const baseUrl = window.location.origin;
+                const invitationLink = `${baseUrl}/register?ref=${profileData.invitation_code}`;
+                document.getElementById('invitationLink').textContent = invitationLink;
+            }
+        }
+        
+        // Atualizar estatísticas da equipe
+        function updateTeamStatistics(data) {
+            // Dados gerais
+            if (data.team_overview) {
+                const totalPeople = data.team_overview.people_added || 0;
+                const totalBonus = data.team_overview.income_added || 0;
+                
+                document.getElementById('totalPeople').textContent = totalPeople;
+                document.getElementById('totalBonus').textContent = formatCurrency(totalBonus);
+                
+                // Se houver investimento na equipe
+                if (data.team_overview.investment_total) {
+                    document.getElementById('totalTeamInvestment').textContent = formatCurrency(data.team_overview.investment_total);
+                }
+            }
+            
+            // Investimento total da equipe (se disponível)
+            if (data.income_analysis && data.income_analysis.cumulative_recharge) {
+                document.getElementById('totalTeamInvestment').textContent = 
+                    formatCurrency(data.income_analysis.cumulative_recharge);
+            }
+            
+            // Dados por nível
+            if (data.level_data) {
+                updateLevelData('level1', data.level_data.level1);
+                updateLevelData('level2', data.level_data.level2);
+                updateLevelData('level3', data.level_data.level3);
+            }
+        }
+        
+        // Atualizar dados de nível específico
+        function updateLevelData(level, data) {
+            if (!data) return;
+            
+            const peopleElement = document.getElementById(`${level}People`);
+            const bonusElement = document.getElementById(`${level}Bonus`);
+            const percentElement = document.getElementById(`${level}BonusPercent`);
+            
+            if (peopleElement) peopleElement.textContent = data.valid_members || 0;
+            if (bonusElement) bonusElement.textContent = formatCurrency(data.team_withdrawal || 0);
+            
+            // Definir percentuais fixos conforme seu sistema
+            if (percentElement) {
+                let percent = 25;
+                if (level === 'level2') percent = 2;
+                if (level === 'level3') percent = 1;
+                percentElement.textContent = percent + '%';
+            }
+        }
+        
+        // Dados de fallback
+        function loadFallbackData() {
+            // Gerar código aleatório para demonstração
+            const randomCode = 'USER' + Math.floor(10000 + Math.random() * 90000);
+            const baseUrl = window.location.origin;
+            
+            document.getElementById('invitationCode').textContent = randomCode;
+            document.getElementById('invitationLink').textContent = `${baseUrl}/register?ref=${randomCode}`;
+            
+            // Dados de exemplo para a equipe
+            document.getElementById('totalPeople').textContent = '0';
+            document.getElementById('totalBonus').textContent = 'Kz 0';
+            document.getElementById('totalTeamInvestment').textContent = 'Kz 0';
+            
+            document.getElementById('level1People').textContent = '0';
+            document.getElementById('level1Bonus').textContent = 'Kz 0';
+            
+            document.getElementById('level2People').textContent = '0';
+            document.getElementById('level2Bonus').textContent = 'Kz 0';
+            
+            document.getElementById('level3People').textContent = '0';
+            document.getElementById('level3Bonus').textContent = 'Kz 0';
+        }
+        
+        // ==============================================
+        // FUNÇÕES DE CÓPIA
+        // ==============================================
+        
+        async function copyToClipboard(text, successMessage) {
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast(successMessage);
+            } catch (err) {
+                // Fallback para navegadores antigos
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showToast(successMessage);
+            }
+        }
+        
+        function copyCode() {
+            const code = document.getElementById('invitationCode').textContent;
+            if (code === 'Carregando...' || !code.trim()) {
+                showToast('Código não disponível', 'error');
+                return;
+            }
+            copyToClipboard(code, 'Código copiado!');
+            document.getElementById('myToolti').innerHTML = 'Copiado';
+        }
+        
+        function copyLink() {
+            const link = document.getElementById('invitationLink').textContent;
+            if (link === 'Carregando...' || !link.trim()) {
+                showToast('Link não disponível', 'error');
+                return;
+            }
+            copyToClipboard(link, 'Link copiado!');
+            document.getElementById('myTooltip').innerHTML = 'Copiado';
+        }
+        
+        function outFun() {
+            setTimeout(() => {
+                document.getElementById('myToolti').innerHTML = 'Copiar';
+            }, 2000);
+        }
+        
+        function outFunc() {
+            setTimeout(() => {
+                document.getElementById('myTooltip').innerHTML = 'Copiar';
+            }, 2000);
+        }
+        
+        // ==============================================
+        // FUNÇÕES DOS MODAIS
+        // ==============================================
+        
+        // Função para abrir modal
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        
+        // Função para fechar modal
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+        
+        // Fechar modal ao clicar fora
+        window.addEventListener('click', function(event) {
+            const modals = ['level1Modal', 'level2Modal', 'level3Modal'];
+            modals.forEach(modalId => {
+                const modal = document.getElementById(modalId);
+                if (modal && event.target === modal) {
+                    closeModal(modalId);
+                }
+            });
+        });
+        
+        // Carregar membros de um nível
+        async function loadLevelMembers(level) {
+            const token = getUserToken();
+            if (!token) {
+                showToast('Sessão expirada', 'error');
+                setTimeout(() => window.location.href = '/login.html', 1500);
+                return [];
+            }
+            
+            try {
+                const userId = getUserId();
+                if (!userId) {
+                    throw new Error('ID do usuário não encontrado');
+                }
+                
+                // Usar a rota correta para buscar membros
+                const response = await fetch(`${API_BASE_URL}/api/team/members-detailed?level=${level}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.status === 401) {
+                    localStorage.removeItem('user_token');
+                    localStorage.removeItem('user_id');
+                    showToast('Sessão expirada', 'error');
+                    setTimeout(() => window.location.href = '/login.html', 1500);
+                    return [];
+                }
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.success && data.data && data.data.members) {
+                        return data.data.members;
+                    }
+                }
+                
+                return [];
+                
+            } catch (error) {
+                console.error('Erro ao carregar membros:', error);
+                showToast('Erro ao carregar membros', 'error');
+                return [];
+            }
+        }
+        
+        // Mostrar membros de um nível
+        async function showLevelMembers(level) {
+            const modalId = `level${level}Modal`;
+            const contentId = `level${level}MembersContent`;
+            
+            // Abrir modal
+            openModal(modalId);
+            
+            // Mostrar loading
+            const contentElement = document.getElementById(contentId);
+            contentElement.innerHTML = `
+                <div class="modal-loading">
+                    <div class="spinner"></div>
+                    <p>Carregando membros do nível ${level}...</p>
+                </div>
+            `;
+            
+            // Carregar membros
+            const members = await loadLevelMembers(level);
+            
+            // Renderizar membros
+            if (members && members.length > 0) {
+                renderMembersInModal(contentId, members, level);
+            } else {
+                contentElement.innerHTML = `
+                    <div class="no-members">
+                        <p>Nenhum membro encontrado no nível ${level}</p>
+                        <p style="font-size: 14px; margin-top: 10px; color: #888;">
+                            Convide mais pessoas para aparecerem aqui!
+                        </p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Renderizar membros no modal
+        function renderMembersInModal(contentId, members, level) {
+            const contentElement = document.getElementById(contentId);
+            
+            // Ordenar por data de registro (mais recentes primeiro)
+            members.sort((a, b) => new Date(b.registration_date || 0) - new Date(a.registration_date || 0));
+            
+            // Contar membros
+            const totalCount = members.length;
+            
+            // Criar HTML dos membros
+            let membersHTML = '';
+            
+            // Adicionar contador no topo
+            membersHTML += `
+                <div style="margin-bottom: 15px; padding: 10px; background: #f5f5f5; border-radius: 5px; text-align: center; font-size: 14px; color: #666;">
+                    Total: ${totalCount} membro(s)
+                </div>
+            `;
+            
+            members.forEach((member, index) => {
+                const dateText = member.registration_date ? 
+                    new Date(member.registration_date).toLocaleDateString('pt-AO') : 
+                    'Data não disponível';
+                
+                // Determinar status baseado no número de compras
+                const statusClass = member.recharge_count > 0 ? 'status-active' : 'status-inactive';
+                const statusText = member.recharge_count > 0 ? 'Ativo' : 'Inativo';
+                
+                membersHTML += `
+                    <div class="member-item">
+                        <div class="member-info">
+                            <div class="member-phone">${member.mobile || 'Número não disponível'}</div>
+                            <div class="member-date">Cadastrado: ${dateText}</div>
+                        </div>
+                        <div class="member-status ${statusClass}">${statusText}</div>
+                    </div>
+                `;
+            });
+            
+            contentElement.innerHTML = membersHTML;
+        }
+        
+        // ==============================================
+        // INICIALIZAÇÃO
+        // ==============================================
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carregar dados da equipe
+            loadTeamData();
+            
+            // Atualizar periodicamente a cada 30 segundos
+            setInterval(() => {
+                if (isTokenValid()) {
+                    const token = getUserToken();
+                    if (token) {
+                        loadTeamStatistics(token);
+                    }
+                }
+            }, 30000);
+        });
+        
+        // Expor funções globalmente
+        window.copyCode = copyCode;
+        window.copyLink = copyLink;
+        window.outFun = outFun;
+        window.outFunc = outFunc;
+        window.showLevelMembers = showLevelMembers;
+        window.closeModal = closeModal;
+        
+        // Funções de compatibilidade
+        window.myFunctio = copyCode;
+        window.myFunction = copyLink;
+    </script>
+</body>
+</html>

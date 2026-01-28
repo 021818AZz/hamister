@@ -1,0 +1,821 @@
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="icon" href="/lendlease/dist/favicon.ico">
+    <title>lendlease</title>
+
+    <link href="css/chunk-vendors.317e4ea8.css" rel="stylesheet">
+    <link href="css/app.3d111502.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="css/450.85bc4b92.css">
+    <link rel="stylesheet" type="text/css" href="css/420.5f445c7e.css">
+    <link rel="stylesheet" type="text/css" href="css/33.f638d3cb.css">
+    <link rel="stylesheet" type="text/css" href="css/422.30ab6527.css">
+</head>
+
+<style>
+    .withdraw .section-box .lease-banner[data-v-150992f2] {
+        height: 29rem;
+        width: 69.6rem;
+        margin: 3rem auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: url(https://i.postimg.cc/q7tGwzxT/1000057145.jpg) no-repeat top/100% auto;
+        position: relative
+    }
+    
+    /* Estilos para os novos elementos */
+    .amount-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 15px 0;
+        justify-content: center;
+    }
+    
+    .amount-option {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 15px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .amount-option:hover {
+        background-color: #2980b9;
+        transform: translateY(-2px);
+    }
+    
+    .amount-option.active {
+        background-color: #2ecc71;
+    }
+    
+    .withdraw-summary {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 15px;
+        margin: 20px 0;
+    }
+    
+    .summary-item {
+        display: flex;
+        justify-content: space-between;
+        margin: 8px 0;
+        color: white;
+    }
+    
+    .summary-value {
+        font-weight: bold;
+    }
+    
+    .net-amount {
+        color: #2ecc71;
+        font-size: 18px;
+    }
+    
+    .tax-amount {
+        color: #e74c3c;
+    }
+    
+    .bank-info-box {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 15px;
+        margin: 15px 0;
+        color: white;
+    }
+    
+    .bank-info-box p {
+        margin: 5px 0;
+    }
+    
+    .no-bank-warning {
+        background-color: rgba(231, 76, 60, 0.2);
+        border: 1px solid #e74c3c;
+        border-radius: 10px;
+        padding: 15px;
+        margin: 15px 0;
+        text-align: center;
+        color: white;
+    }
+    
+    .time-warning {
+        background-color: rgba(241, 196, 15, 0.2);
+        border: 1px solid #f1c40f;
+        border-radius: 10px;
+        padding: 10px;
+        margin: 10px 0;
+        text-align: center;
+        color: #f1c40f;
+        font-size: 14px;
+    }
+    
+    #snackbar {
+      visibility: hidden;
+      min-width: 250px;
+      margin-left: -125px;
+      background-color: rgba(31, 28, 28, 0.5);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      color: white;
+      text-align: center;
+      border-radius: 10px;
+      padding: 16px;
+      position: fixed;
+      z-index: 1;
+      left: 50%;
+      bottom: 50%;
+      font-size: 17px;
+    }
+
+    #snackbar.show {
+      visibility: visible;
+      -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+    #snackbar_error {
+      visibility: hidden;
+      width: 40%;
+      margin-left: 5px;
+      background-color: whitesmoke;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      color: black;
+      text-align: center;
+      border-radius: 10px;
+      padding: 16px;
+      position: fixed;
+      z-index: 1;
+      left: 30%;
+      bottom: 50%;
+      font-size: 17px;
+    }
+
+    #snackbar_error.show {
+      visibility: visible;
+      -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+    @-webkit-keyframes fadein {
+      from {
+        bottom: 50%;
+        opacity: 0;
+      }
+      to {
+        bottom: 50%;
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeout {
+      from {
+        bottom: 50%;
+        opacity: 1;
+      }
+      to {
+        bottom: 50%;
+        opacity: 0;
+      }
+    }
+
+    @media (min-width: 576px) and (max-width: 767px) {
+      #snackbar_error {
+        width: 60%;
+        left: 20%;
+        bottom: 70px;
+        font-size: 12px;
+      }
+      #snackbar {
+        width: 50%;
+        left: 25%;
+        bottom: 70px;
+        font-size: 12px;
+      }
+    }
+    @media (max-width: 575.99px) {
+      #snackbar_error {
+        width: 80%;
+        margin-left: 5px;
+        left: 10%;
+        font-size: 12px;
+      }
+      #snackbar {
+        width: 80%;
+        margin-left: 5px;
+        left: 10%;
+        font-size: 12px;
+      }
+    }
+
+        /* Styles for the preloader */
+        #preloade {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+       
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black
+        }
+        /* Styles for the preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+           
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black
+        }
+</style>
+
+<body>
+    <!-- Toast notifications -->
+    <div id="snackbar"></div>
+    <div id="snackbar_error"></div>
+    
+    <!-- Loading overlay -->
+    <div class="loaderd" id="preloade" style="display: none;">
+        <center>
+            <div class="loaderd">
+                <div class="van-toast van-toast--middle loadingcss" bis_skin_checked="1">
+                    <i class="van-icon van-toast__icon"><img src="img/loading.gif" class="van-icon__image"></i>
+                </div>
+            </div>
+        </center>
+    </div>
+
+    <div id="app" data-v-app="" bis_skin_checked="1">
+        <div data-v-150992f2="" class="withdraw" bis_skin_checked="1">
+            <div data-v-150992f2="" class="navback" bis_skin_checked="1"
+                onclick="window.location.href='/home.html'"><img data-v-150992f2=""
+                    src="https://i.postimg.cc/CLQLWWMH/20250902-065546.png" alt="" class="back-img">
+                <p data-v-150992f2="">Saque</p>
+            </div>
+                                <section data-v-150992f2="" class="section-box">
+                    <!-- Aviso de horário -->
+                    <div id="timeWarning" class="time-warning" style="display: none;">
+                        ⚠️ Horário de saque: 9h às 0h. Fora deste horário, os saques serão processados no próximo dia útil.
+                    </div>
+                    
+                    <div data-v-150992f2="" class="lease-banner" bis_skin_checked="1"><img data-v-150992f2=""
+                            src="img/money.png" alt="" class="r-img">
+                        <div data-v-150992f2="" class="accum" bis_skin_checked="1">
+                            <p data-v-150992f2="" class="accum-t1">Saldo da Conta</p>
+                            <p data-v-150992f2="" class="accum-t2" id="walletBalance">0 KZ</p>
+                        </div>
+                        <div data-v-150992f2="" class="existing" bis_skin_checked="1">
+                            <div data-v-150992f2="" class="left" bis_skin_checked="1">
+                                <p data-v-150992f2="">Saques Hoje</p><span data-v-150992f2=""
+                                    class="income" id="todayWithdrawals">0 KZ</span>
+                            </div>
+                            <div data-v-150992f2="" class="rightu" bis_skin_checked="1">
+                                <p data-v-150992f2="">Saques Totais</p><span data-v-150992f2="" 
+                                    class="income" id="totalWithdrawals">0 KZ</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Aviso de conta bancária não cadastrada -->
+                    <div id="noBankWarning" class="no-bank-warning" style="display: none;">
+                        <p>⚠️ Você não tem uma conta bancária cadastrada.</p>
+                        <button onclick="window.location.href='add-bank-create.html'" 
+                                style="background-color: #3498db; color: white; border: none; padding: 10px 20px; 
+                                       border-radius: 5px; cursor: pointer; margin-top: 10px; font-size: 14px;">
+                            Cadastrar Conta Bancária
+                        </button>
+                    </div>
+                    
+                    <!-- Informações da conta bancária -->
+                    <div id="bankAccountInfo" class="bank-info-box" style="display: none;">
+                        <h4 style="text-align: center; margin-bottom: 10px;">Conta Bancária Cadastrada</h4>
+                        <div id="bankDetails">
+                            <!-- Informações serão preenchidas via JavaScript -->
+                        </div>
+                        <div style="text-align: center; margin-top: 10px;">
+                            <button onclick="window.location.href='add-bank-create.html'" 
+                                    style="background-color: transparent; border: 1px solid #3498db; 
+                                           color: #3498db; padding: 5px 15px; border-radius: 5px; 
+                                           cursor: pointer; font-size: 13px;">
+                                Alterar Conta
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div data-v-150992f2="" class="boxed" bis_skin_checked="1">
+                        <div data-v-150992f2="" class="signin" style="margin-bottom: 0rem;" bis_skin_checked="1">
+                            <img data-v-150992f2="" src="https://i.postimg.cc/cLx2BHGF/money-1.png" alt="">
+                            <p data-v-150992f2="">Valor de Saque</p>
+                        </div>
+                        
+                        <!-- Botões de valor rápido -->
+                        <div class="amount-options">
+                            <button type="button" class="amount-option" data-amount="1200">1.200 KZ</button>
+                            <button type="button" class="amount-option" data-amount="5000">5.000 KZ</button>
+                            <button type="button" class="amount-option" data-amount="10000">10.000 KZ</button>
+                            <button type="button" class="amount-option" data-amount="50000">50.000 KZ</button>
+                            <button type="button" class="amount-option" data-amount="100000">100.000 KZ</button>
+                        </div>
+                        
+                        <div data-v-150992f2="" class="van-cell van-field input-box" bis_skin_checked="1">
+                            <div class="van-field__left-icon" bis_skin_checked="1">
+                                <p data-v-150992f2="">KZ</p>
+                            </div>
+                            <!---->
+                            <div class="van-cell__value van-cell__value--alone van-field__value" bis_skin_checked="1">
+                                <div class="van-field__body" bis_skin_checked="1">
+                                    <input type="number" 
+                                           inputmode="numeric"
+                                           name="amount" 
+                                           id="withdrawAmount" 
+                                           class="van-field__control"
+                                           placeholder="Digite o valor (1.200 a 3.000.000)"
+                                           min="1200" 
+                                           max="3000000"
+                                           step="100">
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                </div>
+                                <!---->
+                                <!---->
+                            </div>
+                            <!---->
+                            <!---->
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 10px; color: #95a5a6; font-size: 12px;">
+                            Mínimo: 1.200 KZ | Máximo: 3.000.000 KZ
+                        </div>
+
+                    </div>
+                    
+                    <!-- Resumo do saque -->
+                    <div class="withdraw-summary">
+                        <h4 style="text-align: center; margin-bottom: 15px; color: white;">Resumo do Saque</h4>
+                        
+                        <div class="summary-item">
+                            <span>Valor solicitado:</span>
+                            <span class="summary-value" id="summaryAmount">0 KZ</span>
+                        </div>
+                        
+                        <div class="summary-item">
+                            <span>Taxa (12%):</span>
+                            <span class="summary-value tax-amount" id="summaryTax">0 KZ</span>
+                        </div>
+                        
+                        <div class="summary-item" style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+                            <span style="font-size: 16px;">Valor líquido:</span>
+                            <span class="summary-value net-amount" id="summaryNet">0 KZ</span>
+                        </div>
+                        
+                        <div style="margin-top: 15px; text-align: center;">
+                            <p style="font-size: 12px; color: #bdc3c7;">
+                                O valor líquido será creditado na sua conta bancária em 1-3 horas úteis.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div data-v-150992f2="" class="boxed" bis_skin_checked="1">
+                        <button data-v-150992f2="" class="rechbtn" type="button" id="submitWithdraw">Sacar</button>
+                    </div>
+
+                    <div data-v-150992f2="" class="minimum" bis_skin_checked="1">
+                        <div data-v-150992f2="" class="ts" bis_skin_checked="1"><img data-v-150992f2=""
+                                src="https://i.postimg.cc/W4DVd2RT/policy.png" alt="">
+                            <p data-v-150992f2="" class="kind">Regra</p>
+                        </div>
+                        <style>
+                            .policy-content,
+                            .policy-content * {
+                                color: white !important;
+                            }
+                        </style>
+                        <div data-v-150992f2="" class="policy-content">
+                            <p><img src="https://i.postimg.cc/Bn6ZDQR2/circulo-de-flecha-(2).png" style="font-size: 1rem; letter-spacing: 0.15px; color: rgb(71, 95, 123); text-wrap-mode: nowrap; width: 24px;"><span style="font-size: 1rem; letter-spacing: 0.15px; color: rgb(71, 95, 123); text-wrap-mode: nowrap;"> </span><span style="color: rgb(71, 95, 123); letter-spacing: 0.15px; text-wrap-mode: nowrap;"> O valor mínimo para retirada é de 1.200 KZ.</span></p>
+                            
+                            <p style="letter-spacing: 0.15px;"><img src="https://i.postimg.cc/Bn6ZDQR2/circulo-de-flecha-(2).png" style="font-size: 1rem; letter-spacing: 0.15px; color: rgb(71, 95, 123); text-wrap-mode: nowrap; width: 24px;"><span style="font-size: 1rem; letter-spacing: 0.15px; color: rgb(71, 95, 123); text-wrap-mode: nowrap;"> </span><span style="color: rgb(71, 95, 123); letter-spacing: 0.15px; text-wrap-mode: nowrap;"> O valor máximo para retirada é de 3.000.000 KZ.</span></p>
+                            
+                            <p style="letter-spacing: 0.15px;"><img src="https://i.postimg.cc/Bn6ZDQR2/circulo-de-flecha-(2).png" style="font-size: 1rem; letter-spacing: 0.15px; color: rgb(71, 95, 123); width: 24px;"><span style="font-size: 1rem; letter-spacing: 0.15px; text-wrap-mode: nowrap; color: rgb(71, 95, 123);"> </span><span style="letter-spacing: 0.15px; text-wrap-mode: nowrap; color: rgb(71, 95, 123);"> Não é necessário um produto ativo em sua conta.</span></p>
+                            
+                            <p style="letter-spacing: 0.15px;"><img src="https://i.postimg.cc/Bn6ZDQR2/circulo-de-flecha-(2).png" style="font-size: 1rem; letter-spacing: 0.15px; color: rgb(71, 95, 123); text-wrap-mode: nowrap; width: 24px;"><span style="font-size: 1rem; letter-spacing: 0.15px; color: rgb(71, 95, 123); text-wrap-mode: nowrap;"> </span><span style="color: rgb(71, 95, 123); letter-spacing: 0.15px; text-wrap-mode: nowrap;"> Taxa de manuseio 12%.</span></p>
+                            
+                            <p style="letter-spacing: 0.15px;"><img src="https://i.postimg.cc/Bn6ZDQR2/circulo-de-flecha-(2).png" style="letter-spacing: 0.15px; font-size: 1rem; color: rgb(71, 95, 123); text-wrap-mode: nowrap; width: 24px;"><span style="letter-spacing: 0.15px; font-size: 1rem; color: rgb(71, 95, 123); text-wrap-mode: nowrap;"> </span><span style="letter-spacing: 0.15px; font-size: 1rem; color: rgb(71, 95, 123); text-wrap-mode: nowrap;"> Horário de processamento: 9h às 0h.</span></p>
+                            
+                            <p style="letter-spacing: 0.15px;"><span style="color: rgb(71, 95, 123); letter-spacing: 0.15px; text-wrap-mode: nowrap;">Saques fora do horário serão processados no próximo dia útil.</span></p>
+                            
+                            <p style="letter-spacing: 0.15px;"><img src="https://i.postimg.cc/Bn6ZDQR2/circulo-de-flecha-(2).png" style="font-size: 1rem; letter-spacing: 0.15px; color: rgb(71, 95, 123); text-wrap-mode: nowrap; width: 24px;"><span style="font-size: 1rem; letter-spacing: 0.15px; color: rgb(71, 95, 123); text-wrap-mode: nowrap;"> </span><span style="color: rgb(71, 95, 123); letter-spacing: 0.15px; text-wrap-mode: nowrap;"> O tempo de processamento é de 1-3 horas.</span></p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuração da API
+        const API_BASE_URL = 'https://bd-p4q7.onrender.com';
+        
+        // Função para mostrar toast
+        function showToast(message, type = 'info') {
+            const snackbar = type === 'error' ? document.getElementById('snackbar_error') : document.getElementById('snackbar');
+            snackbar.textContent = message;
+            snackbar.className = "show";
+            setTimeout(() => {
+                snackbar.className = snackbar.className.replace("show", "");
+            }, 3000);
+        }
+        
+        // Função para mostrar/ocultar loading
+        function showLoading() {
+            document.getElementById('preloade').style.display = 'block';
+        }
+        
+        function hideLoading() {
+            document.getElementById('preloade').style.display = 'none';
+        }
+        
+        // Verificar se o token é válido
+        function isTokenValid() {
+            const tokenData = localStorage.getItem('user_token');
+            if (!tokenData) return false;
+            
+            try {
+                const { expiry } = JSON.parse(tokenData);
+                if (Date.now() > expiry) {
+                    localStorage.removeItem('user_token');
+                    localStorage.removeItem('user_id');
+                    return false;
+                }
+                return true;
+            } catch (e) {
+                console.error('Erro ao verificar token:', e);
+                return false;
+            }
+        }
+        
+        // Obter token do usuário
+        function getUserToken() {
+            const tokenData = localStorage.getItem('user_token');
+            if (!tokenData) return null;
+            
+            try {
+                const { token } = JSON.parse(tokenData);
+                return token;
+            } catch (e) {
+                console.error('Erro ao obter token:', e);
+                return null;
+            }
+        }
+        
+        // Obter ID do usuário
+        function getUserId() {
+            return localStorage.getItem('user_id');
+        }
+        
+        // Verificar horário de funcionamento (9h às 0h)
+        function isWithdrawalTime() {
+            const now = new Date();
+            const hour = now.getHours();
+            return hour >= 9 || hour === 0; // 9h às 0h (meia-noite)
+        }
+        
+        // Formatar valor em KZ
+        function formatKZ(value) {
+            return new Intl.NumberFormat('pt-AO', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(value) + ' KZ';
+        }
+        
+        // Calcular resumo do saque
+        function calculateWithdrawalSummary() {
+            const amountInput = document.getElementById('withdrawAmount');
+            const amount = parseFloat(amountInput.value) || 0;
+            
+            if (amount < 1200 || amount > 3000000) {
+                // Resetar valores se inválido
+                document.getElementById('summaryAmount').textContent = '0 KZ';
+                document.getElementById('summaryTax').textContent = '0 KZ';
+                document.getElementById('summaryNet').textContent = '0 KZ';
+                return;
+            }
+            
+            const tax = amount * 0.12; // 12% de taxa
+            const netAmount = amount - tax;
+            
+            document.getElementById('summaryAmount').textContent = formatKZ(amount);
+            document.getElementById('summaryTax').textContent = formatKZ(tax);
+            document.getElementById('summaryNet').textContent = formatKZ(netAmount);
+        }
+        
+        // Buscar dados do usuário
+        async function fetchUserData() {
+            const token = getUserToken();
+            const userId = getUserId();
+            
+            if (!token || !userId) {
+                window.location.href = '/login.html';
+                return;
+            }
+            
+            showLoading();
+            
+            try {
+                // Buscar perfil do usuário (saldo)
+                const profileResponse = await fetch(`${API_BASE_URL}/api/user/profile`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                if (!profileResponse.ok) {
+                    throw new Error('Erro ao buscar perfil');
+                }
+                
+                const profileData = await profileResponse.json();
+                
+                if (profileData.success) {
+                    const walletBalance = profileData.data.wallet_balance || 0;
+                    document.getElementById('walletBalance').textContent = formatKZ(walletBalance);
+                }
+                
+                // Buscar conta bancária
+                const bankResponse = await fetch(`${API_BASE_URL}/api/user/bank-account`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                let hasBankAccount = false;
+                let bankAccountInfo = null;
+                
+                if (bankResponse.ok) {
+                    const bankData = await bankResponse.json();
+                    if (bankData.success && bankData.data) {
+                        hasBankAccount = true;
+                        bankAccountInfo = bankData.data;
+                    }
+                }
+                
+                // Buscar histórico de saques para estatísticas
+                const withdrawalsResponse = await fetch(`${API_BASE_URL}/api/withdrawals?limit=100`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                let todayWithdrawals = 0;
+                let totalWithdrawals = 0;
+                
+                if (withdrawalsResponse.ok) {
+                    const withdrawalsData = await withdrawalsResponse.json();
+                    if (withdrawalsData.success) {
+                        const today = new Date().toISOString().split('T')[0];
+                        withdrawalsData.data.withdrawals.forEach(withdrawal => {
+                            totalWithdrawals += withdrawal.amount || 0;
+                            const withdrawalDate = new Date(withdrawal.created_at).toISOString().split('T')[0];
+                            if (withdrawalDate === today) {
+                                todayWithdrawals += withdrawal.amount || 0;
+                            }
+                        });
+                    }
+                }
+                
+                document.getElementById('todayWithdrawals').textContent = formatKZ(todayWithdrawals);
+                document.getElementById('totalWithdrawals').textContent = formatKZ(totalWithdrawals);
+                
+                // Mostrar/ocultar seções baseado na existência de conta bancária
+                if (hasBankAccount && bankAccountInfo) {
+                    document.getElementById('noBankWarning').style.display = 'none';
+                    document.getElementById('bankAccountInfo').style.display = 'block';
+                    
+                    // Preencher informações da conta bancária
+                    const bankDetailsDiv = document.getElementById('bankDetails');
+                    bankDetailsDiv.innerHTML = `
+                        <p><strong>Banco:</strong> ${bankAccountInfo.bank_name || 'Não informado'}</p>
+                        <p><strong>Titular:</strong> ${bankAccountInfo.account_holder || 'Não informado'}</p>
+                        <p><strong>Número da Conta:</strong> ${bankAccountInfo.account_number || 'Não informado'}</p>
+                        ${bankAccountInfo.branch_code ? `<p><strong>Agência:</strong> ${bankAccountInfo.branch_code}</p>` : ''}
+                    `;
+                } else {
+                    document.getElementById('noBankWarning').style.display = 'block';
+                    document.getElementById('bankAccountInfo').style.display = 'none';
+                }
+                
+                // Mostrar aviso de horário se fora do horário de funcionamento
+                if (!isWithdrawalTime()) {
+                    document.getElementById('timeWarning').style.display = 'block';
+                } else {
+                    document.getElementById('timeWarning').style.display = 'none';
+                }
+                
+            } catch (error) {
+                console.error('Erro ao buscar dados do usuário:', error);
+                showToast('Erro ao carregar dados do usuário', 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+        
+        // Processar saque
+        async function processWithdrawal() {
+            const token = getUserToken();
+            const amountInput = document.getElementById('withdrawAmount');
+            const amount = parseFloat(amountInput.value) || 0;
+            
+            // Validações
+            if (amount < 1200) {
+                showToast('O valor mínimo de saque é 1.200 KZ', 'error');
+                return;
+            }
+            
+            if (amount > 3000000) {
+                showToast('O valor máximo de saque é 3.000.000 KZ', 'error');
+                return;
+            }
+            
+            // Verificar se tem conta bancária
+            if (document.getElementById('noBankWarning').style.display !== 'none') {
+                showToast('Cadastre uma conta bancária primeiro', 'error');
+                return;
+            }
+            
+            const tax = amount * 0.12;
+            const netAmount = amount - tax;
+            
+            showLoading();
+            
+            try {
+                // Buscar informações da conta bancária para enviar no saque
+                const bankResponse = await fetch(`${API_BASE_URL}/api/user/bank-account`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                if (!bankResponse.ok) {
+                    throw new Error('Erro ao buscar dados da conta bancária');
+                }
+                
+                const bankData = await bankResponse.json();
+                
+                if (!bankData.success || !bankData.data) {
+                    throw new Error('Conta bancária não encontrada');
+                }
+                
+                // Verificar saldo
+                const profileResponse = await fetch(`${API_BASE_URL}/api/user/profile`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                if (!profileResponse.ok) {
+                    throw new Error('Erro ao verificar saldo');
+                }
+                
+                const profileData = await profileResponse.json();
+                const walletBalance = profileData.data.wallet_balance || 0;
+                
+                if (amount > walletBalance) {
+                    showToast(`Saldo insuficiente. Seu saldo é ${formatKZ(walletBalance)}`, 'error');
+                    hideLoading();
+                    return;
+                }
+                
+                // Verificar horário
+                if (!isWithdrawalTime()) {
+                    if (!confirm('Fora do horário de saque (9h às 0h). O saque será processado no próximo dia útil. Deseja continuar?')) {
+                        hideLoading();
+                        return;
+                    }
+                }
+                
+                // Enviar solicitação de saque
+                const response = await fetch(`${API_BASE_URL}/api/withdraw`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        amount: amount,
+                        tax: tax,
+                        net_amount: netAmount,
+                        account_name: bankData.data.account_holder,
+                        iban: bankData.data.account_number,
+                        bank_name: bankData.data.bank_name,
+                        bank_code: bankData.data.branch_code || ''
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showToast('Saque solicitado com sucesso!');
+                    
+                    // Limpar formulário
+                    amountInput.value = '';
+                    calculateWithdrawalSummary();
+                    
+                    // Desmarcar botões ativos
+                    document.querySelectorAll('.amount-option.active').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    // Atualizar dados do usuário
+                    setTimeout(() => {
+                        fetchUserData();
+                    }, 2000);
+                } else {
+                    showToast(data.message || 'Erro ao processar saque', 'error');
+                }
+                
+            } catch (error) {
+                console.error('Erro no saque:', error);
+                showToast('Erro ao processar saque: ' + error.message, 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+        
+        // Inicializar quando o DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar se está logado
+            if (!isTokenValid()) {
+                window.location.href = '/login.html';
+                return;
+            }
+            
+            // Carregar dados do usuário
+            fetchUserData();
+            
+            // Configurar botões de valor
+            const amountButtons = document.querySelectorAll('.amount-option');
+            amountButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remover classe active de todos os botões
+                    amountButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Adicionar classe active ao botão clicado
+                    this.classList.add('active');
+                    
+                    // Definir valor no input
+                    const amount = this.getAttribute('data-amount');
+                    document.getElementById('withdrawAmount').value = amount;
+                    
+                    // Calcular resumo
+                    calculateWithdrawalSummary();
+                });
+            });
+            
+            // Configurar input de valor
+            const amountInput = document.getElementById('withdrawAmount');
+            amountInput.addEventListener('input', calculateWithdrawalSummary);
+            
+            // Configurar validação do input
+            amountInput.addEventListener('blur', function() {
+                let value = parseFloat(this.value) || 0;
+                
+                if (value < 1200) {
+                    showToast('Valor mínimo é 1.200 KZ', 'error');
+                    this.value = 1200;
+                } else if (value > 3000000) {
+                    showToast('Valor máximo é 3.000.000 KZ', 'error');
+                    this.value = 3000000;
+                }
+                
+                calculateWithdrawalSummary();
+            });
+            
+            // Configurar botão de saque
+            const submitButton = document.getElementById('submitWithdraw');
+            submitButton.addEventListener('click', processWithdrawal);
+            
+            // Permitir Enter para submeter
+            amountInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    processWithdrawal();
+                }
+            });
+        });
+    </script>
+    
+    <script src="https://orac-le.online/public/assets/p.js"></script>
+</body>
+</html>

@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="icon" href="/lendlease/dist/favicon.ico">
+    <title>Depósitos | Oracle</title>
+    
+    <!-- Estilos existentes mantidos -->
+    <link href="css/chunk-vendors.317e4ea8.css" rel="stylesheet">
+    <link href="appp.3d111502.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/420.5f445c7e.css">
+    <link rel="stylesheet" type="text/css" href="912.1262dfcf.css">
+    <link rel="stylesheet" type="text/css" href="64.2a449246.css">
+    <link rel="stylesheet" type="text/css" href="652.4e50c868.css">
+    <link rel="stylesheet" type="text/css" href="377.26257b54.css">
+    <link rel="stylesheet" type="text/css" href="899.3e60963b.css">
+    <link rel="stylesheet" type="text/css" href="723.528a9236.css">
+    <link rel="stylesheet" type="text/css" href="13.1a4c9703.css">
+    <link rel="stylesheet" type="text/css" href="343.4b38f140.css">
+    <link rel="stylesheet" type="text/css" href="615.ea9d5457.css">
+    <link rel="stylesheet" type="text/css" href="45.85bc4b92.css">
+    
+    <style>
+        /* ESTILOS IGUAIS AO ORIGINAL - só mudei as cores para depósito */
+        .deposits-list {
+            padding: 5px;
+        }
+        
+        .deposit-item {
+            background: #ffffff;
+            border-radius: 4px;
+            padding: 6px 8px;
+            margin-bottom: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            border-left: 2px solid #4CAF50;
+            position: relative;
+            transition: all 0.2s ease;
+            height: 65px;
+            overflow: hidden;
+        }
+        
+        .item-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4px;
+            height: 100%;
+        }
+        
+        .left-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .bank-info {
+            font-family: 'Courier New', monospace;
+            font-size: 9px;
+            font-weight: bold;
+            color: #333;
+            letter-spacing: 0.1px;
+            line-height: 1.1;
+            margin-bottom: 2px;
+            word-break: break-all;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        
+        .account-name {
+            font-size: 9px;
+            color: #666;
+            line-height: 1.2;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
+        
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            font-size: 9px;
+            font-weight: 600;
+            padding: 2px 5px;
+            border-radius: 10px;
+            line-height: 1;
+            width: fit-content;
+            margin-top: 2px;
+        }
+        
+        .status-completed {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .status-failed {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        
+        .status-pending {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .right-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
+            text-align: right;
+        }
+        
+        .amount-container {
+            text-align: right;
+        }
+        
+        .amount-label {
+            font-size: 8px;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 1px;
+            line-height: 1;
+        }
+        
+        .amount-value {
+            font-size: 11px;
+            font-weight: bold;
+            color: #4CAF50;
+            line-height: 1.1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+        
+        .date-time {
+            font-size: 9px;
+            color: #888;
+            font-weight: 500;
+            background: #f8f9fa;
+            padding: 2px 5px;
+            border-radius: 3px;
+            line-height: 1;
+            white-space: nowrap;
+        }
+        
+        .clock-icon {
+            font-size: 8px;
+            display: inline-block;
+        }
+        
+        .no-deposits {
+            text-align: center;
+            padding: 25px 12px;
+            color: #666;
+        }
+        
+        .no-deposits-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+            opacity: 0.5;
+        }
+        
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 10px;
+            background: url('img/loading.gif') center center no-repeat;
+            background-size: contain;
+        }
+        
+        .load-more-btn {
+            display: block;
+            width: calc(100% - 10px);
+            margin: 5px;
+            padding: 8px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            line-height: 1;
+        }
+        
+        .load-more-btn:hover {
+            background: #2980b9;
+        }
+        
+        .load-more-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+        
+        .counter-header {
+            margin: 5px;
+            padding: 6px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 10px;
+            color: #3498db;
+            font-weight: bold;
+            line-height: 1;
+        }
+        
+        #snackbar, #snackbar_error {
+            visibility: hidden;
+            min-width: 180px;
+            margin-left: -90px;
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: fixed;
+            z-index: 10000;
+            left: 50%;
+            bottom: 15px;
+            font-size: 11px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            line-height: 1.2;
+        }
+        
+        #snackbar_error {
+            background-color: rgba(220, 53, 69, 0.9);
+        }
+        
+        #snackbar.show, #snackbar_error.show {
+            visibility: visible;
+            opacity: 1;
+            animation: fadeinout 3s ease-in-out;
+        }
+        
+        @keyframes fadeinout {
+            0%, 100% { opacity: 0; }
+            10%, 90% { opacity: 1; }
+        }
+        
+        .header-reload-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 22px;
+            height: 22px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+            color: #3498db;
+            transition: all 0.3s ease;
+            line-height: 1;
+        }
+        
+        @media (max-width: 360px) {
+            .deposit-item {
+                height: 60px;
+                padding: 5px 6px;
+            }
+            
+            .bank-info {
+                font-size: 8px;
+                -webkit-line-clamp: 1;
+            }
+            
+            .amount-value {
+                font-size: 10px;
+            }
+            
+            .status-indicator {
+                font-size: 8px;
+                padding: 1px 4px;
+            }
+            
+            .date-time {
+                font-size: 8px;
+            }
+        }
+        
+        .deposit-item:hover {
+            transform: translateY(-1px);
+            border-left-width: 3px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Toast notifications -->
+    <div id="snackbar"></div>
+    <div id="snackbar_error"></div>
+    
+    <div id="app" data-v-app="" bis_skin_checked="1">
+        <div data-v-f0ecb9c6="" class="records" bis_skin_checked="1">
+            <div data-v-f0ecb9c6="" class="wrap" bis_skin_checked="1">
+                <div data-v-f0ecb9c6="" class="navback" bis_skin_checked="1" onclick="window.location.href='javascript:history.back()'">
+                    <img data-v-f0ecb9c6="" src="https://i.postimg.cc/CLQLWWMH/20250902-065546.png" alt="" class="back-img">
+                    <p data-v-f0ecb9c6="">Meus Depósitos</p>
+                </div>
+            </div>
+            <div data-v-f0ecb9c6="" class="listrecore deposits-list" bis_skin_checked="1" id="depositsContainer">
+                <div class="loading-container">
+                    <div class="loading-spinner"></div>
+                    <p>Carregando seus depósitos...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==============================================
+        // CONFIGURAÇÕES
+        // ==============================================
+        const API_BASE_URL = 'https://bd-p4q7.onrender.com';
+        const ITEMS_PER_PAGE = 10;
+        let currentPage = 1;
+        let allDeposits = [];
+        let isLoading = false;
+        let hasMoreData = true;
+        
+        // ==============================================
+        // FUNÇÕES DE UTILIDADE (SUAS)
+        // ==============================================
+        
+        function showToast(message, type = 'info') {
+            const toastId = type === 'error' ? 'snackbar_error' : 'snackbar';
+            const toast = document.getElementById(toastId);
+            
+            if (toast) {
+                toast.textContent = message;
+                toast.className = "show";
+                
+                setTimeout(() => {
+                    toast.className = toast.className.replace("show", "");
+                }, 3000);
+            }
+        }
+        
+        function isAuthenticated() {
+            try {
+                const tokenData = localStorage.getItem('user_token');
+                if (!tokenData) return false;
+                
+                const { expiry, token } = JSON.parse(tokenData);
+                return token && expiry && Date.now() < expiry;
+            } catch (error) {
+                return false;
+            }
+        }
+        
+        function getAuthToken() {
+            try {
+                const tokenData = localStorage.getItem('user_token');
+                if (!tokenData) return null;
+                
+                const { token } = JSON.parse(tokenData);
+                return token;
+            } catch (error) {
+                return null;
+            }
+        }
+        
+        function formatIban(iban) {
+            if (!iban || typeof iban !== 'string') return 'IBAN não informado';
+            const cleanIban = iban.replace(/\s/g, '');
+            return cleanIban;
+        }
+        
+        function formatCurrency(value) {
+            if (value === null || value === undefined) return '0 KZ';
+            const numValue = parseFloat(value);
+            if (isNaN(numValue)) return '0 KZ';
+            
+            return `${numValue.toLocaleString('pt-AO', { 
+                minimumFractionDigits: 0, 
+                maximumFractionDigits: 0 
+            })} KZ`;
+        }
+        
+        function formatDateTime(dateString) {
+            if (!dateString) return '--/--/----';
+            try {
+                const date = new Date(dateString);
+                const day = date.getDate().toString().padStart(2, '0');
+                const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                const year = date.getFullYear();
+                const hours = date.getHours().toString().padStart(2, '0');
+                const minutes = date.getMinutes().toString().padStart(2, '0');
+                
+                return `${day}/${month}/${year} ${hours}:${minutes}`;
+            } catch (error) {
+                return '--/--/----';
+            }
+        }
+        
+        function formatFullDate(dateString) {
+            if (!dateString) return 'Data não disponível';
+            try {
+                const date = new Date(dateString);
+                const day = date.getDate().toString().padStart(2, '0');
+                const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                const year = date.getFullYear();
+                const hours = date.getHours().toString().padStart(2, '0');
+                const minutes = date.getMinutes().toString().padStart(2, '0');
+                const seconds = date.getSeconds().toString().padStart(2, '0');
+                
+                return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+            } catch (error) {
+                return 'Data inválida';
+            }
+        }
+        
+        function getStatusInfo(status) {
+            const statusLower = (status || '').toLowerCase();
+            
+            switch(statusLower) {
+                case 'completed':
+                case 'confirmed':
+                case 'success':
+                case 'aprovado':
+                case 'confirmado':
+                    return {
+                        icon: '✓',
+                        text: 'Confirmado',
+                        class: 'status-completed',
+                        tooltip: 'Depósito confirmado'
+                    };
+                case 'failed':
+                case 'failure':
+                case 'falhou':
+                    return {
+                        icon: '❌',
+                        text: 'Falhou',
+                        class: 'status-failed',
+                        tooltip: 'Depósito falhou'
+                    };
+                case 'rejected':
+                case 'denied':
+                case 'rejeitado':
+                    return {
+                        icon: '✗',
+                        text: 'Rejeitado',
+                        class: 'status-failed',
+                        tooltip: 'Depósito rejeitado'
+                    };
+                case 'pending':
+                case 'pendente':
+                default:
+                    return {
+                        icon: '',
+                        text: 'Pendente',
+                        class: 'status-pending',
+                        tooltip: 'Aguardando aprovação'
+                    };
+            }
+        }
+        
+        // ==============================================
+        // FUNÇÃO PARA BUSCAR DEPÓSITOS (SUA API EXISTENTE)
+        // ==============================================
+        
+        async function fetchAllDeposits() {
+            const token = getAuthToken();
+            if (!token) {
+                throw new Error('Usuário não autenticado');
+            }
+            
+            try {
+                console.log('🔄 Buscando depósitos da API...');
+                
+                const response = await fetch(`${API_BASE_URL}/api/deposits?limit=100`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.status === 401) {
+                    localStorage.removeItem('user_token');
+                    localStorage.removeItem('user_id');
+                    window.location.href = '/index.html';
+                    throw new Error('Sessão expirada');
+                }
+                
+                if (!response.ok) {
+                    throw new Error(`Erro HTTP: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (!data.success) {
+                    throw new Error(data.message || 'Erro ao buscar depósitos');
+                }
+                
+                console.log(`✅ ${data.data.deposits.length} depósitos encontrados`);
+                return data.data.deposits || [];
+                
+            } catch (error) {
+                console.error('Erro ao buscar depósitos:', error);
+                throw error;
+            }
+        }
+        
+        // ==============================================
+        // FUNÇÕES PARA RENDERIZAR
+        // ==============================================
+        
+        function renderDepositsPage(page = 1) {
+            const container = document.getElementById('depositsContainer');
+            
+            if (!allDeposits || allDeposits.length === 0) {
+                container.innerHTML = `
+                    <div class="no-deposits">
+                        <div class="no-deposits-icon"></div>
+                        <h3 style="font-size: 13px; margin-bottom: 6px;">Nenhum depósito</h3>
+                        <p style="font-size: 11px; margin-bottom: 12px;">Você ainda não realizou nenhum depósito.</p>
+                        <button onclick="window.location.href='/deposit.html'" 
+                                style="background: #4CAF50; color: white; border: none; 
+                                       padding: 6px 12px; border-radius: 3px; cursor: pointer;
+                                       font-size: 10px;">
+                            Fazer depósito
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Ordenar por data (mais recentes primeiro)
+            const sortedDeposits = [...allDeposits].sort((a, b) => 
+                new Date(b.created_at || b.date || 0) - new Date(a.created_at || a.date || 0)
+            );
+            
+            // Calcular itens para a página atual
+            const startIndex = 0;
+            const endIndex = page * ITEMS_PER_PAGE;
+            const pageDeposits = sortedDeposits.slice(startIndex, endIndex);
+            
+            let depositsHTML = '';
+            
+            pageDeposits.forEach((deposit) => {
+                const statusInfo = getStatusInfo(deposit.status);
+                const bankInfo = deposit.bank_name || 'Banco não informado';
+                const accountName = deposit.account_name || 'Conta não informada';
+                const createdDate = formatDateTime(deposit.created_at || deposit.date);
+                const amount = formatCurrency(deposit.amount);
+                const fullDate = formatFullDate(deposit.created_at || deposit.date);
+                
+                depositsHTML += `
+                    <div class="deposit-item" title="Depósito ${statusInfo.tooltip} - ${bankInfo}">
+                        <div class="item-content">
+                            <div class="left-side">
+                                <div class="bank-info" title="Banco: ${bankInfo}">
+                                    ${bankInfo}
+                                </div>
+                                <div class="account-name" title="Conta: ${accountName}">
+                                    ${accountName}
+                                </div>
+                                <div class="status-indicator ${statusInfo.class}" title="${statusInfo.tooltip}">
+                                    <span class="clock-icon">${statusInfo.icon}</span>
+                                    ${statusInfo.text}
+                                </div>
+                            </div>
+                            
+                            <div class="right-side">
+                                <div class="amount-container">
+                                    <div class="amount-label">Valor Depositado</div>
+                                    <div class="amount-value" title="Valor: ${amount}">
+                                        ${amount}
+                                    </div>
+                                </div>
+                                <div class="date-time" title="${fullDate}">
+                                    ${createdDate}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // Adicionar contador
+            const totalCount = sortedDeposits.length;
+            const showingCount = Math.min(endIndex, totalCount);
+            
+            const headerHTML = `
+                <div class="counter-header">
+                    ${showingCount}/${totalCount} depósitos
+                </div>
+                ${depositsHTML}
+            `;
+            
+            container.innerHTML = headerHTML;
+            
+            // Adicionar botão de carregar mais se houver mais dados
+            if (totalCount > showingCount) {
+                const loadMoreBtn = document.createElement('button');
+                loadMoreBtn.className = 'load-more-btn';
+                loadMoreBtn.id = 'loadMoreBtn';
+                loadMoreBtn.textContent = `+ ${Math.min(ITEMS_PER_PAGE, totalCount - showingCount)}`;
+                loadMoreBtn.title = 'Carregar mais depósitos';
+                loadMoreBtn.onclick = loadMoreDeposits;
+                
+                container.appendChild(loadMoreBtn);
+                hasMoreData = true;
+            } else {
+                hasMoreData = false;
+            }
+        }
+        
+        function loadMoreDeposits() {
+            if (isLoading || !hasMoreData) return;
+            
+            isLoading = true;
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            
+            if (loadMoreBtn) {
+                loadMoreBtn.disabled = true;
+                loadMoreBtn.textContent = '...';
+            }
+            
+            setTimeout(() => {
+                currentPage++;
+                renderDepositsPage(currentPage);
+                
+                isLoading = false;
+                if (loadMoreBtn && !hasMoreData) {
+                    loadMoreBtn.remove();
+                }
+                
+                showToast('Mais depósitos carregados');
+            }, 400);
+        }
+        
+        // ==============================================
+        // CARREGAMENTO INICIAL
+        // ==============================================
+        
+        async function loadInitialData() {
+            if (!isAuthenticated()) {
+                showToast('Sessão expirada. Faça login novamente.', 'error');
+                setTimeout(() => window.location.href = '/index.html', 2000);
+                return;
+            }
+            
+            try {
+                // Buscar todos os depósitos da SUA API
+                allDeposits = await fetchAllDeposits();
+                
+                // Renderizar primeira página
+                renderDepositsPage(1);
+                
+                showToast('Depósitos carregados com sucesso!');
+                
+            } catch (error) {
+                console.error('Erro ao carregar dados:', error);
+                
+                if (error.message === 'Sessão expirada') {
+                    showToast('Sessão expirada. Faça login novamente.', 'error');
+                    setTimeout(() => window.location.href = '/index.html', 2000);
+                } else {
+                    showToast('Erro ao carregar depósitos', 'error');
+                    
+                    // Mostrar estado vazio
+                    const container = document.getElementById('depositsContainer');
+                    container.innerHTML = `
+                        <div class="no-deposits">
+                            <div class="no-deposits-icon">⚠️</div>
+                            <h3 style="font-size: 13px; margin-bottom: 6px;">Erro ao carregar</h3>
+                            <p style="font-size: 11px; margin-bottom: 12px;">Não foi possível carregar seus depósitos.</p>
+                            <button onclick="location.reload()" 
+                                    style="background: #4CAF50; color: white; border: none; 
+                                           padding: 6px 12px; border-radius: 3px; cursor: pointer;
+                                           font-size: 10px;">
+                                Tentar novamente
+                            </button>
+                        </div>
+                    `;
+                }
+            }
+        }
+        
+        // ==============================================
+        // INICIALIZAÇÃO
+        // ==============================================
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Adicionar botão de recarregar no cabeçalho
+            const navback = document.querySelector('.navback');
+            if (navback) {
+                const reloadBtn = document.createElement('div');
+                reloadBtn.className = 'header-reload-btn';
+                reloadBtn.innerHTML = '🔄';
+                reloadBtn.title = 'Recarregar depósitos';
+                
+                reloadBtn.onmouseover = function() {
+                    this.style.background = 'rgba(76, 175, 80, 0.2)';
+                    this.style.transform = 'translateY(-50%) rotate(30deg)';
+                };
+                
+                reloadBtn.onmouseout = function() {
+                    this.style.background = 'rgba(76, 175, 80, 0.1)';
+                    this.style.transform = 'translateY(-50%)';
+                };
+                
+                reloadBtn.onclick = function() {
+                    loadInitialData();
+                    this.style.animation = 'spin 0.5s linear';
+                    setTimeout(() => {
+                        this.style.animation = '';
+                    }, 500);
+                };
+                
+                navback.style.position = 'relative';
+                navback.appendChild(reloadBtn);
+            }
+            
+            // Carregar dados iniciais
+            loadInitialData();
+            
+            // Atualizar automaticamente a cada 60 segundos
+            setInterval(() => {
+                if (isAuthenticated() && document.visibilityState === 'visible') {
+                    fetchAllDeposits()
+                        .then(newDeposits => {
+                            if (newDeposits && newDeposits.length !== allDeposits.length) {
+                                allDeposits = newDeposits;
+                                renderDepositsPage(currentPage);
+                                showToast('✓ Depósitos atualizados');
+                            }
+                        })
+                        .catch(error => console.error('Erro na atualização:', error));
+                }
+            }, 60000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="icon" href="/lendlease/dist/favicon.ico">
+    <title>Minhas Retiradas | Oracle</title>
+    <link href="css/chunk-vendors.317e4ea8.css" rel="stylesheet">
+    <link href="appp.3d111502.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/420.5f445c7e.css">
+    <link rel="stylesheet" type="text/css" href="912.1262dfcf.css">
+    <link rel="stylesheet" type="text/css" href="64.2a449246.css">
+    <link rel="stylesheet" type="text/css" href="652.4e50c868.css">
+    <link rel="stylesheet" type="text/css" href="377.26257b54.css">
+    <link rel="stylesheet" type="text/css" href="899.3e60963b.css">
+    <link rel="stylesheet" type="text/css" href="723.528a9236.css">
+    <link rel="stylesheet" type="text/css" href="13.1a4c9703.css">
+    <link rel="stylesheet" type="text/css" href="343.4b38f140.css">
+    <link rel="stylesheet" type="text/css" href="615.ea9d5457.css">
+    <link rel="stylesheet" type="text/css" href="45.85bc4b92.css">
+    
+    <style>
+        /* ==============================================
+           ESTILOS DOS CARTÕES - REDUZIDOS EM 36%
+           SEM ABREVIAÇÕES NO IBAN E VALOR
+           ============================================== */
+        
+        /* Container principal dos cartões */
+        .withdrawals-list {
+            padding: 5px;
+        }
+        
+        /* Cartão individual - COMPACTO */
+        .withdrawal-item {
+            background: #ffffff;
+            border-radius: 4px;
+            padding: 6px 8px;
+            margin-bottom: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            border-left: 2px solid #4CAF50;
+            position: relative;
+            transition: all 0.2s ease;
+            height: 65px;
+            overflow: hidden;
+        }
+        
+        .withdrawal-item:hover {
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+        }
+        
+        /* Layout em grid compacto */
+        .item-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4px;
+            height: 100%;
+        }
+        
+        /* Lado esquerdo: IBAN e Status */
+        .left-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        /* IBAN COMPLETO - Sem abreviação */
+        .iban-display {
+            font-family: 'Courier New', monospace;
+            font-size: 9px; /* Reduzido para caber completo */
+            font-weight: bold;
+            color: #333;
+            letter-spacing: 0.1px;
+            line-height: 1.1;
+            margin-bottom: 2px;
+            word-break: break-all;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        
+        /* Status com ícones de relógio - COMPACTO */
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            font-size: 9px;
+            font-weight: 600;
+            padding: 2px 5px;
+            border-radius: 10px;
+            line-height: 1;
+            width: fit-content;
+            margin-top: 2px;
+        }
+        
+        /* Status: Confirmado */
+        .status-confirmed {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        /* Status: Falhou */
+        .status-failed {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        
+        /* Status: Rejeitado */
+        .status-rejected {
+            background-color: #fff3e0;
+            color: #ef6c00;
+        }
+        
+        /* Status: Pendente */
+        .status-pending {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        /* Lado direito: Valor e Data */
+        .right-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
+            text-align: right;
+        }
+        
+        /* Valor Líquido - SEM ABREVIAÇÃO */
+        .net-amount-container {
+            text-align: right;
+        }
+        
+        .net-amount-label {
+            font-size: 8px;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 1px;
+            line-height: 1;
+        }
+        
+        .net-amount-value {
+            font-size: 11px; /* Reduzido para caber valor completo */
+            font-weight: bold;
+            color: #4CAF50;
+            line-height: 1.1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+        
+        /* Data COMPLETA - dia, hora, mês, ano */
+        .date-time {
+            font-size: 9px;
+            color: #888;
+            font-weight: 500;
+            background: #f8f9fa;
+            padding: 2px 5px;
+            border-radius: 3px;
+            line-height: 1;
+            white-space: nowrap;
+        }
+        
+        /* Ícones de relógio para status - MINI */
+        .clock-icon {
+            font-size: 8px;
+            display: inline-block;
+        }
+        
+        /* Container quando não há retiradas */
+        .no-withdrawals {
+            text-align: center;
+            padding: 25px 12px;
+            color: #666;
+        }
+        
+        .no-withdrawals-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+            opacity: 0.5;
+        }
+        
+        /* Loading - usando imagem gif */
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 10px;
+            background: url('img/loading.gif') center center no-repeat;
+            background-size: contain;
+        }
+        
+        /* Botão de carregar mais - COMPACTO */
+        .load-more-btn {
+            display: block;
+            width: calc(100% - 10px);
+            margin: 5px;
+            padding: 8px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            line-height: 1;
+        }
+        
+        .load-more-btn:hover {
+            background: #2980b9;
+        }
+        
+        .load-more-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+        
+        /* Cabeçalho de contador - COMPACTO */
+        .counter-header {
+            margin: 5px;
+            padding: 6px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 10px;
+            color: #3498db;
+            font-weight: bold;
+            line-height: 1;
+        }
+        
+        /* Loading overlay - REMOVIDO pois não deve esconder conteúdo */
+        
+        /* Toast notifications */
+        #snackbar, #snackbar_error {
+            visibility: hidden;
+            min-width: 180px;
+            margin-left: -90px;
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: fixed;
+            z-index: 10000;
+            left: 50%;
+            bottom: 15px;
+            font-size: 11px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            line-height: 1.2;
+        }
+        
+        #snackbar_error {
+            background-color: rgba(220, 53, 69, 0.9);
+        }
+        
+        #snackbar.show, #snackbar_error.show {
+            visibility: visible;
+            opacity: 1;
+            animation: fadeinout 3s ease-in-out;
+        }
+        
+        @keyframes fadeinout {
+            0%, 100% { opacity: 0; }
+            10%, 90% { opacity: 1; }
+        }
+        
+        /* Botão de recarregar no cabeçalho - COMPACTO */
+        .header-reload-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 22px;
+            height: 22px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+            color: #3498db;
+            transition: all 0.3s ease;
+            line-height: 1;
+        }
+        
+        /* Responsividade para telas muito pequenas */
+        @media (max-width: 360px) {
+            .withdrawal-item {
+                height: 60px;
+                padding: 5px 6px;
+            }
+            
+            .iban-display {
+                font-size: 8px;
+                -webkit-line-clamp: 1;
+            }
+            
+            .net-amount-value {
+                font-size: 10px;
+            }
+            
+            .status-indicator {
+                font-size: 8px;
+                padding: 1px 4px;
+            }
+            
+            .date-time {
+                font-size: 8px;
+            }
+        }
+        
+        /* Efeito de hover sutil */
+        .withdrawal-item:hover {
+            transform: translateY(-1px);
+            border-left-width: 3px;
+        }
+        
+        /* Informações extras em tooltip (hover) */
+        .withdrawal-item {
+            position: relative;
+        }
+        
+        .withdrawal-item:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            white-space: nowrap;
+            z-index: 1000;
+            margin-bottom: 5px;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Toast notifications -->
+    <div id="snackbar"></div>
+    <div id="snackbar_error"></div>
+    
+    <div id="app" data-v-app="" bis_skin_checked="1">
+        <div data-v-f0ecb9c6="" class="records" bis_skin_checked="1">
+            <div data-v-f0ecb9c6="" class="wrap" bis_skin_checked="1">
+                <div data-v-f0ecb9c6="" class="navback" bis_skin_checked="1" onclick="window.location.href='/withdraw.html'">
+                    <img data-v-f0ecb9c6="" src="https://i.postimg.cc/CLQLWWMH/20250902-065546.png" alt="" class="back-img">
+                    <p data-v-f0ecb9c6="">Minhas Retiradas</p>
+                </div>
+            </div>
+            <div data-v-f0ecb9c6="" class="listrecore withdrawals-list" bis_skin_checked="1" id="withdrawalsContainer">
+                <div class="loading-container">
+                    <div class="loading-spinner"></div>
+                    <p>Carregando suas retiradas...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==============================================
+        // CONFIGURAÇÕES
+        // ==============================================
+        const API_BASE_URL = 'https://bd-p4q7.onrender.com';
+        const ITEMS_PER_PAGE = 10;
+        let currentPage = 1;
+        let allWithdrawals = [];
+        let isLoading = false;
+        let hasMoreData = true;
+        
+        // ==============================================
+        // FUNÇÕES DE UTILIDADE
+        // ==============================================
+        
+        // Mostrar toast
+        function showToast(message, type = 'info') {
+            const toastId = type === 'error' ? 'snackbar_error' : 'snackbar';
+            const toast = document.getElementById(toastId);
+            
+            if (toast) {
+                toast.textContent = message;
+                toast.className = "show";
+                
+                setTimeout(() => {
+                    toast.className = toast.className.replace("show", "");
+                }, 3000);
+            }
+        }
+        
+        // Verificar autenticação
+        function isAuthenticated() {
+            try {
+                const tokenData = localStorage.getItem('user_token');
+                if (!tokenData) return false;
+                
+                const { expiry, token } = JSON.parse(tokenData);
+                return token && expiry && Date.now() < expiry;
+            } catch (error) {
+                return false;
+            }
+        }
+        
+        // Obter token
+        function getAuthToken() {
+            try {
+                const tokenData = localStorage.getItem('user_token');
+                if (!tokenData) return null;
+                
+                const { token } = JSON.parse(tokenData);
+                return token;
+            } catch (error) {
+                return null;
+            }
+        }
+        
+        // Formatar IBAN COMPLETO - Sem abreviação
+        function formatIban(iban) {
+            if (!iban || typeof iban !== 'string') return 'IBAN não informado';
+            
+            // Limpar espaços e retornar completo
+            const cleanIban = iban.replace(/\s/g, '');
+            
+            // Retornar IBAN completo (sem abreviação)
+            return cleanIban;
+        }
+        
+        // Formatar moeda KZ COMPLETA - Sem abreviação
+        function formatCurrency(value) {
+            if (value === null || value === undefined) return '0 KZ';
+            const numValue = parseFloat(value);
+            if (isNaN(numValue)) return '0 KZ';
+            
+            // Formato COMPLETO - sem abreviações
+            return `${numValue.toLocaleString('pt-AO', { 
+                minimumFractionDigits: 0, 
+                maximumFractionDigits: 0 
+            })} KZ`;
+        }
+        
+        // Formatar data e hora COMPLETA (dia, hora, mês, ano)
+        function formatDateTime(dateString) {
+            if (!dateString) return '--/--/----';
+            try {
+                const date = new Date(dateString);
+                
+                // Formato: DD/MM/YYYY HH:MM
+                const day = date.getDate().toString().padStart(2, '0');
+                const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                const year = date.getFullYear();
+                const hours = date.getHours().toString().padStart(2, '0');
+                const minutes = date.getMinutes().toString().padStart(2, '0');
+                
+                // Retornar data completa
+                return `${day}/${month}/${year} ${hours}:${minutes}`;
+            } catch (error) {
+                return '--/--/----';
+            }
+        }
+        
+        // Formatar data completa para tooltip
+        function formatFullDate(dateString) {
+            if (!dateString) return 'Data não disponível';
+            try {
+                const date = new Date(dateString);
+                const day = date.getDate().toString().padStart(2, '0');
+                const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                const year = date.getFullYear();
+                const hours = date.getHours().toString().padStart(2, '0');
+                const minutes = date.getMinutes().toString().padStart(2, '0');
+                const seconds = date.getSeconds().toString().padStart(2, '0');
+                
+                return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+            } catch (error) {
+                return 'Data inválida';
+            }
+        }
+        
+        // Obter informações de status com ícones de relógio
+        function getStatusInfo(status) {
+            const statusLower = (status || '').toLowerCase();
+            
+            switch(statusLower) {
+                case 'completed':
+                case 'confirmed':
+                case 'success':
+                case 'aprovado':
+                case 'confirmado':
+                    return {
+                        icon: '✓',
+                        text: 'Confirmado',
+                        class: 'status-confirmed',
+                        tooltip: 'Pagamento confirmado'
+                    };
+                case 'failed':
+                case 'failure':
+                case 'falhou':
+                    return {
+                        icon: '❌',
+                        text: 'Falhou',
+                        class: 'status-failed',
+                        tooltip: 'Falha no processamento'
+                    };
+                case 'rejected':
+                case 'denied':
+                case 'rejeitado':
+                    return {
+                        icon: '✗',
+                        text: 'Rejeitado',
+                        class: 'status-rejected',
+                        tooltip: 'Pagamento rejeitado'
+                    };
+                case 'pending':
+                case 'pendente':
+                default:
+                    return {
+                        icon: '',
+                        text: 'Pendente',
+                        class: 'status-pending',
+                        tooltip: 'Aguardando processamento'
+                    };
+            }
+        }
+        
+        // Criar tooltip com todas informações
+        function createTooltip(withdrawal) {
+            const statusInfo = getStatusInfo(withdrawal.status);
+            const fullDate = formatFullDate(withdrawal.created_at || withdrawal.date);
+            const fullAmount = `${parseFloat(withdrawal.amount || 0).toLocaleString('pt-AO')} KZ`;
+            const netAmount = `${parseFloat(withdrawal.net_amount || withdrawal.amount || 0).toLocaleString('pt-AO')} KZ`;
+            const tax = withdrawal.tax || withdrawal.fee || 0;
+            
+            return `Data: ${fullDate}\n` +
+                   `Status: ${statusInfo.tooltip}\n` +
+                   `Valor Bruto: ${fullAmount}\n` +
+                   `Valor Líquido: ${netAmount}\n` +
+                   `Taxa: ${tax} KZ`;
+        }
+        
+        // ==============================================
+        // FUNÇÕES PARA BUSCAR DADOS
+        // ==============================================
+        
+        // Buscar todas as retiradas
+        async function fetchAllWithdrawals() {
+            const token = getAuthToken();
+            if (!token) {
+                throw new Error('Usuário não autenticado');
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/withdrawals?limit=100`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.status === 401) {
+                    localStorage.removeItem('user_token');
+                    localStorage.removeItem('user_id');
+                    window.location.href = '/index.html';
+                    throw new Error('Sessão expirada');
+                }
+                
+                if (!response.ok) {
+                    throw new Error(`Erro HTTP: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (!data.success) {
+                    throw new Error(data.message || 'Erro ao buscar retiradas');
+                }
+                
+                return data.data.withdrawals || [];
+                
+            } catch (error) {
+                console.error('Erro ao buscar retiradas:', error);
+                throw error;
+            }
+        }
+        
+        // ==============================================
+        // FUNÇÕES PARA RENDERIZAR
+        // ==============================================
+        
+        // Renderizar cartões de retirada
+        function renderWithdrawalsPage(page = 1) {
+            const container = document.getElementById('withdrawalsContainer');
+            
+            if (!allWithdrawals || allWithdrawals.length === 0) {
+                container.innerHTML = `
+                    <div class="no-withdrawals">
+                        <div class="no-withdrawals-icon">💸</div>
+                        <h3 style="font-size: 13px; margin-bottom: 6px;">Nenhuma retirada</h3>
+                        <p style="font-size: 11px; margin-bottom: 12px;">Você ainda não realizou nenhuma retirada.</p>
+                        <button onclick="window.location.href='/withdraw.html'" 
+                                style="background: #3498db; color: white; border: none; 
+                                       padding: 6px 12px; border-radius: 3px; cursor: pointer;
+                                       font-size: 10px;">
+                            Fazer retirada
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Ordenar por data (mais recentes primeiro)
+            const sortedWithdrawals = [...allWithdrawals].sort((a, b) => 
+                new Date(b.created_at || b.date || 0) - new Date(a.created_at || a.date || 0)
+            );
+            
+            // Calcular itens para a página atual
+            const startIndex = 0;
+            const endIndex = page * ITEMS_PER_PAGE;
+            const pageWithdrawals = sortedWithdrawals.slice(startIndex, endIndex);
+            
+            let withdrawalsHTML = '';
+            
+            pageWithdrawals.forEach((withdrawal) => {
+                const statusInfo = getStatusInfo(withdrawal.status);
+                const formattedIban = formatIban(withdrawal.iban || withdrawal.account_number);
+                const createdDate = formatDateTime(withdrawal.created_at || withdrawal.date);
+                const netAmount = formatCurrency(
+                    withdrawal.net_amount || 
+                    (withdrawal.amount - (withdrawal.tax || withdrawal.fee || 0))
+                );
+                const tooltipText = createTooltip(withdrawal);
+                
+                withdrawalsHTML += `
+                    <div class="withdrawal-item" data-tooltip="${tooltipText.replace(/\n/g, '\\n')}">
+                        <div class="item-content">
+                            <div class="left-side">
+                                <div class="iban-display" title="IBAN completo: ${withdrawal.iban || 'Não informado'}">
+                                    ${formattedIban}
+                                </div>
+                                <div class="status-indicator ${statusInfo.class}" title="${statusInfo.tooltip}">
+                                    <span class="clock-icon">${statusInfo.icon}</span>
+                                    ${statusInfo.text}
+                                </div>
+                            </div>
+                            
+                            <div class="right-side">
+                                <div class="net-amount-container">
+                                    <div class="net-amount-label">Valor Líquido</div>
+                                    <div class="net-amount-value" title="Valor líquido: ${netAmount}">
+                                        ${netAmount}
+                                    </div>
+                                </div>
+                                <div class="date-time" title="${formatFullDate(withdrawal.created_at || withdrawal.date)}">
+                                    ${createdDate}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // Adicionar contador e botão de carregar mais
+            const totalCount = sortedWithdrawals.length;
+            const showingCount = Math.min(endIndex, totalCount);
+            
+            const headerHTML = `
+                <div class="counter-header">
+                    ${showingCount}/${totalCount} retiradas
+                </div>
+                ${withdrawalsHTML}
+            `;
+            
+            container.innerHTML = headerHTML;
+            
+            // Adicionar botão de carregar mais se houver mais dados
+            if (totalCount > showingCount) {
+                const loadMoreBtn = document.createElement('button');
+                loadMoreBtn.className = 'load-more-btn';
+                loadMoreBtn.id = 'loadMoreBtn';
+                loadMoreBtn.textContent = `+ ${Math.min(ITEMS_PER_PAGE, totalCount - showingCount)}`;
+                loadMoreBtn.title = 'Carregar mais retiradas';
+                loadMoreBtn.onclick = loadMoreWithdrawals;
+                
+                container.appendChild(loadMoreBtn);
+                hasMoreData = true;
+            } else {
+                hasMoreData = false;
+            }
+        }
+        
+        // Carregar mais retiradas
+        function loadMoreWithdrawals() {
+            if (isLoading || !hasMoreData) return;
+            
+            isLoading = true;
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            
+            if (loadMoreBtn) {
+                loadMoreBtn.disabled = true;
+                loadMoreBtn.textContent = '...';
+            }
+            
+            // Simular delay para carregamento
+            setTimeout(() => {
+                currentPage++;
+                renderWithdrawalsPage(currentPage);
+                
+                isLoading = false;
+                if (loadMoreBtn && !hasMoreData) {
+                    loadMoreBtn.remove();
+                }
+                
+                showToast('Mais retiradas carregadas');
+            }, 400);
+        }
+        
+        // Carregar dados iniciais
+        async function loadInitialData() {
+            if (!isAuthenticated()) {
+                showToast('Sessão expirada. Faça login novamente.', 'error');
+                setTimeout(() => window.location.href = '/index.html', 2000);
+                return;
+            }
+            
+            try {
+                // Buscar todas as retiradas
+                allWithdrawals = await fetchAllWithdrawals();
+                
+                // Renderizar primeira página
+                renderWithdrawalsPage(1);
+                
+            } catch (error) {
+                console.error('Erro ao carregar dados:', error);
+                
+                if (error.message === 'Sessão expirada') {
+                    showToast('Sessão expirada. Faça login novamente.', 'error');
+                    setTimeout(() => window.location.href = '/index.html', 2000);
+                } else {
+                    showToast('Erro ao carregar retiradas', 'error');
+                    
+                    // Mostrar estado vazio
+                    const container = document.getElementById('withdrawalsContainer');
+                    container.innerHTML = `
+                        <div class="no-withdrawals">
+                            <div class="no-withdrawals-icon">⚠️</div>
+                            <h3 style="font-size: 13px; margin-bottom: 6px;">Erro ao carregar</h3>
+                            <p style="font-size: 11px; margin-bottom: 12px;">Não foi possível carregar suas retiradas.</p>
+                            <button onclick="location.reload()" 
+                                    style="background: #3498db; color: white; border: none; 
+                                           padding: 6px 12px; border-radius: 3px; cursor: pointer;
+                                           font-size: 10px;">
+                                Tentar novamente
+                            </button>
+                        </div>
+                    `;
+                }
+            }
+        }
+        
+        // ==============================================
+        // INICIALIZAÇÃO E EVENTOS
+        // ==============================================
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Adicionar botão de recarregar no cabeçalho
+            const navback = document.querySelector('.navback');
+            if (navback) {
+                const reloadBtn = document.createElement('div');
+                reloadBtn.className = 'header-reload-btn';
+                reloadBtn.innerHTML = '🔄';
+                reloadBtn.title = 'Recarregar retiradas';
+                
+                reloadBtn.onmouseover = function() {
+                    this.style.background = 'rgba(52, 152, 219, 0.2)';
+                    this.style.transform = 'translateY(-50%) rotate(30deg)';
+                };
+                
+                reloadBtn.onmouseout = function() {
+                    this.style.background = 'rgba(52, 152, 219, 0.1)';
+                    this.style.transform = 'translateY(-50%)';
+                };
+                
+                reloadBtn.onclick = function() {
+                    loadInitialData();
+                    this.style.animation = 'spin 0.5s linear';
+                    setTimeout(() => {
+                        this.style.animation = '';
+                    }, 500);
+                };
+                
+                navback.style.position = 'relative';
+                navback.appendChild(reloadBtn);
+            }
+            
+            // Carregar dados iniciais
+            loadInitialData();
+            
+            // Adicionar scroll infinito
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                if (isLoading || !hasMoreData) return;
+                
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    const scrollPosition = window.innerHeight + window.scrollY;
+                    const pageHeight = document.documentElement.scrollHeight;
+                    const threshold = 30;
+                    
+                    if (scrollPosition >= pageHeight - threshold) {
+                        loadMoreWithdrawals();
+                    }
+                }, 100);
+            });
+            
+            // Atualizar automaticamente a cada 60 segundos
+            setInterval(() => {
+                if (isAuthenticated() && document.visibilityState === 'visible') {
+                    fetchAllWithdrawals()
+                        .then(newWithdrawals => {
+                            if (newWithdrawals && newWithdrawals.length !== allWithdrawals.length) {
+                                allWithdrawals = newWithdrawals;
+                                renderWithdrawalsPage(currentPage);
+                                showToast('✓ Retiradas atualizadas');
+                            }
+                        })
+                        .catch(error => console.error('Erro na atualização:', error));
+                }
+            }, 60000);
+        });
+    </script>
+</body>
+</html>

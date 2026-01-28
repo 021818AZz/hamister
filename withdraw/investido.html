@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="icon" href="/lendlease/dist/favicon.ico">
+    <title>Meus Produtos | Oracle</title>
+    
+    <!-- Estilos existentes mantidos -->
+    <link href="css/chunk-vendors.317e4ea8.css" rel="stylesheet">
+    <link href="appp.3d111502.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/420.5f445c7e.css">
+    <link rel="stylesheet" type="text/css" href="912.1262dfcf.css">
+    <link rel="stylesheet" type="text/css" href="64.2a449246.css">
+    <link rel="stylesheet" type="text/css" href="652.4e50c868.css">
+    <link rel="stylesheet" type="text/css" href="377.26257b54.css">
+    <link rel="stylesheet" type="text/css" href="899.3e60963b.css">
+    <link rel="stylesheet" type="text/css" href="723.528a9236.css">
+    <link rel="stylesheet" type="text/css" href="13.1a4c9703.css">
+    <link rel="stylesheet" type="text/css" href="343.4b38f140.css">
+    <link rel="stylesheet" type="text/css" href="615.ea9d5457.css">
+    <link rel="stylesheet" type="text/css" href="45.85bc4b92.css">
+    
+    <style>
+        /* ESTILOS ESPECÍFICOS PARA PRODUTOS */
+        .products-container {
+            padding: 10px;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        .page-title {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin: 10px 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        /* CARDS DE PRODUTOS */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 12px;
+            margin-top: 10px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #eaeaea;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+        }
+        
+        .product-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            position: relative;
+        }
+        
+        .product-name {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .product-id {
+            font-size: 11px;
+            opacity: 0.9;
+            font-family: 'Courier New', monospace;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3px 8px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        .product-body {
+            padding: 15px;
+        }
+        
+        .product-info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .info-label {
+            font-size: 11px;
+            color: #666;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .info-value {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .info-value.amount {
+            color: #4CAF50;
+        }
+        
+        .info-value.income {
+            color: #FF9800;
+        }
+        
+        .info-value.days {
+            color: #2196F3;
+        }
+        
+        /* STATUS DO PRODUTO */
+        .product-status {
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .status-active {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .status-completed {
+            background: #f5f5f5;
+            color: #757575;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .status-pending {
+            background: #fff3e0;
+            color: #ef6c00;
+            border: 1px solid #ffe0b2;
+        }
+        
+        .status-cancelled {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ffcdd2;
+        }
+        
+        /* BARRA DE PROGRESSO */
+        .progress-container {
+            margin: 15px 0;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        
+        /* DATAS IMPORTANTES */
+        .dates-container {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+        }
+        
+        .date-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .date-item:last-child {
+            border-bottom: none;
+        }
+        
+        .date-label {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .date-value {
+            font-size: 12px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        /* BOTÃO DE AÇÃO */
+        .action-btn {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .action-btn:hover {
+            background: #45a049;
+        }
+        
+        .action-btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .action-btn.collect {
+            background: #FF9800;
+        }
+        
+        .action-btn.collect:hover {
+            background: #F57C00;
+        }
+        
+        /* SEM PRODUTOS */
+        .no-products {
+            text-align: center;
+            padding: 50px 20px;
+            color: #666;
+        }
+        
+        .no-products-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            opacity: 0.3;
+        }
+        
+        .no-products h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .no-products p {
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+        
+        /* FILTROS */
+        .products-filters {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .filter-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .filter-select {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 13px;
+            background: white;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .filter-btn:hover {
+            background: #5a67d8;
+        }
+        
+        /* CONTADOR */
+        .products-counter {
+            text-align: center;
+            font-size: 12px;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding: 8px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 6px;
+        }
+        
+        /* ESTATÍSTICAS */
+        .stats-container {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        
+        .stat-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 11px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .stat-item.total {
+            background: #e8f5e9;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .stat-item.active {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+        }
+        
+        .stat-item.income {
+            background: #fff3e0;
+            border: 1px solid #ffe0b2;
+        }
+        
+        .stat-item.profit {
+            background: #f3e5f5;
+            border: 1px solid #e1bee7;
+        }
+        
+        /* Loading */
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 15px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Toast notifications -->
+    <div id="snackbar"></div>
+    <div id="snackbar_error"></div>
+    
+    <div id="app" data-v-app="" bis_skin_checked="1">
+        <div data-v-f0ecb9c6="" class="records" bis_skin_checked="1">
+            <div data-v-f0ecb9c6="" class="wrap" bis_skin_checked="1">
+                <div data-v-f0ecb9c6="" class="navback" bis_skin_checked="1" onclick="window.history.back()">
+                    <img data-v-f0ecb9c6="" src="https://i.postimg.cc/CLQLWWMH/20250902-065546.png" alt="" class="back-img">
+                    <p data-v-f0ecb9c6="">Meus Produtos</p>
+                </div>
+            </div>
+            
+            <div class="products-container" id="productsContainer">
+                <div class="loading-container">
+                    <div class="loading-spinner"></div>
+                    <p>Carregando seus produtos...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==============================================
+        // CONFIGURAÇÕES
+        // ==============================================
+        const API_BASE_URL = 'https://bd-p4q7.onrender.com';
+        let allProducts = [];
+        let currentFilter = 'all';
+        
+        // ==============================================
+        // FUNÇÕES DE UTILIDADE
+        // ==============================================
+        
+        function showToast(message, type = 'info') {
+            const toastId = type === 'error' ? 'snackbar_error' : 'snackbar';
+            const toast = document.getElementById(toastId);
+            
+            if (toast) {
+                toast.textContent = message;
+                toast.className = "show";
+                
+                setTimeout(() => {
+                    toast.className = toast.className.replace("show", "");
+                }, 3000);
+            }
+        }
+        
+        function isAuthenticated() {
+            try {
+                const tokenData = localStorage.getItem('user_token');
+                if (!tokenData) return false;
+                
+                const { expiry, token } = JSON.parse(tokenData);
+                return token && expiry && Date.now() < expiry;
+            } catch (error) {
+                return false;
+            }
+        }
+        
+        function getAuthToken() {
+            try {
+                const tokenData = localStorage.getItem('user_token');
+                if (!tokenData) return null;
+                
+                const { token } = JSON.parse(tokenData);
+                return token;
+            } catch (error) {
+                return null;
+            }
+        }
+        
+        function formatCurrency(value) {
+            if (value === null || value === undefined) return '0 KZ';
+            const numValue = parseFloat(value);
+            if (isNaN(numValue)) return '0 KZ';
+            
+            return `${numValue.toLocaleString('pt-AO', { 
+                minimumFractionDigits: 0, 
+                maximumFractionDigits: 0 
+            })} KZ`;
+        }
+        
+        function formatDate(dateString) {
+            if (!dateString) return '--/--/----';
+            try {
+                const date = new Date(dateString);
+                const day = date.getDate().toString().padStart(2, '0');
+                const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                const year = date.getFullYear();
+                
+                return `${day}/${month}/${year}`;
+            } catch (error) {
+                return '--/--/----';
+            }
+        }
+        
+        function formatDateTime(dateString) {
+            if (!dateString) return '--/--/---- --:--';
+            try {
+                const date = new Date(dateString);
+                const day = date.getDate().toString().padStart(2, '0');
+                const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                const year = date.getFullYear();
+                const hours = date.getHours().toString().padStart(2, '0');
+                const minutes = date.getMinutes().toString().padStart(2, '0');
+                
+                return `${day}/${month}/${year} ${hours}:${minutes}`;
+            } catch (error) {
+                return '--/--/---- --:--';
+            }
+        }
+        
+        function getStatusInfo(status) {
+            const statusLower = (status || '').toLowerCase();
+            
+            switch(statusLower) {
+                case 'active':
+                    return {
+                        text: 'Ativo',
+                        class: 'status-active'
+                    };
+                case 'completed':
+                    return {
+                        text: 'Concluído',
+                        class: 'status-completed'
+                    };
+                case 'pending':
+                    return {
+                        text: 'Pendente',
+                        class: 'status-pending'
+                    };
+                case 'cancelled':
+                    return {
+                        text: 'Cancelado',
+                        class: 'status-cancelled'
+                    };
+                default:
+                    return {
+                        text: 'Ativo',
+                        class: 'status-active'
+                    };
+            }
+        }
+        
+        function calculateDaysRemaining(expiryDate) {
+            if (!expiryDate) return 0;
+            const expiry = new Date(expiryDate);
+            const today = new Date();
+            const diffTime = expiry - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            return diffDays > 0 ? diffDays : 0;
+        }
+        
+        function calculateProgress(purchaseDate, expiryDate, cycleDays) {
+            if (!purchaseDate || !expiryDate) return 0;
+            
+            const start = new Date(purchaseDate);
+            const end = new Date(expiryDate);
+            const today = new Date();
+            
+            if (today >= end) return 100;
+            if (today <= start) return 0;
+            
+            const totalTime = end - start;
+            const elapsedTime = today - start;
+            
+            return Math.min(100, Math.round((elapsedTime / totalTime) * 100));
+        }
+        
+        function canCollectToday(lastPayout) {
+            if (!lastPayout) return true;
+            
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            const lastPayoutDate = new Date(lastPayout);
+            lastPayoutDate.setHours(0, 0, 0, 0);
+            
+            return today > lastPayoutDate;
+        }
+        
+        // ==============================================
+        // FUNÇÕES PARA BUSCAR DADOS
+        // ==============================================
+        
+        async function fetchUserPurchases() {
+            const token = getAuthToken();
+            if (!token) return [];
+            
+            try {
+                console.log('🔄 Buscando produtos do usuário...');
+                
+                const response = await fetch(`${API_BASE_URL}/api/user/purchases`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (!response.ok) {
+                    console.error('❌ Erro na resposta:', response.status);
+                    return [];
+                }
+                
+                const data = await response.json();
+                console.log('✅ Dados recebidos:', data);
+                
+                return data.data || [];
+                
+            } catch (error) {
+                console.error('❌ Erro ao buscar produtos:', error);
+                return [];
+            }
+        }
+        
+        async function fetchUserPackagesStats() {
+            const token = getAuthToken();
+            if (!token) return null;
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/user/packages-stats`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (!response.ok) return null;
+                
+                const data = await response.json();
+                return data.data || null;
+                
+            } catch (error) {
+                console.error('Erro ao buscar estatísticas:', error);
+                return null;
+            }
+        }
+        
+        // ==============================================
+        // FUNÇÕES PARA COLETAR RENDIMENTOS
+        // ==============================================
+        
+        async function collectProductIncome(productId) {
+            const token = getAuthToken();
+            if (!token) {
+                showToast('Sessão expirada', 'error');
+                return false;
+            }
+            
+            try {
+                showToast('Processando coleta...', 'info');
+                
+                const response = await fetch(`${API_BASE_URL}/api/tasks/collect-product-income`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        product_id: productId
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showToast(data.message, 'info');
+                    await loadUserProducts();
+                    return true;
+                } else {
+                    showToast(data.message, 'error');
+                    return false;
+                }
+                
+            } catch (error) {
+                console.error('Erro ao coletar rendimento:', error);
+                showToast('Erro ao coletar rendimento', 'error');
+                return false;
+            }
+        }
+        
+        async function collectAllIncome() {
+            const token = getAuthToken();
+            if (!token) {
+                showToast('Sessão expirada', 'error');
+                return false;
+            }
+            
+            try {
+                showToast('Processando todas as coletas...', 'info');
+                
+                const response = await fetch(`${API_BASE_URL}/api/tasks/collect-all-income`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showToast(data.message, 'info');
+                    await loadUserProducts();
+                    return true;
+                } else {
+                    showToast(data.message, 'error');
+                    return false;
+                }
+                
+            } catch (error) {
+                console.error('Erro ao coletar todos os rendimentos:', error);
+                showToast('Erro ao coletar rendimentos', 'error');
+                return false;
+            }
+        }
+        
+        // ==============================================
+        // FUNÇÕES DE RENDERIZAÇÃO
+        // ==============================================
+        
+        function renderProductsStats(stats) {
+            if (!stats) return '';
+            
+            return `
+                <div class="stats-container">
+                    <div class="stats-grid">
+                        <div class="stat-item total">
+                            <div class="stat-value">${stats.total_packages}</div>
+                            <div class="stat-label">Total de Produtos</div>
+                        </div>
+                        <div class="stat-item active">
+                            <div class="stat-value">${stats.active_packages}</div>
+                            <div class="stat-label">Produtos Ativos</div>
+                        </div>
+                        <div class="stat-item income">
+                            <div class="stat-value">${formatCurrency(stats.daily_income)}</div>
+                            <div class="stat-label">Rendimento Diário</div>
+                        </div>
+                        <div class="stat-item profit">
+                            <div class="stat-value">${formatCurrency(stats.net_profit)}</div>
+                            <div class="stat-label">Lucro Líquido</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 10px; font-size: 11px; color: #666; text-align: center;">
+                        Investido: ${formatCurrency(stats.total_invested)} | Ganho: ${formatCurrency(stats.total_earned)}
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderProductCard(product) {
+            const statusInfo = getStatusInfo(product.status);
+            const daysRemaining = calculateDaysRemaining(product.expiry_date);
+            const progress = calculateProgress(product.purchase_date, product.expiry_date, product.cycle_days);
+            const canCollect = product.can_collect && product.status === 'active' && daysRemaining > 0;
+            
+            // Calcular total retornado vs total possível
+            const totalReturn = product.daily_return * product.cycle_days;
+            const returnPercentage = product.total_earned > 0 ? Math.round((product.total_earned / totalReturn) * 100) : 0;
+            
+            return `
+                <div class="product-card">
+                    <div class="product-header">
+                        <div class="product-name">${product.product_name}</div>
+                        <div class="product-id">#${product.id.substring(0, 8)}</div>
+                    </div>
+                    
+                    <div class="product-body">
+                        <div class="product-info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Investimento</span>
+                                <span class="info-value amount">${formatCurrency(product.amount)}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Rendimento/Dia</span>
+                                <span class="info-value income">${formatCurrency(product.daily_return)}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Duração</span>
+                                <span class="info-value days">${product.cycle_days} dias</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Retorno Total</span>
+                                <span class="info-value amount">${formatCurrency(totalReturn)}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-container">
+                            <div class="progress-label">
+                                <span>Progresso: ${progress}%</span>
+                                <span>Dias restantes: ${daysRemaining}</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${progress}%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="dates-container">
+                            <div class="date-item">
+                                <span class="date-label">Data da compra:</span>
+                                <span class="date-value">${formatDate(product.purchase_date)}</span>
+                            </div>
+                            <div class="date-item">
+                                <span class="date-label">Vencimento:</span>
+                                <span class="date-value">${formatDate(product.expiry_date)}</span>
+                            </div>
+                            <div class="date-item">
+                                <span class="date-label">Última coleta:</span>
+                                <span class="date-value">${product.last_payout ? formatDateTime(product.last_payout) : 'Nunca'}</span>
+                            </div>
+                            <div class="date-item">
+                                <span class="date-label">Coletas feitas:</span>
+                                <span class="date-value">${product.payout_count || 0} de ${product.cycle_days}</span>
+                            </div>
+                            <div class="date-item">
+                                <span class="date-label">Total ganho:</span>
+                                <span class="date-value">${formatCurrency(product.total_earned)} (${returnPercentage}%)</span>
+                            </div>
+                        </div>
+                        
+                        <div class="product-status ${statusInfo.class}">
+                            ${statusInfo.text}
+                        </div>
+                        
+                        ${canCollect ? `
+                            <button class="action-btn collect" onclick="collectProductIncome('${product.id}')">
+                                <span>💰</span>
+                                Coletar ${formatCurrency(product.daily_return)} Hoje
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderProductsList(products) {
+            const container = document.getElementById('productsContainer');
+            
+            if (!products || products.length === 0) {
+                container.innerHTML = `
+                    <div class="no-products">
+                        <div class="no-products-icon">📦</div>
+                        <h3>Nenhum produto encontrado</h3>
+                        <p>Você ainda não comprou nenhum produto.</p>
+                        <button onclick="window.location.href = '/'" 
+                                style="background: #667eea; color: white; border: none; 
+                                       padding: 10px 20px; border-radius: 6px; cursor: pointer;
+                                       font-size: 13px; margin-top: 10px;">
+                            Comprar Produtos
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Ordenar produtos: ativos primeiro, depois por data de compra (mais recentes primeiro)
+            const sortedProducts = [...products].sort((a, b) => {
+                if (a.status === 'active' && b.status !== 'active') return -1;
+                if (a.status !== 'active' && b.status === 'active') return 1;
+                return new Date(b.purchase_date) - new Date(a.purchase_date);
+            });
+            
+            // Buscar estatísticas
+            fetchUserPackagesStats().then(stats => {
+                let html = '';
+                
+                if (stats) {
+                    html += renderProductsStats(stats);
+                }
+                
+                html += `
+                    <div class="products-filters">
+                        <div class="filter-row">
+                            <select id="filterStatus" class="filter-select" onchange="applyFilter()">
+                                <option value="all">Todos os Produtos</option>
+                                <option value="active">Apenas Ativos</option>
+                                <option value="completed">Concluídos</option>
+                                <option value="cancelled">Cancelados</option>
+                            </select>
+                            <button class="filter-btn" onclick="collectAllIncome()">
+                                Coletar Todos
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="products-counter">
+                        Mostrando ${sortedProducts.length} produto${sortedProducts.length !== 1 ? 's' : ''}
+                    </div>
+                `;
+                
+                html += '<div class="product-grid">';
+                
+                sortedProducts.forEach(product => {
+                    html += renderProductCard(product);
+                });
+                
+                html += '</div>';
+                
+                container.innerHTML = html;
+                
+                // Aplicar filtro salvo
+                if (currentFilter !== 'all') {
+                    document.getElementById('filterStatus').value = currentFilter;
+                    applyFilter();
+                }
+                
+            }).catch(error => {
+                console.error('Erro ao renderizar:', error);
+                showToast('Erro ao carregar estatísticas', 'error');
+            });
+        }
+        
+        function applyFilter() {
+            const filterValue = document.getElementById('filterStatus').value;
+            currentFilter = filterValue;
+            
+            const productsGrid = document.querySelector('.product-grid');
+            if (!productsGrid) return;
+            
+            const productCards = productsGrid.querySelectorAll('.product-card');
+            
+            productCards.forEach(card => {
+                const statusElement = card.querySelector('.product-status');
+                if (!statusElement) return;
+                
+                const statusText = statusElement.textContent.toLowerCase();
+                
+                switch(filterValue) {
+                    case 'all':
+                        card.style.display = 'block';
+                        break;
+                    case 'active':
+                        card.style.display = statusText.includes('ativo') ? 'block' : 'none';
+                        break;
+                    case 'completed':
+                        card.style.display = statusText.includes('concluído') ? 'block' : 'none';
+                        break;
+                    case 'cancelled':
+                        card.style.display = statusText.includes('cancelado') ? 'block' : 'none';
+                        break;
+                    default:
+                        card.style.display = 'block';
+                }
+            });
+            
+            // Atualizar contador
+            const counter = document.querySelector('.products-counter');
+            if (counter) {
+                const visibleCount = productsGrid.querySelectorAll('.product-card[style*="display: block"]').length;
+                counter.textContent = `Mostrando ${visibleCount} produto${visibleCount !== 1 ? 's' : ''}`;
+            }
+        }
+        
+        // ==============================================
+        // CARREGAMENTO INICIAL
+        // ==============================================
+        
+        async function loadUserProducts() {
+            if (!isAuthenticated()) {
+                showToast('Sessão expirada. Faça login novamente.', 'error');
+                setTimeout(() => window.location.href = '/index.html', 2000);
+                return;
+            }
+            
+            try {
+                console.log('🔄 Carregando produtos do usuário...');
+                
+                allProducts = await fetchUserPurchases();
+                
+                if (allProducts.length === 0) {
+                    console.log('⚠️ Nenhum produto encontrado');
+                    showToast('Nenhum produto encontrado', 'info');
+                } else {
+                    console.log(`✅ ${allProducts.length} produtos carregados`);
+                    showToast('Produtos carregados com sucesso!');
+                }
+                
+                renderProductsList(allProducts);
+                
+            } catch (error) {
+                console.error('❌ Erro ao carregar produtos:', error);
+                
+                if (error.message === 'Sessão expirada') {
+                    showToast('Sessão expirada. Faça login novamente.', 'error');
+                    setTimeout(() => window.location.href = '/index.html', 2000);
+                } else {
+                    showToast('Erro ao carregar produtos. Tente novamente.', 'error');
+                    
+                    const container = document.getElementById('productsContainer');
+                    container.innerHTML = `
+                        <div class="no-products">
+                            <div class="no-products-icon">⚠️</div>
+                            <h3>Erro ao carregar</h3>
+                            <p>Não foi possível carregar seus produtos.</p>
+                            <button onclick="loadUserProducts()" 
+                                    style="background: #667eea; color: white; border: none; 
+                                           padding: 10px 20px; border-radius: 6px; cursor: pointer;
+                                           font-size: 13px; margin-top: 10px;">
+                                Tentar novamente
+                            </button>
+                        </div>
+                    `;
+                }
+            }
+        }
+        
+        // ==============================================
+        // INICIALIZAÇÃO
+        // ==============================================
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Adicionar botão de recarregar no cabeçalho
+            const navback = document.querySelector('.navback');
+            if (navback) {
+                const reloadBtn = document.createElement('div');
+                reloadBtn.className = 'header-reload-btn';
+                reloadBtn.innerHTML = '🔄';
+                reloadBtn.title = 'Recarregar produtos';
+                
+                reloadBtn.onclick = function() {
+                    this.style.transform = 'rotate(180deg)';
+                    loadUserProducts();
+                    
+                    setTimeout(() => {
+                        this.style.transform = 'rotate(0deg)';
+                    }, 500);
+                };
+                
+                navback.style.position = 'relative';
+                
+                // Estilo para o botão de recarregar
+                reloadBtn.style.position = 'absolute';
+                reloadBtn.style.right = '10px';
+                reloadBtn.style.top = '50%';
+                reloadBtn.style.transform = 'translateY(-50%)';
+                reloadBtn.style.width = '24px';
+                reloadBtn.style.height = '24px';
+                reloadBtn.style.background = 'rgba(102, 126, 234, 0.1)';
+                reloadBtn.style.borderRadius = '50%';
+                reloadBtn.style.display = 'flex';
+                reloadBtn.style.alignItems = 'center';
+                reloadBtn.style.justifyContent = 'center';
+                reloadBtn.style.cursor = 'pointer';
+                reloadBtn.style.fontSize = '12px';
+                reloadBtn.style.color = '#667eea';
+                reloadBtn.style.transition = 'all 0.3s ease';
+                reloadBtn.style.lineHeight = '1';
+                
+                navback.appendChild(reloadBtn);
+            }
+            
+            // Carregar produtos
+            loadUserProducts();
+        });
+    </script>
+</body>
+</html>

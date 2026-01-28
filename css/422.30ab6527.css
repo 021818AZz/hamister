@@ -1,0 +1,422 @@
+.recharge[data-v-616d10fd] {
+    min-height: 100vh;
+    padding-bottom: 18rem;
+    background: #f7f6f3;
+    position: relative;
+    z-index: 1;
+    padding-top: 5rem
+}
+
+.recharge[data-v-616d10fd]:after {
+    width: 100%;
+    height: 50rem;
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    background: url(/lendlease/dist/img/bg.7ab2eac0.png) no-repeat top/100% auto
+}
+
+.recharge .navback[data-v-616d10fd] {
+    display: flex;
+    align-items: center;
+    padding: 0 3rem
+}
+
+.recharge .navback .back-img[data-v-616d10fd] {
+    width: 4.8rem;
+    height: 4rem
+}
+
+.recharge .navback .logo-img[data-v-616d10fd] {
+    width: 7.2rem;
+    height: 7.2rem;
+    margin-left: 1rem
+}
+
+.recharge .navback p[data-v-616d10fd] {
+    font-weight: 500;
+    font-size: 4.5rem;
+    color: #333;
+    margin-left: 2rem
+}
+
+.recharge .section-box[data-v-616d10fd] {
+    padding: 0 2.8rem;
+    margin-top: 1rem
+}
+
+.recharge .section-box .lease-banner[data-v-616d10fd] {
+    height: 29rem;
+    width: 69.6rem;
+    margin: 3rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: url(/lendlease/dist/img/head.eddea931.png) no-repeat top/100% auto;
+    position: relative
+}
+
+.recharge .section-box .lease-banner .r-img[data-v-616d10fd] {
+    width: 17.2rem;
+    height: 16.4rem;
+    position: absolute;
+    right: 0;
+    top: -3rem
+}
+
+.recharge .section-box .lease-banner .accum[data-v-616d10fd] {
+    margin-top: 3rem;
+    width: 100%;
+    padding-left: 3rem
+}
+
+.recharge .section-box .lease-banner .accum .accum-t1[data-v-616d10fd] {
+    font-size: 2.4rem;
+    color: #fff;
+    text-align: left
+}
+
+.recharge .section-box .lease-banner .accum .accum-t2[data-v-616d10fd] {
+    font-weight: 400;
+    font-size: 4.2rem;
+    color: #fff;
+    font-weight: 700;
+    margin-top: 1rem;
+    text-align: left
+}
+
+.recharge .section-box .existing[data-v-616d10fd] {
+    width: 69.4rem;
+    border-radius: .8rem;
+    margin: 0 auto;
+    padding-left: 3rem;
+    display: flex;
+    margin-top: 4rem;
+    align-items: center
+}
+
+.recharge .section-box .existing .left[data-v-616d10fd] {
+    display: flex;
+    flex-direction: column;
+    width: 50%
+}
+
+.recharge .section-box .existing .left p[data-v-616d10fd] {
+    font-size: 2.6rem;
+    color: #fff;
+    text-shadow: 0 .2rem .4rem rgba(0, 0, 0, .5);
+    text-align: left;
+    font-weight: 700
+}
+
+.recharge .section-box .existing .left .income[data-v-616d10fd] {
+    font-weight: 700;
+    font-size: 3.8rem;
+    color: #fff;
+    text-align: left;
+    margin-top: 1rem
+}
+
+.recharge .section-box .existing .rightu[data-v-616d10fd] {
+    display: flex;
+    flex-direction: column;
+    width: 50%
+}
+
+.recharge .section-box .existing .rightu p[data-v-616d10fd] {
+    font-size: 2.6rem;
+    color: #fff;
+    text-shadow: 0 .2rem .4rem rgba(0, 0, 0, .5);
+    text-align: left;
+    font-weight: 700;
+    display: flex;
+    align-items: center
+}
+
+.recharge .section-box .existing .rightu .income[data-v-616d10fd] {
+    font-weight: 700;
+    font-size: 3.8rem;
+    color: #fff;
+    text-align: left;
+    margin-top: 1rem
+}
+
+.recharge .section-box .boxed[data-v-616d10fd] {
+    background: #fff;
+    border-radius: 2rem;
+    padding: 2rem;
+    margin-top: 3rem
+}
+
+.recharge .section-box .select-usdt[data-v-616d10fd] {
+    display: flex;
+    align-items: center;
+    justify-content: space-around
+}
+
+.recharge .section-box .select-usdt .l-tile[data-v-616d10fd] {
+    width: 30%;
+    font-size: 4rem;
+    border-radius: .8rem;
+    background: #f5f5f5;
+    color: #333c40;
+    padding: 1rem 2rem
+}
+
+.recharge .section-box .select-usdt .select[data-v-616d10fd] {
+    color: #35774a;
+    font-weight: 700;
+    border: .2rem solid #35774a
+}
+
+.recharge .section-box .signin[data-v-616d10fd] {
+    height: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    border-bottom: .1rem solid #d8d8d8
+}
+
+.recharge .section-box .signin .tip[data-v-616d10fd] {
+    color: red;
+    text-align: right;
+    margin-left: 3rem
+}
+
+.recharge .section-box .signin img[data-v-616d10fd] {
+    width: 4rem;
+    height: 4rem
+}
+
+.recharge .section-box .signin p[data-v-616d10fd] {
+    font-weight: 700;
+    font-size: 3rem;
+    color: #35774a;
+    margin-left: 1rem
+}
+
+.recharge .section-box .cholist[data-v-616d10fd] {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between
+}
+
+.recharge .section-box .cholist .itemu[data-v-616d10fd] {
+    font-size: 3.5rem;
+    position: relative;
+    width: 20rem;
+    height: 8.5rem;
+    line-height: 8.5rem;
+    border-radius: .8rem;
+    background: #f5f5f5;
+    color: #333c40;
+    margin-bottom: 3rem
+}
+
+.recharge .section-box .cholist .itemu .givei[data-v-616d10fd] {
+    color: #fff;
+    font-size: 2.5rem;
+    height: 5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1rem;
+    border-radius: 1rem;
+    background: linear-gradient(270deg, #ff6d60, #db1100);
+    position: absolute;
+    top: -2.5rem;
+    right: 0
+}
+
+.recharge .section-box .cholist span[data-v-616d10fd] {
+    width: 20rem
+}
+
+.recharge .section-box .cholist .image[data-v-616d10fd] {
+    position: absolute;
+    width: 5rem;
+    height: 4.4rem;
+    bottom: 0;
+    right: -.3rem
+}
+
+.recharge .section-box .cholist .actives[data-v-616d10fd] {
+    background: rgba(53, 119, 74, .08);
+    border-radius: 1.2rem;
+    color: #35774a;
+    font-weight: 700;
+    border: .2rem solid #35774a
+}
+
+.recharge .section-box .seletwo[data-v-616d10fd] {
+    margin-bottom: 0
+}
+
+.recharge .section-box .seletwo span[data-v-616d10fd] {
+    width: 23.3rem
+}
+
+.recharge .section-box .ullist[data-v-616d10fd] {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between
+}
+
+.recharge .section-box .ullist .listmethod[data-v-616d10fd] {
+    position: relative;
+    width: 100%;
+    height: 8.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: .1rem solid #999
+}
+
+.recharge .section-box .ullist .listmethod .left[data-v-616d10fd] {
+    display: flex;
+    align-items: center
+}
+
+.recharge .section-box .ullist .listmethod .left p[data-v-616d10fd] {
+    width: 100%;
+    font-size: 2.8rem;
+    color: #333
+}
+
+.recharge .section-box .ullist .listmethod .imgright[data-v-616d10fd] {
+    width: 4rem;
+    height: 4rem
+}
+
+.recharge .section-box .ullist .chopaya .imgright[data-v-616d10fd] {
+    width: 4.4rem;
+    height: 4rem
+}
+
+.recharge .section-box .minimum[data-v-616d10fd] {
+    text-align: left;
+    margin-top: 2rem
+}
+
+.recharge .section-box .minimum .ts[data-v-616d10fd] {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem
+}
+
+.recharge .section-box .minimum .ts img[data-v-616d10fd] {
+    width: 4rem;
+    height: 4rem
+}
+
+.recharge .section-box .minimum .ts .kind[data-v-616d10fd] {
+    font-weight: 700;
+    font-size: 2.8rem;
+    color: #35774a;
+    margin-left: 1rem
+}
+
+.recharge .section-box .minimum p[data-v-616d10fd] {
+    font-size: 2.8rem;
+    color: #333
+}
+
+.recharge .section-box .rechbtn[data-v-616d10fd] {
+    position: fixed;
+    transform: translateX(-50%);
+    bottom: 5rem;
+    margin-top: 3rem;
+    width: 69rem;
+    height: 8.8rem;
+    background: #000;
+    border-radius: 4.9rem;
+    font-weight: 700;
+    font-size: 4rem;
+    color: #fff
+}
+
+[data-v-616d10fd] .nav-box {
+    padding: 4rem 0 0;
+    background: none
+}
+
+[data-v-616d10fd] .nav-box .van-nav-bar__content .van-nav-bar__left img {
+    width: 2.6rem;
+    height: 3rem
+}
+
+[data-v-616d10fd] .nav-box .van-nav-bar__content .van-nav-bar__left i {
+    color: #000;
+    font-size: 4rem
+}
+
+[data-v-616d10fd] .nav-box .van-nav-bar__content .van-nav-bar__title {
+    padding: .5rem 0
+}
+
+[data-v-616d10fd] .nav-box .van-nav-bar__content .van-nav-bar__title img {
+    width: 19.2rem;
+    height: 5rem
+}
+
+[data-v-616d10fd] .nav-box .van-nav-bar__content .van-nav-bar__title p {
+    font-size: 3.6rem;
+    color: #333
+}
+
+[data-v-616d10fd] .nav-box .van-nav-bar__content .van-nav-bar__right .billde {
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+[data-v-616d10fd] .nav-box .van-nav-bar__content .van-nav-bar__right .billde p {
+    font-weight: 400;
+    font-size: 2.2rem
+}
+
+[data-v-616d10fd] .nav-box .van-nav-bar__content .van-nav-bar__right .billde img {
+    width: 4.4rem;
+    height: 4.4rem;
+    margin-left: 1rem
+}
+
+[data-v-616d10fd] .nav-box:after {
+    display: none
+}
+
+[data-v-616d10fd] .input-box {
+    height: 8rem;
+    border-radius: .8rem;
+    border: .1rem solid #999;
+    padding: 1.5rem 2rem;
+    padding-top: 2rem
+}
+
+[data-v-616d10fd] .input-box .van-field__left-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 2rem;
+    padding-top: .5rem
+}
+
+[data-v-616d10fd] .input-box .van-field__left-icon p {
+    font-size: 3.4rem;
+    font-weight: 400;
+    color: #080034
+}
+
+[data-v-616d10fd] .input-box input {
+    font-size: 3rem;
+    font-weight: 400;
+    color: #080034
+}
+
+[data-v-616d10fd] .input-box input.van-field__control::-webkit-input-placeholder {
+    color: #080034
+}

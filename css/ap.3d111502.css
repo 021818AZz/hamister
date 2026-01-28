@@ -1,0 +1,316 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+#app {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    height: 100%;
+    min-height: 100%;
+    position: relative;
+    background: #f8f7fb;
+    overflow-y: visible
+}
+
+#app .bold {
+    font-weight: 700
+}
+
+#app .lined {
+    width: 64.2rem;
+    height: .1rem;
+    border: .1rem solid #fff;
+    opacity: .5;
+    margin: 1rem auto
+}
+
+.glob-popover {
+    position: absolute;
+    z-index: 2;
+    top: 70px;
+    right: 20px;
+    font-weight: 500
+}
+
+.glob-popover .assets-wrap p {
+    font-size: 28px
+}
+
+.glob-popover .assets-wrap img {
+    width: 42px;
+    height: 42px;
+    margin-left: 10px
+}
+
+.xuanfu {
+    z-index: 999;
+    position: fixed;
+    bottom: 17rem;
+    right: 1rem;
+    border-radius: .8rem;
+    touch-action: pan-y
+}
+
+.xuanfu img {
+    width: 9rem;
+    height: 9rem
+}
+
+.xuanfu .un-read {
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    border-radius: 10rem;
+    background: red;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.3rem;
+    z-index: 2;
+    position: absolute;
+    right: 0;
+    top: 0
+}
+
+.xuanfu .popup-check {
+    background: none
+}
+
+
+
+.xuanfu .popup-check .topimg .check-in {
+    font-size: 3.6rem;
+    font-weight: 500;
+    color: #00fffb
+}
+
+.xuanfu .popup-check .topimg .amountn {
+    font-size: 6rem;
+    color: #ffe400;
+    font-weight: 600;
+    margin: 1rem 0
+}
+
+.xuanfu .popup-check .topimg .rewardck {
+    font-size: 2.8rem;
+    color: #00fff7
+}
+
+.xuanfu .popup-check .topimg button {
+    margin-top: 5rem;
+    width: 50.4rem;
+    height: 7.4rem;
+    background: rgba(0, 255, 251, .3);
+    border-radius: .8rem;
+    border: .4rem solid #00fffb;
+    color: #00fffa;
+    font-weight: 500;
+    font-size: 3.6rem
+}
+
+.xuanfu .popup-check .imgclose {
+    width: 6.4rem;
+    height: 10.4rem
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+li,
+ul {
+    list-style-type: none
+}
+
+input {
+    outline: none
+}
+
+textarea {
+    resize: none
+}
+
+a {
+    text-decoration: none
+}
+
+.ellipsis-1 {
+    white-space: nowrap
+}
+
+.ellipsis-1,
+.ellipsis-2 {
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.ellipsis-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical
+}
+
+.text-transparent {
+    background-image: linear-gradient(135deg, #0091ff, #00e6ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent
+}
+
+.top-index {
+    z-index: 2020 !important
+}
+
+.van-dropdown-item__content {
+    width: 90% !important;
+    left: 5% !important
+}
+
+.van-dropdown-item__content .van-cell__title {
+    flex: 2
+}
+
+.van-dropdown-item__content .van-cell__value {
+    flex: 1
+}
+
+.sub-bl {
+    width: 100vw;
+    height: 60px;
+    background: #17264f;
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: 3px;
+    text-indent: 3px;
+    position: fixed;
+    border-radius: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999
+}
+
+button {
+    border: none;
+    border-radius: 4px
+}
+
+p {
+    margin: 0;
+    color: #ffffff00
+}
+
+p,
+span {
+    font-size: 2.8rem
+}
+
+body {
+    font-size: .26em !important
+}
+
+html {
+    font-size: 1.333333333vw !important
+}
+
+@media screen and (min-width:1000px) {
+    html {
+        font-size: 5px !important
+    }
+
+    html:after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        opacity: .6
+    }
+}
+
+.van-toast {
+    font-size: 2.8rem !important;
+    word-wrap: break-word !important;
+    word-break: normal !important;
+    padding: 1.6rem 2.2rem !important;
+    border-radius: 1.4rem !important;
+    background: #fff !important;
+    color: #000 !important;
+    box-shadow: 0 .3rem 1.5rem 0 rgba(0, 0, 0, .4) !important
+}
+
+.van-toast,
+.van-toast.loadingcss {
+    top: 50% !important;
+    border: none !important
+}
+
+.van-toast.loadingcss {
+    background: none !important;
+    padding: 0 !important;
+    overflow: hidden;
+    width: 15rem !important;
+    height: 15rem !important;
+    box-shadow: none !important
+}
+
+.van-toast.loadingcss .van-icon img {
+    width: 13rem !important;
+    height: 13rem !important
+}
+
+.topIndex.van-overlay {
+    z-index: 9999
+}
+
+.w-wrap {
+    width: 93%;
+    margin: 0 auto;
+    border-radius: 2rem;
+    padding: 3rem;
+    box-sizing: border-box
+}
+
+.w-wrap .title {
+    font-size: 1.6rem;
+    font-weight: 500;
+    text-align: center;
+    margin: 0
+}
+
+.after {
+    position: relative;
+    z-index: 1
+}
+
+.after:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1
+}
+
+.flex {
+    justify-content: space-between
+}
+
+.flex,
+.flex-start {
+    display: flex;
+    align-items: center
+}
+
+.flex-start {
+    justify-content: flex-start
+}
+
+.flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between
+}

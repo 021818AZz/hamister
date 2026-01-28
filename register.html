@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="icon" href="https://orac-le.online/lend/login/lendlease/dist/favicon.ico">
+    <title>Oracle | Registro</title>
+
+    <link href="css/chunk-vendors.317e4ea8.css" rel="stylesheet">
+    <link href="css/app.3d111502.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/65.2ad687df.css">
+
+    <!-- Toastify CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <style>
+        .login[data-v-6698f844]:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 70.6rem;
+            background: url(img/oracle.jpg) no-repeat 50%/100% 100%
+        }
+        
+        /* Estilos para código de convite preenchido automaticamente */
+        .invite-code-auto {
+            border-color: #28a745 !important;
+            background-color: rgba(40, 167, 69, 0.1) !important;
+        }
+        
+        .invite-code-info {
+            display: none;
+            font-size: 12px;
+            margin-top: 5px;
+            padding: 5px;
+            border-radius: 4px;
+        }
+        
+        /* Toastify custom styles - TODOS PRETOS */
+        .toast-success,
+        .toast-error,
+        .toast-warning,
+        .toast-info {
+            background: linear-gradient(135deg, #000000 0%, #333333 100%) !important;
+            color: white !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        /* Loading overlay */
+        #loadingOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            color: white;
+            font-size: 18px;
+            flex-direction: column;
+        }
+
+        /* Existing styles */
+        #snackbar {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: rgba(31, 28, 28, 0.5);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            color: white;
+            text-align: center;
+            border-radius: 10px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 50%;
+            font-size: 17px;
+        }
+
+        #snackbar.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        #snackbar_error {
+            visibility: hidden;
+            width: 40%;
+            margin-left: 5px;
+            background-color: whitesmoke;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            color: black;
+            text-align: center;
+            border-radius: 10px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 30%;
+            bottom: 50%;
+            font-size: 17px;
+        }
+
+        #snackbar_error.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+        
+        @-webkit-keyframes fadein {
+            from {
+                bottom: 50%;
+                opacity: 0;
+            }
+            to {
+                bottom: 50%;
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeout {
+            from {
+                bottom: 50%;
+                opacity: 1;
+            }
+            to {
+                bottom: 50%;
+                opacity: 0;
+            }
+        }
+
+        @media (min-width: 576px) and (max-width: 767px) {
+            #snackbar_error {
+                width: 60%;
+                left: 20%;
+                bottom: 70px;
+                font-size: 12px;
+            }
+            #snackbar {
+                width: 50%;
+                left: 25%;
+                bottom: 70px;
+                font-size: 12px;
+            }
+        }
+        
+        @media (max-width: 575.99px) {
+            #snackbar_error {
+                width: 80%;
+                margin-left: 5px;
+                left: 10%;
+                font-size: 12px;
+            }
+            #snackbar {
+                width: 80%;
+                margin-left: 5px;
+                left: 10%;
+                font-size: 12px;
+            }
+        }
+
+        /* Preloader styles */
+        #preloade,
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+        }
+        
+        .loaderd {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .loadingcss {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        .van-icon__image {
+            width: 50px;
+            height: 50px;
+        }
+        
+        /* Password toggle icon */
+        .password-toggle {
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .password-toggle img {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loading overlay para registro -->
+    <div id="loadingOverlay">
+        <div class="van-toast van-toast--middle loadingcss">
+            <i class="van-icon van-toast__icon">
+                <img src="https://orac-le.online/lend/loading.gif" class="van-icon__image">
+            </i>
+            <p>Processando registro...</p>
+        </div>
+    </div>
+
+    <!-- Preloader inicial -->
+    <div id="preloade" style="display: none;">
+        <div class="loaderd">
+            <div class="van-toast van-toast--middle loadingcss">
+                <i class="van-icon van-toast__icon">
+                    <img src="https://orac-le.online/lend/loading.gif" class="van-icon__image">
+                </i>
+            </div>
+        </div>
+    </div>
+
+    <form id="registerForm" method="post">
+        <input type="hidden" name="_token" value="WrcbWuAS8ZGbQfmC1mCXKBSqOpoKAGsEj7Hoo26r">
+        <div id="app" data-v-app="">
+            <div data-v-6698f844="" class="login">
+                <div data-v-6698f844="" class="wrap">
+                    <div data-v-6698f844="" class="head-box">
+                        <img data-v-6698f844="" src="https://i.postimg.cc/NMXGxjG2/Chat-GPT-Image-18-de-jan-de-2026-15-20-17.png" alt="" class="logo2-img">
+                        <p data-v-6698f844="" class="join">Seja bem-vindo a Oracle<br></p>
+                    </div>
+                </div>
+                <div data-v-6698f844="" class="wrap-body">
+                    <section data-v-6698f844="" class="section-box">
+                        <div data-v-6698f844="" class="content" style="padding: 20px 1rem;">
+                            <div data-v-6698f844="" class="userinfo">
+                                <!-- País -->
+                                <div data-v-6698f844="">
+                                    <div data-v-6698f844="" class="box-title">
+                                        <img data-v-6698f844="" src="img/internet.png" alt="">
+                                        <p data-v-6698f844="" class="title">País</p>
+                                    </div>
+                                    <div data-v-6698f844="" class="van-dropdown-menu item-boxi">
+                                        <div class="van-dropdown-menu__bar">
+                                            <div id="van-dropdown-menu-1-0" role="button" tabindex="0"
+                                                class="van-dropdown-menu__item van-haptics-feedback">
+                                                <span class="van-dropdown-menu__title">
+                                                    <div class="van-ellipsis">
+                                                        <p data-v-6698f844="" class="icon-img">
+                                                            <img data-v-6698f844="" src="img/angola.png" alt="" style="width: 20px;">
+                                                            Angola (+244)
+                                                        </p>
+                                                    </div>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Telefone -->
+                                <div data-v-6698f844="">
+                                    <div data-v-6698f844="" class="box-title">
+                                        <img data-v-6698f844="" src="https://i.postimg.cc/GhRfnKg9/phone.png" alt="">
+                                        <p data-v-6698f844="" class="title">Telefone</p>
+                                    </div>
+                                    <div data-v-6698f844="" class="van-cell van-field input-box sel-input">
+                                        <div class="van-cell__value van-cell__value--alone van-field__value">
+                                            <div class="van-field__body">
+                                                <input type="tel" name="phone" id="mobile" inputmode="numeric"
+                                                    class="van-field__control"
+                                                    placeholder="9XXXXXXXX (ex: 912345678)">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Senha -->
+                                <div data-v-6698f844="" style="margin-top: 3rem;">
+                                    <div data-v-6698f844="" class="box-title">
+                                        <img data-v-6698f844="" src="https://i.postimg.cc/8PrvQhqF/20250829-144228.png" alt="">
+                                        <p data-v-6698f844="" class="title">Senha</p>
+                                    </div>
+                                    <div data-v-6698f844="" class="van-cell van-field input-box">
+                                        <div class="van-cell__value van-cell__value--alone van-field__value">
+                                            <div class="van-field__body">
+                                                <input name="password" type="password" id="password" class="van-field__control"
+                                                    placeholder="Por favor insira sua senha (mínimo 6 caracteres)">
+                                                <div class="van-field__right-icon password-toggle" onclick="togglePassword()">
+                                                    <img src="img/vista.png" alt="Mostrar/ocultar senha">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Código de Convite -->
+                                <div data-v-6698f844="" style="margin-top: 3rem;">
+                                    <div data-v-6698f844="" class="box-title">
+                                        <img data-v-4dce6a1e="" src="img/cont.png" alt="">
+                                        <p data-v-6698f844="" class="title">Código de convite</p>
+                                    </div>
+                                    <div data-v-6698f844="" class="van-cell van-field input-box">
+                                        <div class="van-cell__value van-cell__value--alone van-field__value">
+                                            <div class="van-field__body">
+                                                <input type="text" id="inviteCode" class="van-field__control"
+                                                    placeholder="Código de convite (opcional)" name="ref_by">
+                                            </div>
+                                        </div>
+                                        <div id="inviteCodeInfo" class="invite-code-info"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div data-v-6698f844="" class="goforget flex">
+                                <div data-v-6698f844="" class="signup"></div>
+                            </div>
+
+                            <!-- Botão de Registro -->
+                            <div id="submitBtn" data-v-6698f844="" class="login-btn" onclick="registerApp.handleRegister()">
+                                <p data-v-6698f844="" class="tit">Registro</p>
+                            </div>
+
+                            <p data-v-6698f844="" class="sig">
+                                Você já tem uma conta?
+                                <span data-v-6698f844="" onclick="window.location.href='/index.html'">Vá para o login</span>
+                            </p>
+
+                            <div style="cursor: pointer;" data-v-6698f844="" class="downloadapp">
+                                <img data-v-6698f844="" src="img/telegrama.png" alt="" onclick="window.location.href='https://t.me/oracleoficial'">
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="xuanfu" draggable="true" id="moveDiv"></div>
+        </div>
+    </form>
+
+    <!-- Toastify JS -->
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+    <script>
+        // Configuração da API
+        const API_BASE_URL = 'https://bd-p4q7.onrender.com';
+        
+        // Função para extrair parâmetros da URL (query string)
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            const results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+        
+        // Função para extrair código de convite do pathname
+        function extractCodeFromPathname() {
+            const pathname = window.location.pathname;
+            
+            // Verificar se o pathname contém um código (ex: /register/ABC123)
+            const pathParts = pathname.split('/').filter(part => part.trim() !== '');
+            
+            // Se o último segmento do path for um código (não é "register" e tem pelo menos 3 caracteres)
+            if (pathParts.length > 0) {
+                const lastPart = pathParts[pathParts.length - 1];
+                // Verificar se parece ser um código (não é uma extensão de arquivo, tem 3+ caracteres)
+                if (lastPart.length >= 3 && !lastPart.includes('.') && 
+                    lastPart !== 'register' && lastPart !== 'index.html' && 
+                    lastPart !== 'cadastro.html' && lastPart !== 'index.html') {
+                    return lastPart;
+                }
+            }
+            
+            return '';
+        }
+        
+        // Função para extrair código de convite do hash (#)
+        function extractCodeFromHash() {
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#')) {
+                const code = hash.substring(1);
+                // Verificar se o hash parece ser um código (mínimo 3 caracteres)
+                if (code.length >= 3 && !code.includes('/') && !code.includes('?')) {
+                    return code;
+                }
+            }
+            return '';
+        }
+        
+        // Função para extrair código de convite da URL completa
+        function extractInviteCodeFromUrl() {
+            // 1. Tentar obter do parâmetro de query 'ref'
+            const queryCode = getUrlParameter('ref');
+            if (queryCode && queryCode.trim() !== '') {
+                return queryCode.trim();
+            }
+            
+            // 2. Tentar obter do parâmetro de query 'code'
+            const queryCodeAlt = getUrlParameter('code');
+            if (queryCodeAlt && queryCodeAlt.trim() !== '') {
+                return queryCodeAlt.trim();
+            }
+            
+            // 3. Tentar obter do parâmetro de query 'invite'
+            const queryInvite = getUrlParameter('invite');
+            if (queryInvite && queryInvite.trim() !== '') {
+                return queryInvite.trim();
+            }
+            
+            // 4. Tentar extrair do pathname (ex: /register/CODE123)
+            const pathCode = extractCodeFromPathname();
+            if (pathCode && pathCode.trim() !== '') {
+                return pathCode.trim();
+            }
+            
+            // 5. Tentar extrair do hash (ex: #CODE123)
+            const hashCode = extractCodeFromHash();
+            if (hashCode && hashCode.trim() !== '') {
+                return hashCode.trim();
+            }
+            
+            return '';
+        }
+        
+        // Função para preencher automaticamente o código de convite
+        function autoFillInviteCode() {
+            const inviteCode = extractInviteCodeFromUrl();
+            
+            if (inviteCode && inviteCode.trim() !== '') {
+                const inviteCodeInput = document.getElementById('inviteCode');
+                const inviteCodeInfo = document.getElementById('inviteCodeInfo');
+                
+                // Preencher o campo com o código extraído
+                inviteCodeInput.value = inviteCode;
+                
+                // Adicionar classe de estilo para indicar preenchimento automático
+                inviteCodeInput.classList.add('invite-code-auto');
+                
+                // Mostrar informação sobre o código preenchido automaticamente
+                inviteCodeInfo.textContent = `✓ Código de convite preenchido automaticamente: ${inviteCode}`;
+                inviteCodeInfo.style.display = 'block';
+                inviteCodeInfo.style.color = '#28a745';
+                
+                console.log('Código de convite preenchido automaticamente:', inviteCode);
+                console.log('URL completa:', window.location.href);
+                
+                // Mostrar um toast informando o código preenchido
+                showToast(`Código de convite "${inviteCode}" preenchido automaticamente!`);
+            }
+        }
+        
+        // Função para mostrar toast usando Toastify - TODOS PRETOS
+        function showToast(message) {
+            // Configurações do Toastify - sempre preto
+            const config = {
+                text: message,
+                duration: 3000,
+                gravity: "top",
+                position: "center",
+                stopOnFocus: true,
+                className: 'toast-black',
+                style: {
+                    background: "linear-gradient(135deg, #000000 0%, #333333 100%)",
+                    color: "white",
+                    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.3)"
+                }
+            };
+            
+            Toastify(config).showToast();
+        }
+        
+        // Função para mostrar/ocultar loading
+        function showLoading() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            if (loadingOverlay) {
+                loadingOverlay.style.display = 'flex';
+            }
+            
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.querySelector('.tit').textContent = 'Processando...';
+            }
+        }
+        
+        function hideLoading() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            if (loadingOverlay) {
+                loadingOverlay.style.display = 'none';
+            }
+            
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.querySelector('.tit').textContent = 'Registro';
+            }
+        }
+        
+        // Função para validar número de telefone de Angola
+        function validateAngolanPhone(phone) {
+            // Remove qualquer caractere não numérico
+            const cleanNumber = phone.replace(/\D/g, '');
+            
+            // Verifica se tem exatamente 9 dígitos
+            if (cleanNumber.length !== 9) {
+                return {
+                    valid: false,
+                    message: 'O número deve ter exatamente 9 dígitos'
+                };
+            }
+            
+            // Verifica se começa com 9
+            if (!cleanNumber.startsWith('9')) {
+                return {
+                    valid: false,
+                    message: 'Número angolano deve começar com 9'
+                };
+            }
+            
+            // Verifica se o segundo dígito é válido (1-9)
+            const secondDigit = parseInt(cleanNumber.charAt(1));
+            if (secondDigit < 1 || secondDigit > 9) {
+                return {
+                    valid: false,
+                    message: 'Número inválido'
+                };
+            }
+            
+            return {
+                valid: true,
+                cleanNumber: cleanNumber
+            };
+        }
+        
+        // Função para formatar número para o banco de dados
+        function formatPhoneForDatabase(phone) {
+            const validation = validateAngolanPhone(phone);
+            if (!validation.valid) {
+                return null;
+            }
+            
+            // Adiciona código do país 244 na frente: 244 + 9 dígitos = 12 dígitos
+            return '244' + validation.cleanNumber;
+        }
+        
+        // Função para alternar visibilidade da senha
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.querySelector('.password-toggle img');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.src = 'img/ocultar.png'; // Você pode criar este ícone
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.src = 'img/vista.png';
+            }
+        }
+        
+        // Função principal de registro
+        async function performRegister(mobile, password, inviteCode) {
+            // Formatar o número para o banco de dados
+            const fullPhoneForDB = formatPhoneForDatabase(mobile);
+            
+            if (!fullPhoneForDB) {
+                showToast('Número de telefone inválido');
+                hideLoading();
+                return;
+            }
+            
+            try {
+                console.log('Enviando dados para registro:', {
+                    mobile: fullPhoneForDB,
+                    password_length: password.length,
+                    invite_code: inviteCode || 'Não informado'
+                });
+                
+                // Preparar dados para envio
+                const registerData = {
+                    mobile: fullPhoneForDB,
+                    password: password
+                };
+                
+                // Adicionar código de convite se fornecido
+                if (inviteCode && inviteCode.trim() !== '') {
+                    registerData.invitation_code = inviteCode.trim();
+                }
+                
+                // Fazer requisição para a API de registro
+                const response = await fetch(`${API_BASE_URL}/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(registerData)
+                });
+                
+                const data = await response.json();
+                console.log('Resposta da API:', data);
+                
+                if (data.success) {
+                    hideLoading();
+                    showToast('Conta criada com sucesso!');
+                    
+                    // Redirecionar para página de login após 2 segundos
+                    setTimeout(() => {
+                        window.location.href = "index.html";
+                    }, 2000);
+                    
+                } else {
+                    hideLoading();
+                    showToast(data.message || 'Erro ao criar conta');
+                }
+                
+            } catch (error) {
+                console.error('Erro no registro:', error);
+                hideLoading();
+                showToast('Erro de conexão com o servidor');
+            }
+        }
+        
+        // Função para lidar com o clique no botão de cadastro
+        function handleRegister() {
+            // Obter valores dos campos
+            const mobile = document.getElementById('mobile').value.trim();
+            const password = document.getElementById('password').value;
+            const inviteCode = document.getElementById('inviteCode').value.trim();
+            
+            console.log('Validando cadastro:', {
+                mobile: mobile.substring(0, 3) + '...',
+                password_length: password.length,
+                invite_code: inviteCode || 'Não informado'
+            });
+            
+            // Validações
+            if (!mobile) {
+                showToast('Digite o número de telefone...');
+                document.getElementById('mobile').focus();
+                return;
+            }
+            
+            const phoneValidation = validateAngolanPhone(mobile);
+            if (!phoneValidation.valid) {
+                showToast('Número inválido. Digite 9 dígitos começando com 9. Exemplo: 912345678');
+                document.getElementById('mobile').focus();
+                return;
+            }
+            
+            if (!password) {
+                showToast('Digite uma senha...');
+                document.getElementById('password').focus();
+                return;
+            }
+            
+            if (password.length < 6) {
+                showToast('A senha deve ter pelo menos 6 caracteres');
+                document.getElementById('password').focus();
+                return;
+            }
+            
+            // Mostrar loading e processar registro
+            showLoading();
+            performRegister(mobile, password, inviteCode);
+        }
+        
+        // Função para formatar o telefone enquanto digita
+        function setupPhoneFormatting() {
+            const phoneInput = document.getElementById('mobile');
+            
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function(e) {
+                    // Remove qualquer caractere não numérico
+                    let value = this.value.replace(/\D/g, '');
+                    
+                    // Limita a 9 dígitos
+                    if (value.length > 9) {
+                        value = value.substring(0, 9);
+                    }
+                    
+                    // Atualiza o valor
+                    this.value = value;
+                    
+                    // Se começar com 9, mostra dica
+                    if (value.length > 0 && !value.startsWith('9')) {
+                        this.style.borderColor = '#dc3545';
+                    } else {
+                        this.style.borderColor = '';
+                    }
+                });
+                
+                // Dica quando o campo recebe foco
+                phoneInput.addEventListener('focus', function() {
+                    if (!this.value) {
+                        this.placeholder = '912345678';
+                    }
+                });
+                
+                phoneInput.addEventListener('blur', function() {
+                    if (!this.value) {
+                        this.placeholder = '9XXXXXXXX (ex: 912345678)';
+                    }
+                });
+            }
+        }
+        
+        // Inicializar quando o DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Inicializando sistema de cadastro...');
+            console.log('URL atual:', window.location.href);
+            
+            // 1. Preencher automaticamente código de convite se estiver na URL
+            autoFillInviteCode();
+            
+            // 2. Configurar formatação do telefone
+            setupPhoneFormatting();
+            
+            // 3. Adicionar evento ao botão de cadastro
+            const submitBtn = document.getElementById('submitBtn');
+            if (submitBtn) {
+                submitBtn.addEventListener('click', handleRegister);
+                console.log('Botão de cadastro configurado');
+            }
+            
+            // 4. Permitir submit com Enter nos campos
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        handleRegister();
+                    }
+                });
+            });
+            
+            // 5. Esconder preloader inicial
+            const preloader = document.getElementById('preloade');
+            if (preloader) {
+                preloader.style.display = 'none';
+            }
+            
+            console.log('Sistema de cadastro inicializado com sucesso!');
+        });
+        
+        // Exportar funções para uso global
+        window.registerApp = {
+            handleRegister,
+            validatePhone: validateAngolanPhone,
+            formatPhone: formatPhoneForDatabase,
+            extractInviteCode: extractInviteCodeFromUrl,
+            togglePassword
+        };
+    </script>
+
+    <script>
+        // Função para exibir/esconder senha (compatibilidade)
+        function eye() {
+            togglePassword();
+        }
+        
+        // Preloader inicial
+        document.onreadystatechange = function () {
+            var state = document.readyState;
+            if (state == "interactive") {
+                document.getElementById('preloade').style.display = 'flex';
+            } else if (state == "complete") {
+                setTimeout(function() {
+                    document.getElementById('preloade').style.display = 'none';
+                }, 500);
+            }
+        };
+        
+        // Configurar click no ícone de senha
+        document.addEventListener('DOMContentLoaded', function() {
+            const passwordToggle = document.querySelector('.password-toggle');
+            if (passwordToggle) {
+                passwordToggle.addEventListener('click', togglePassword);
+            }
+        });
+    </script>
+</body>
+</html>

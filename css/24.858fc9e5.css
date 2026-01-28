@@ -1,0 +1,287 @@
+.homedetail[data-v-495d4e48] {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    background: #fff;
+    position: relative;
+    width: 100%;
+    padding-top: 5rem
+}
+
+
+.homedetail .nav-top[data-v-495d4e48] {
+    position: relative;
+    background: none
+}
+
+.homedetail .nav-top .navback[data-v-495d4e48] {
+    display: flex;
+    align-items: center;
+    padding: 0 3rem
+}
+
+.homedetail .nav-top .navback .back-img[data-v-495d4e48] {
+    width: 4.8rem;
+    height: 4rem
+}
+
+.homedetail .nav-top .navback .logo-img[data-v-495d4e48] {
+    width: 7.2rem;
+    height: 7.2rem;
+    margin-left: 1rem
+}
+
+.homedetail .nav-top .navback p[data-v-495d4e48] {
+    font-weight: 500;
+    font-size: 4.5rem;
+    color: #333;
+    margin-left: 2rem
+}
+
+.homedetail .nav-top[data-v-495d4e48] .van-image.imgtop {
+    width: 67.6rem;
+    height: 67.6rem;
+    margin-top: 3rem;
+    border-radius: 1.6rem
+}
+
+.homedetail .nav-top[data-v-495d4e48] .van-image.imgtop img {
+    border-radius: 1.6rem
+}
+
+.homedetail .section-box[data-v-495d4e48] {
+    position: relative;
+    width: 100%;
+    padding: 0 3rem
+}
+
+.homedetail .section-box .effective[data-v-495d4e48] {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 1.6rem
+}
+
+.homedetail .section-box .effective .list-time[data-v-495d4e48] {
+    width: 100%;
+    border-bottom: .1rem solid #dddcda;
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem 0
+}
+
+.homedetail .section-box .effective .list-time .time[data-v-495d4e48] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.homedetail .section-box .effective .list-time .time img[data-v-495d4e48] {
+    width: 2.8rem;
+    height: 2.8rem;
+    margin-right: 1rem
+}
+
+.homedetail .section-box .effective .list-time .time p[data-v-495d4e48] {
+    font-size: 2.6rem;
+    color: #000
+}
+
+.homedetail .section-box .effective .list-time .dayst[data-v-495d4e48] {
+    font-size: 3.2rem;
+    font-weight: 500;
+    font-weight: 400;
+    color: #000;
+    margin-top: 1.5rem
+}
+
+.homedetail .section-box .effective .lastitem[data-v-495d4e48] {
+    margin-bottom: 0
+}
+
+.homedetail .section-box .details[data-v-495d4e48] {
+    border-radius: .8rem;
+    padding: 2rem;
+    margin-bottom: 2rem
+}
+
+.homedetail .section-box .details .signin[data-v-495d4e48] {
+    height: 5rem;
+    text-align: center;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 3rem
+}
+
+.homedetail .section-box .details .signin p[data-v-495d4e48] {
+    display: inline-block;
+    font-weight: 400;
+    color: #000;
+    font-size: 4rem;
+    font-weight: 700
+}
+
+.homedetail .section-box .details .signin span[data-v-495d4e48] {
+    display: inline-block;
+    content: "";
+    width: 19rem;
+    height: 1.2rem;
+    background: #ffd638
+}
+
+.homedetail .section-box .details .product[data-v-495d4e48] {
+    font-size: 2.6rem;
+    color: #000;
+    text-align: left;
+    border-radius: 1.6rem;
+    margin-top: 3rem
+}
+
+.homedetail .section-box .details .price-dect[data-v-495d4e48] {
+    background: linear-gradient(270deg, #21a2ff, #0038c6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: left;
+    margin-top: 2rem;
+    font-size: 4.8rem
+}
+
+.homedetail .section-box .btndetail[data-v-495d4e48] {
+    width: 67.6rem;
+    height: 7.8rem;
+    background: #000;
+    border-radius: 3.9rem;
+    font-size: 3.6rem;
+    color: #fff;
+    font-weight: 700
+}
+
+.homedetail .notdeail[data-v-495d4e48] {
+    opacity: .4
+}
+
+[data-v-495d4e48] .popup-box {
+    background: none
+}
+
+[data-v-495d4e48] .popup-box .topcontent {
+    width: 67rem;
+    height: 43rem;
+    background: #fff;
+    padding: 4rem 7rem 2rem
+}
+
+[data-v-495d4e48] .popup-box .topcontent .latest {
+    font-size: 4rem;
+    font-weight: 400;
+    background: linear-gradient(90deg, #ffd100, #ffa400), #ffa400;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 3rem;
+    font-weight: 700
+}
+
+[data-v-495d4e48] .popup-box .topcontent .textui {
+    font-size: 3rem;
+    color: #000;
+    text-align: center;
+    font-weight: 700
+}
+
+[data-v-495d4e48] .popup-box .topcontent button {
+    width: 53rem;
+    height: 10rem;
+    background: linear-gradient(90deg, #ffd100, #ffa400), #ffa400;
+    border-radius: .8rem;
+    margin-top: 6rem;
+    font-family: HelveticaNeue-CondensedBold, HelveticaNeue;
+    font-weight: 400;
+    color: #333;
+    font-size: 3.6rem;
+    font-weight: 600
+}
+
+[data-v-495d4e48] .popup-box .imgclose {
+    width: 6.4rem;
+    height: 10.4rem
+}
+
+[data-v-495d4e48] .popup-success {
+    background: none
+}
+
+[data-v-495d4e48] .popup-success .topcontent {
+    width: 64.4rem;
+    height: 65.6rem;
+    background: url(/lendlease/dist/img/bg.d8c93dbe.png) no-repeat top/100% 100%;
+    padding: 3rem 5rem 2rem;
+    overflow: hidden;
+    border-radius: 2.4rem;
+    padding-top: 30rem
+}
+
+[data-v-495d4e48] .popup-success .topcontent .latestit {
+    font-size: 4.2rem;
+    font-weight: 400;
+    background: linear-gradient(90deg, #ffd100, #ffa400), #ffa400;
+    -webkit-background-clip: text;
+    margin-top: 1rem;
+    color: #333
+}
+
+[data-v-495d4e48] .popup-success .topcontent .textui {
+    font-size: 3.2rem;
+    color: #666;
+    text-align: center;
+    margin-top: 3rem
+}
+
+[data-v-495d4e48] .popup-success .topcontent button {
+    width: 51.2rem;
+    height: 9.6rem;
+    background: #000;
+    border-radius: 4.8rem;
+    font-size: 3.6rem;
+    font-weight: 700;
+    color: #fff;
+    margin-top: 3rem
+}
+
+[data-v-495d4e48] .popup-success .imgclose {
+    width: 6.4rem;
+    height: 10.4rem
+}
+
+[data-v-495d4e48] .van-image__loading {
+    background: none;
+    border: 0
+}
+
+[data-v-495d4e48] .van-nav-bar {
+    position: absolute;
+    top: 5rem;
+    width: 100%;
+    background: none
+}
+
+[data-v-495d4e48] .van-nav-bar:after {
+    display: none
+}
+
+[data-v-495d4e48] .van-nav-bar .van-nav-bar__content .van-nav-bar__left i {
+    color: #000;
+    font-size: 4rem
+}
+
+[data-v-495d4e48] .van-nav-bar .van-nav-bar__content .van-nav-bar__left img {
+    width: 5.2rem;
+    height: 5.2rem
+}
+
+[data-v-495d4e48] .van-nav-bar .van-nav-bar__content .van-nav-bar__title {
+    font-size: 3.8rem
+}

@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="icon" href="/lendlease/dist/favicon.ico">
+    <title>Oracle | Início</title>
+
+    <!-- CSS -->
+    <link href="css/chunk-vendors.317e4ea8.css" rel="stylesheet">
+    <link href="css/ap.3d111502.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/695.2ad687df.css">
+    
+    <style>
+        /* Estilos do sistema */
+        [data-v-52db0c36] .popup-sing .reward-box .con-btn {
+            width: 50rem;
+            height: 10.8rem;
+            background: url() no-repeat top/100% auto;
+            margin-top: 3rem
+        }
+
+        [data-v-52db0c36] .popup-sing .reward-box {
+            width: 63.6rem;
+            height: 68.7rem;
+            background: url(img/verde.png) no-repeat top/100% auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 28rem
+        }
+
+        .homedetail[data-v-495d4e48]:after {
+            width: 100%;
+            height: 22rem;
+            content: "";
+            display: block;
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            background: url(img/verde.png) no-repeat top/100% auto
+        }
+
+        .xuanfu .popup-check .topimg {
+            width: 67rem;
+            height: 60rem;
+            background: url() no-repeat;
+            background-size: cover;
+            padding: 18.5rem 4rem 2rem
+        }
+        
+        /* Ajuste para remover espaço desnecessário */
+        .item-box[data-v-52db0c36] {
+            margin-bottom: 0.5rem !important;
+            padding-bottom: 0.5rem !important;
+        }
+        
+        .signin[data-v-52db0c36] {
+            margin-top: 0.5rem !important;
+            padding-top: 0.5rem !important;
+        }
+        
+        .section-box[data-v-52db0c36] {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+        
+        /* Produtos ajustados */
+        .listproduct-wrap[data-v-52db0c36] {
+            margin-bottom: 1rem;
+            border: 1px solid rgba(0, 255, 48, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .listproduct-wrap[data-v-52db0c36]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 255, 48, 0.15);
+        }
+        
+        .hourlyi[data-v-52db0c36] {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin: 0.8rem 0;
+        }
+        
+        .hourlyi[data-v-52db0c36] p {
+            margin: 0.4rem 0;
+            font-size: 0.95rem;
+        }
+        
+        .hourlyi[data-v-52db0c36] span {
+            color: #00ff30;
+            font-weight: bold;
+        }
+        
+        .price[data-v-52db0c36] {
+            font-size: 1.4rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 0.5rem;
+            background: rgba(0, 255, 48, 0.1);
+            border-radius: 6px;
+            margin: 0.5rem 0;
+        }
+        
+        .buy-btn[data-v-52db0c36] {
+            background: linear-gradient(90deg, #00ff30 0%, #00cc24 100%);
+            color: #000;
+            font-weight: bold;
+            text-align: center;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-top: 1px solid rgba(0, 255, 48, 0.3);
+            border: none;
+            width: 100%;
+            font-size: 1.1rem;
+        }
+        
+        .buy-btn[data-v-52db0c36]:hover {
+            background: linear-gradient(90deg, #00cc24 0%, #00a81d 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 255, 48, 0.3);
+        }
+        
+        .buy-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        
+        /* Toast System - PRETO com letras brancas (SEM ALERT) */
+        .oracle-toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.95) !important;
+            color: white !important;
+            padding: 20px 30px;
+            border-radius: 12px;
+            z-index: 99999;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+            max-width: 85%;
+            min-width: 280px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            border: 2px solid;
+            animation: oracleToast 3s ease-in-out;
+            line-height: 1.5;
+            white-space: pre-line;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .oracle-toast.error {
+            border-color: rgba(255, 50, 50, 0.6);
+        }
+        
+        .oracle-toast.success {
+            border-color: rgba(0, 255, 48, 0.7);
+        }
+        
+        .oracle-toast.info {
+            border-color: rgba(0, 150, 255, 0.6);
+        }
+        
+        .oracle-toast.loading {
+            border-color: rgba(0, 255, 48, 0.5);
+            background: rgba(0, 0, 0, 0.98) !important;
+        }
+        
+        .oracle-toast.loading .toast-gif {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 15px;
+            display: block;
+        }
+        
+        @keyframes oracleToast {
+            0% { 
+                opacity: 0; 
+                transform: translate(-50%, -60%) scale(0.9); 
+            }
+            15% { 
+                opacity: 1; 
+                transform: translate(-50%, -50%) scale(1); 
+            }
+            85% { 
+                opacity: 1; 
+                transform: translate(-50%, -50%) scale(1); 
+            }
+            100% { 
+                opacity: 0; 
+                transform: translate(-50%, -40%) scale(0.9); 
+            }
+        }
+        
+        /* Loader System */
+        .oracle-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 99998;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .oracle-loader img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+        
+        .oracle-loader p {
+            color: white;
+            font-size: 18px;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        
+        /* Remover espaços desnecessários */
+        .jackbot-left[data-v-52db0c36] {
+            margin-bottom: 0.5rem !important;
+            padding-bottom: 0 !important;
+        }
+        
+        /* Snackbar original - manter compatibilidade */
+        #snackbar, #snackbar_error {
+            display: none !important;
+        }
+        
+        /* Preloader original */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            color: black;
+        }
+        
+        #blurred-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 9998;
+            display: none;
+        }
+
+        /* Popup */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .popup-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 380px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #555;
+            line-height: 1;
+            z-index: 10;
+        }
+        
+        .popup-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            max-height: 50vh;
+            object-fit: cover;
+        }
+        
+        .popup-text {
+            margin-bottom: 15px;
+            color: #222 !important;
+            font-size: 14px;
+            line-height: 1.5;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .popup-text * {
+            color: #222 !important;
+        }
+        
+        .popup-text p {
+            margin-bottom: 5px;
+            color: #222 !important;
+        }
+        
+        .popup-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(90deg, #ff4e50 0%, #f9d423 100%);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        
+        .popup-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Loader original */
+        .loaderd {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            z-index: 9999;
+            display: none;
+        }
+        
+        .loadingcss {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10000;
+        }
+    </style>
+    
+    <link rel="stylesheet" type="text/css" href="css/530.954d3dd3.css">
+    <link rel="stylesheet" type="text/css" href="css/92.1262dfcf.css">
+    <link rel="stylesheet" type="text/css" href="css/24.858fc9e5.css">
+</head>
+
+<body>
+    <!-- SVG Icons -->
+    <svg aria-hidden="true" style="position: absolute; width: 0px; height: 0px; overflow: hidden;"></svg>
+
+    <!-- Main App Container -->
+    <div id="app" data-v-app="">
+        <div data-v-52db0c36="" class="home" bis_skin_checked="1">
+            <header data-v-52db0c36="">
+                <div></div>
+            </header>
+            
+            <!-- Banner Swiper -->
+            <div data-v-52db0c36="" class="van-swipe my-swipe" bis_skin_checked="1">
+                <div class="van-swipe__track" bis_skin_checked="1" style="transition-duration: 500ms; width: 100%;">
+                    <div data-v-52db0c36="" class="van-swipe-item" bis_skin_checked="1" style="width: 100%;">
+                        <img data-v-52db0c36="" src="img/oracle.jpg" alt="Banner" style="width: 100%;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu Items - Sem espaço extra -->
+            <div data-v-52db0c36="" class="item-box" bis_skin_checked="1">
+                <div data-v-52db0c36="" class="itemit" bis_skin_checked="1" onclick="OracleApp.navigate('/deposit.html')">
+                    <img data-v-52db0c36="" src="https://i.postimg.cc/qBKyvL1k/20250828-132942.png" alt="">
+                    <p data-v-52db0c36="">Recarregar</p>
+                </div>
+                <div data-v-52db0c36="" class="itemit" bis_skin_checked="1" onclick="OracleApp.navigate('/withdraw.html')">
+                    <img data-v-52db0c36="" src="https://i.postimg.cc/Xq9C1jrZ/20250828-133103.png" alt="">
+                    <p data-v-52db0c36="">Sacar</p>
+                </div>
+                <div data-v-52db0c36="" class="itemit" bis_skin_checked="1" onclick="OracleApp.navigate('/add-bank-create.html')">
+                    <img data-v-52db0c36="" src="https://i.postimg.cc/TwzbcL3M/20250828-133152.png" alt="">
+                    <p data-v-52db0c36="">Cartão bancário</p>
+                </div>
+                <div data-v-52db0c36="" class="itemit" bis_skin_checked="1" onclick="OracleApp.navigate('/task.html')">
+                    <img data-v-52db0c36="" src="https://i.postimg.cc/VLcMrChX/20250828-132825.png" alt="">
+                    <p data-v-52db0c36="">Tarefas</p>
+                </div>
+            </div>
+            
+            <!-- Products Section - 11 Planos -->
+            <section data-v-52db0c36="" class="section-box">
+                <!-- Product 1 - 2.500 KZ -->
+                <div data-v-52db0c36="" class="listproduct-wrap" bis_skin_checked="1">
+                    <div data-v-52db0c36="" class="listproduct" bis_skin_checked="1">
+                        <div data-v-52db0c36="" class="imguis" bis_skin_checked="1">
+                            <img data-v-52db0c36="" src="img/produto.jpg" alt="" class="pro-img">
+                        </div>
+                        <div data-v-52db0c36="" class="rightbuy" bis_skin_checked="1">
+                            <div data-v-52db0c36="" class="topuis flex" bis_skin_checked="1">
+                                <p data-v-52db0c36="">Oracle BR</p>
+                            </div>
+                            <div data-v-52db0c36="" class="hourlyi" bis_skin_checked="1">
+                                <p data-v-52db0c36=""> Duração:<span data-v-52db0c36=""> 120 dias</span></p>
+                                <p data-v-52db0c36=""> Rendimento/dia: <span data-v-52db0c36="">KZ 250</span></p>
+                                <p data-v-52db0c36=""> Rendimento/hora: <span data-v-52db0c36="">KZ 10,42</span></p>
+                                <p data-v-52db0c36;"> Total retorno: <span data-v-52db0c36="">KZ 30.000</span></p>
+                                <p data-v-52db0c36=""> Limite diário: <span data-v-52db0c36="">5/5</span></p>
+                            </div>
+                            <p data-v-52db0c36="" class="price">
+                                <span data-v-52db0c36="" style="color: rgb(0 255 48);">KZ 2.500</span>
+                            </p>
+                        </div>
+                    </div>
+                    <button data-v-52db0c36="" onclick="OracleApp.buyPackage(1, 'Oracle BR', 2500)" class="buy-btn" bis_skin_checked="1">Comprar</button>
+                </div>
+
+                <!-- Product 2 - 5.000 KZ -->
+                <div data-v-52db0c36="" class="listproduct-wrap" bis_skin_checked="1">
+                    <div data-v-52db0c36="" class="listproduct" bis_skin_checked="1">
+                        <div data-v-52db0c36="" class="imguis" bis_skin_checked="1">
+                            <img data-v-52db0c36="" src="img/produto.jpg" alt="" class="pro-img">
+                        </div>
+                        <div data-v-52db0c36="" class="rightbuy" bis_skin_checked="1">
+                            <div data-v-52db0c36="" class="topuis flex" bis_skin_checked="1">
+                                <p data-v-52db0c36="">Oracle PT</p>
+                            </div>
+                            <div data-v-52db0c36="" class="hourlyi" bis_skin_checked="1">
+                                <p data-v-52db0c36=""> Duração:<span data-v-52db0c36=""> 120 dias</span></p>
+                                <p data-v-52db0c36=""> Rendimento/dia: <span data-v-52db0c36="">KZ 500</span></p>
+                                <p data-v-52db0c36=""> Rendimento/hora: <span data-v-52db0c36="">KZ 20,83</span></p>
+                                <p data-v-52db0c36;"> Total retorno: <span data-v-52db0c36="">KZ 60.000</span></p>
+                                <p data-v-52db0c36=""> Limite diário: <span data-v-52db0c36="">5/5</span></p>
+                            </div>
+                            <p data-v-52db0c36="" class="price">
+                                <span data-v-52db0c36="" style="color: rgb(0 255 48);">KZ 5.000</span>
+                            </p>
+                        </div>
+                    </div>
+                    <button data-v-52db0c36="" onclick="OracleApp.buyPackage(2, 'Oracle PT', 5000)" class="buy-btn" bis_skin_checked="1">Comprar</button>
+                </div>
+
+                <!-- Product 3 - 10.000 KZ -->
+                <div data-v-52db0c36="" class="listproduct-wrap" bis_skin_checked="1">
+                    <div data-v-52db0c36="" class="listproduct" bis_skin_checked="1">
+                        <div data-v-52db0c36="" class="imguis" bis_skin_checked="1">
+                            <img data-v-52db0c36="" src="img/produto.jpg" alt="" class="pro-img">
+                        </div>
+                        <div data-v-52db0c36="" class="rightbuy" bis_skin_checked="1">
+                            <div data-v-52db0c36="" class="topuis flex" bis_skin_checked="1">
+                                <p data-v-52db0c36="">Oracle AOA</p>
+                            </div>
+                            <div data-v-52db0c36="" class="hourlyi" bis_skin_checked="1">
+                                <p data-v-52db0c36=""> Duração:<span data-v-52db0c36=""> 120 dias</span></p>
+                                <p data-v-52db0c36=""> Rendimento/dia: <span data-v-52db0c36="">KZ 1.000</span></p>
+                                <p data-v-52db0c36=""> Rendimento/hora: <span data-v-52db0c36="">KZ 41,67</span></p>
+                                <p data-v-52db0c36;"> Total retorno: <span data-v-52db0c36="">KZ 120.000</span></p>
+                                <p data-v-52db0c36=""> Limite diário: <span data-v-52db0c36="">5/5</span></p>
+                            </div>
+                            <p data-v-52db0c36="" class="price">
+                                <span data-v-52db0c36="" style="color: rgb(0 255 48);">KZ 10.000</span>
+                            </p>
+                        </div>
+                    </div>
+                    <button data-v-52db0c36="" onclick="OracleApp.buyPackage(3, 'Oracle AOA', 10000)" class="buy-btn" bis_skin_checked="1">Comprar</button>
+                </div>
+
+                <!-- Product 4 - 30.000 KZ -->
+                <div data-v-52db0c36="" class="listproduct-wrap" bis_skin_checked="1">
+                    <div data-v-52db0c36="" class="listproduct" bis_skin_checked="1">
+                        <div data-v-52db0c36="" class="imguis" bis_skin_checked="1">
+                            <img data-v-52db0c36="" src="img/produto.jpg" alt="" class="pro-img">
+                        </div>
+                        <div data-v-52db0c36="" class="rightbuy" bis_skin_checked="1">
+                            <div data-v-52db0c36="" class="topuis flex" bis_skin_checked="1">
+                                <p data-v-52db0c36="">Oracle MOZ</p>
+                            </div>
+                            <div data-v-52db0c36="" class="hourlyi" bis_skin_checked="1">
+                                <p data-v-52db0c36=""> Duração:<span data-v-52db0c36=""> 120 dias</span></p>
+                                <p data-v-52db0c36=""> Rendimento/dia: <span data-v-52db0c36="">KZ 3.000</span></p>
+                                <p data-v-52db0c36=""> Rendimento/hora: <span data-v-52db0c36="">KZ 125</span></p>
+                                <p data-v-52db0c36;"> Total retorno: <span data-v-52db0c36="">KZ 360.000</span></p>
+                                <p data-v-52db0c36=""> Limite diário: <span data-v-52db0c36="">5/5</span></p>
+                            </div>
+                            <p data-v-52db0c36="" class="price">
+                                <span data-v-52db0c36="" style="color: rgb(0 255 48);">KZ 30.000</span>
+                            </p>
+                        </div>
+                    </div>
+                    <button data-v-52db0c36="" onclick="OracleApp.buyPackage(4, 'Oracle MOZ', 30000)" class="buy-btn" bis_skin_checked="1">Comprar</button>
+                </div>
+
+                <!-- Product 5 - 50.000 KZ -->
+                <div data-v-52db0c36="" class="listproduct-wrap" bis_skin_checked="1">
+                    <div data-v-52db0c36="" class="listproduct" bis_skin_checked="1">
+                        <div data-v-52db0c36="" class="imguis" bis_skin_checked="1">
+                            <img data-v-52db0c36="" src="img/produto.jpg" alt="" class="pro-img">
+                        </div>
+                        <div data-v-52db0c36="" class="rightbuy" bis_skin_checked="1">
+                            <div data-v-52db0c36="" class="topuis flex" bis_skin_checked="1">
+                                <p data-v-52db0c36="">Oracle ZA</p>
+                            </div>
+                            <div data-v-52db0c36="" class="hourlyi" bis_skin_checked="1">
+                                <p data-v-52db0c36=""> Duração:<span data-v-52db0c36=""> 120 dias</span></p>
+                                <p data-v-52db0c36=""> Rendimento/dia: <span data-v-52db0c36="">KZ 5.000</span></p>
+                                <p data-v-52db0c36=""> Rendimento/hora: <span data-v-52db0c36="">KZ 208,33</span></p>
+                                <p data-v-52db0c36;"> Total retorno: <span data-v-52db0c36="">KZ 600.000</span></p>
+                                <p data-v-52db0c36=""> Limite diário: <span data-v-52db0c36="">5/5</span></p>
+                            </div>
+                            <p data-v-52db0c36="" class="price">
+                                <span data-v-52db0c36="" style="color: rgb(0 255 48);">KZ 50.000</span>
+                            </p>
+                        </div>
+                    </div>
+                    <button data-v-52db0c36="" onclick="OracleApp.buyPackage(5, 'Oracle ZA', 50000)" class="buy-btn" bis_skin_checked="1">Comprar</button>
+                </div>
+
+                <!-- Product 6 - 100.000 KZ -->
+                <div data-v-52db0c36="" class="listproduct-wrap" bis_skin_checked="1">
+                    <div data-v-52db0c36="" class="listproduct" bis_skin_checked="1">
+                        <div data-v-52db0c36="" class="imguis" bis_skin_checked="1">
+                            <img data-v-52db0c36="" src="img/produto.jpg" alt="" class="pro-img">
+                        </div>
+                        <div data-v-52db0c36="" class="rightbuy" bis_skin_checked="1">
+                            <div data-v-52db0c36="" class="topuis flex" bis_skin_checked="1">
+                                <p data-v-52db0c36="">Oracle NG</p>
+                            </div>
+                            <div data-v-52db0c36="" class="hourlyi" bis_skin_checked="1">
+                                <p data-v-52db0c36=""> Duração:<span data-v-52db0c36=""> 120 dias</span></p>
+                                <p data-v-52db0c36=""> Rendimento/dia: <span data-v-52db0c36="">KZ 10.000</span></p>
+                                <p data-v-52db0c36=""> Rendimento/hora: <span data-v-52db0c36="">KZ 416,67</span></p>
+                                <p data-v-52db0c36;"> Total retorno: <span data-v-52db0c36="">KZ 1.200.000</span></p>
+                                <p data-v-52db0c36=""> Limite diário: <span data-v-52db0c36="">5/5</span></p>
+                            </div>
+                            <p data-v-52db0c36="" class="price">
+                                <span data-v-52db0c36="" style="color: rgb(0 255 48);">KZ 100.000</span>
+                            </p>
+                        </div>
+                    </div>
+                    <button data-v-52db0c36="" onclick="OracleApp.buyPackage(6, 'Oracle NG', 100000)" class="buy-btn" bis_skin_checked="1">Comprar</button>
+                </div>
+
+                <!-- Product 7 - 150.000 KZ -->
+                <div data-v-52db0c36="" class="listproduct-wrap" bis_skin_checked="1">
+                    <div data-v-52db0c36="" class="listproduct" bis_skin_checked="1">
+                        <div data-v-52db0c36="" class="imguis" bis_skin_checked="1">
+                            <img data-v-52db0c36="" src="img/produto.jpg" alt="" class="pro-img">
+                        </div>
+                        <div data-v-52db0c36="" class="rightbuy" bis_skin_checked="1">
+                            <div data-v-52db0c36="" class="topuis flex" bis_skin_checked="1">
+                                <p data-v-52db0c36="">Oracle IN</p>
+                            </div>
+                            <div data-v-52db0c36="" class="hourlyi" bis_skin_checked="1">
+                                <p data-v-52db0c36=""> Duração:<span data-v-52db0c36=""> 120 dias</span></p>
+                                <p data-v-52db0c36=""> Rendimento/dia: <span data-v-52db0c36="">KZ 15.000</span></p>
+                                <p data-v-52db0c36=""> Rendimento/hora: <span data-v-52db0c36="">KZ 625</span></p>
+                                <p data-v-52db0c36;"> Total retorno: <span data-v-52db0c36="">KZ 1.800.000</span></p>
+                                <p data-v-52db0c36=""> Limite diário: <span data-v-52db0c36="">5/5</span></p>
+                            </div>
+                            <p data-v-52db0c36="" class="price">
+                                <span data-v-52db0c36="" style="color: rgb(0 255 48);">KZ 150.000</span>
+                            </p>
+                        </div>
+                    </div>
+                    <button data-v-52db0c36="" onclick="OracleApp.buyPackage(7, 'Oracle IN', 150000)" class="buy-btn" bis_skin_checked="1">Comprar</button>
+                </div>
+
+                <!-- Product 8 - 300.000 KZ -->
+                <div data-v-52db0c36="" class="listproduct-wrap" bis_skin_checked="1">
+                    <div data-v-52db0c36="" class="listproduct" bis_skin_checked="1">
+                        <div data-v-52db0c36="" class="imguis" bis_skin_checked="1">
+                            <img data-v-52db0c36="" src="img/produto.jpg" alt="" class="pro-img">
+                        </div>
+                        <div data-v-52db0c36="" class="rightbuy" bis_skin_checked="1">
+                            <div data-v-52db0c36="" class="topuis flex" bis_skin_checked="1">
+                                <p data-v-52db0c36="">Oracle CN</p>
+                            </div>
+                            <div data-v-52db0c36="" class="hourlyi" bis_skin_checked="1">
+                                <p data-v-52db0c36=""> Duração:<span data-v-52db0c36=""> 120 dias</span></p>
+                                <p data-v-52db0c36=""> Rendimento/dia: <span data-v-52db0c36="">KZ 30.000</span></p>
+                                <p data-v-52db0c36=""> Rendimento/hora: <span data-v-52db0c36="">KZ 1.250</span></p>
+                                <p data-v-52db0c36;"> Total retorno: <span data-v-52db0c36="">KZ 3.600.000</span></p>
+                                <p data-v-52db0c36=""> Limite diário: <span data-v-52db0c36="">5/5</span></p>
+                            </div>
+                            <p data-v-52db0c36="" class="price">
+                                <span data-v-52db0c36="" style="color: rgb(0 255 48);">KZ 300.000</span>
+                            </p>
+                        </div>
+                    </div>
+                    <button data-v-52db0c36="" onclick="OracleApp.buyPackage(8, 'Oracle CN', 300000)" class="buy-btn" bis_skin_checked="1">Comprar</button>
+                </div>
+
+                <!-- Product 9 - 600.000 KZ -->
+                <div data-v-52db0c36="" class="listproduct-wrap" bis_skin_checked="1">
+                    <div data-v-52db0c36="" class="listproduct" bis_skin_checked="1">
+                        <div data-v-52db0c36="" class="imguis" bis_skin_checked="1">
+                            <img data-v-52db0c36="" src="img/produto.jpg" alt="" class="pro-img">
+                        </div>
+                        <div data-v-52db0c36="" class="rightbuy" bis_skin_checked="1">
+                            <div data-v-52db0c36="" class="topuis flex" bis_skin_checked="1">
+                                <p data-v-52db0c36="">Oracle JP</p>
+                            </div>
+                            <div data-v-52db0c36="" class="hourlyi" bis_skin_checked="1">
+                                <p data-v-52db0c36=""> Duração:<span data-v-52db0c36=""> 120 dias</span></p>
+                                <p data-v-52db0c36=""> Rendimento/dia: <span data-v-52db0c36="">KZ 60.000</span></p>
+                                <p data-v-52db0c36=""> Rendimento/hora: <span data-v-52db0c36="">KZ 2.500</span></p>
+                                <p data-v-52db0c36;"> Total retorno: <span data-v-52db0c36="">KZ 7.200.000</span></p>
+                                <p data-v-52db0c36=""> Limite diário: <span data-v-52db0c36="">5/5</span></p>
+                            </div>
+                            <p data-v-52db0c36="" class="price">
+                                <span data-v-52db0c36="" style="color: rgb(0 255 48);">KZ 600.000</span>
+                            </p>
+                        </div>
+                    </div>
+                    <button data-v-52db0c36="" onclick="OracleApp.buyPackage(9, 'Oracle JP', 600000)" class="buy-btn" bis_skin_checked="1">Comprar</button>
+                </div>
+
+                <!-- Product 10 - 900.000 KZ -->
+                <div data-v-52db0c36="" class="listproduct-wrap" bis_skin_checked="1">
+                    <div data-v-52db0c36="" class="listproduct" bis_skin_checked="1">
+                        <div data-v-52db0c36="" class="imguis" bis_skin_checked="1">
+                            <img data-v-52db0c36="" src="img/produto.jpg" alt="" class="pro-img">
+                        </div>
+                        <div data-v-52db0c36="" class="rightbuy" bis_skin_checked="1">
+                            <div data-v-52db0c36="" class="topuis flex" bis_skin_checked="1">
+                                <p data-v-52db0c36="">Oracle DE</p>
+                            </div>
+                            <div data-v-52db0c36="" class="hourlyi" bis_skin_checked="1">
+                                <p data-v-52db0c36=""> Duração:<span data-v-52db0c36=""> 120 dias</span></p>
+                                <p data-v-52db0c36=""> Rendimento/dia: <span data-v-52db0c36="">KZ 90.000</span></p>
+                                <p data-v-52db0c36=""> Rendimento/hora: <span data-v-52db0c36="">KZ 3.750</span></p>
+                                <p data-v-52db0c36;"> Total retorno: <span data-v-52db0c36="">KZ 10.800.000</span></p>
+                                <p data-v-52db0c36=""> Limite diário: <span data-v-52db0c36="">5/5</span></p>
+                            </div>
+                            <p data-v-52db0c36="" class="price">
+                                <span data-v-52db0c36="" style="color: rgb(0 255 48);">KZ 900.000</span>
+                            </p>
+                        </div>
+                    </div>
+                    <button data-v-52db0c36="" onclick="OracleApp.buyPackage(10, 'Oracle DE', 900000)" class="buy-btn" bis_skin_checked="1">Comprar</button>
+                </div>
+
+                <!-- Product 11 - 1.200.000 KZ -->
+                <div data-v-52db0c36="" class="listproduct-wrap" bis_skin_checked="1">
+                    <div data-v-52db0c36="" class="listproduct" bis_skin_checked="1">
+                        <div data-v-52db0c36="" class="imguis" bis_skin_checked="1">
+                            <img data-v-52db0c36="" src="img/produto.jpg" alt="" class="pro-img">
+                        </div>
+                        <div data-v-52db0c36="" class="rightbuy" bis_skin_checked="1">
+                            <div data-v-52db0c36="" class="topuis flex" bis_skin_checked="1">
+                                <p data-v-52db0c36="">Oracle EUA</p>
+                            </div>
+                            <div data-v-52db0c36="" class="hourlyi" bis_skin_checked="1">
+                                <p data-v-52db0c36=""> Duração:<span data-v-52db0c36=""> 120 dias</span></p>
+                                <p data-v-52db0c36=""> Rendimento/dia: <span data-v-52db0c36="">KZ 120.000</span></p>
+                                <p data-v-52db0c36=""> Rendimento/hora: <span data-v-52db0c36="">KZ 5.000</span></p>
+                                <p data-v-52db0c36;"> Total retorno: <span data-v-52db0c36="">KZ 14.400.000</span></p>
+                                <p data-v-52db0c36=""> Limite diário: <span data-v-52db0c36="">5/5</span></p>
+                            </div>
+                            <p data-v-52db0c36="" class="price">
+                                <span data-v-52db0c36="" style="color: rgb(0 255 48);">KZ 1.200.000</span>
+                            </p>
+                        </div>
+                    </div>
+                    <button data-v-52db0c36="" onclick="OracleApp.buyPackage(11, 'Oracle EUA', 1200000)" class="buy-btn" bis_skin_checked="1">Comprar</button>
+                </div>
+            </section>
+
+            <!-- Bottom Navigation -->
+            <div data-v-5ca38804="" data-v-52db0c36="" class="bottom" bis_skin_checked="1">
+                <div data-v-5ca38804="" class="flex flex-bom" bis_skin_checked="1">
+                    <div data-v-5ca38804="" class="item active" bis_skin_checked="1" onclick="OracleApp.navigate('/home')">
+                        <div data-v-5ca38804="" class="img-box" bis_skin_checked="1">
+                            <img data-v-5ca38804="" class="imgc" src="https://i.postimg.cc/NfkcY3TR/20250828-140018.png" alt="">
+                        </div>
+                        <p data-v-5ca38804="" class="item-pone item-color">Início</p>
+                    </div>
+                    <div data-v-5ca38804="" class="item" bis_skin_checked="1" onclick="OracleApp.navigate('/ordered.html')">
+                        <div data-v-5ca38804="" class="img-box" bis_skin_checked="1">
+                            <img data-v-5ca38804="" class="imgc" src="https://i.postimg.cc/81F0b85w/20250828-140043.png" alt="">
+                        </div>
+                        <p data-v-5ca38804="" class="item-pone">Investido</p>
+                    </div>
+                    <div data-v-5ca38804="" class="item" bis_skin_checked="1" onclick="OracleApp.navigate('/my-team.html')">
+                        <div data-v-5ca38804="" class="img-box" bis_skin_checked="1">
+                            <img data-v-5ca38804="" class="imgc" src="https://i.postimg.cc/3wp9QT0T/20250828-140122.png" alt="">
+                        </div>
+                        <p data-v-5ca38804="" class="item-pone">Equipe</p>
+                    </div>
+                    <div data-v-5ca38804="" class="item" bis_skin_checked="1" onclick="OracleApp.navigate('/profile.html')">
+                        <div data-v-5ca38804="" class="img-box" bis_skin_checked="1">
+                            <img data-v-5ca38804="" class="imgc" src="https://i.postimg.cc/kgLwH44s/20250828-140201.png" alt="">
+                        </div>
+                        <p data-v-5ca38804="" class="item-pone">Perfil</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Floating Element -->
+        <div class="xuanfu" draggable="true" id="moveDiv" bis_skin_checked="1"></div>
+    </div>
+
+    <!-- Hidden Elements -->
+    <div id="snackbar" style="display: none;"></div>
+    <div id="snackbar_error" style="display: none;"></div>
+    <div id="preloader" style="display: none;">
+        <div class="van-toast van-toast--middle loadingcss" bis_skin_checked="1">
+            <i class="van-icon van-toast__icon">
+                <img src="img/loading.gif" class="van-icon__image">
+            </i>
+        </div>
+    </div>
+    <div id="blurred-background" style="display: none;"></div>
+    <div class="loaderd" id="preloade" style="display: none;"></div>
+
+    <!-- Popup -->
+    <div class="popup-overlay" id="homePopup" style="display: none;">
+        <div class="popup-content">
+            <span class="popup-close" onclick="closePopup()">&times;</span>
+            <img src="https://orac-le.online/public/uploads/popup/1769103113_popup.jpg" alt="Popup Image" class="popup-image">
+            <div class="popup-text">
+                <blockquote class="dropdown-item">
+                    <p class="dropdown-item"><img src="https://i.postimg.cc/Bn6ZDQR2/circulo-de-flecha-(2).png" style="width: 24px;"> Obtenha 500kz ao concluir seu cadastro</p>
+                    <p class="dropdown-item"><img src="https://i.postimg.cc/Bn6ZDQR2/circulo-de-flecha-(2).png" style="letter-spacing: 0.15px; width: 24px;"><span style="letter-spacing: 0.15px;">&nbsp;</span><span style="letter-spacing: 0.15px;">&nbsp;Retiradas disponíveis 24 horas por dia</span></p>
+                    <p class="dropdown-item"><img src="https://i.postimg.cc/Bn6ZDQR2/circulo-de-flecha-(2).png" style="letter-spacing: 0.15px; width: 24px;"><span style="letter-spacing: 0.15px;">&nbsp;</span><span style="letter-spacing: 0.15px;">&nbsp;Rendimentos automatizados e por hora&nbsp;</span><span style="letter-spacing: 0.15px;"><br></span></p>
+                    <p class="dropdown-item"><img src="img/telegrama.png" data-filename="circulo-de-flecha (1).png" style="width: 24px;">&nbsp; Entre em nosso grupo de telegramas<span style="letter-spacing: 0.15px; text-align: inherit; font-size: 1rem;">&nbsp;</span></p>
+                </blockquote>
+            </div>
+            <a href="https://t.me/oracleoficial" class="popup-btn">Solicitar Entrada</a>
+        </div>
+    </div>
+
+    <!-- SISTEMA COMPLETO COM APIS REAIS CORRIGIDAS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script>
+        // ============================================
+        // SISTEMA ORACLE - COM APIS REAIS CORRIGIDAS
+        // ============================================
+        
+        const OracleApp = {
+            // SUAS APIS REAIS
+            API_BASE: 'https://bd-p4q7.onrender.com',
+            DOMAIN: 'https://orac-le.online',
+            
+            // Configurações
+            TOKEN_EXPIRY_HOURS: 5,
+            
+            // Planos reais do seu HTML
+            plans: [
+                { id: 1, name: "Oracle BR", price: 2500, daily: 250, hourly: 10.42, total: 30000 },
+                { id: 2, name: "Oracle PT", price: 5000, daily: 500, hourly: 20.83, total: 60000 },
+                { id: 3, name: "Oracle AOA", price: 10000, daily: 1000, hourly: 41.67, total: 120000 },
+                { id: 4, name: "Oracle MOZ", price: 30000, daily: 3000, hourly: 125, total: 360000 },
+                { id: 5, name: "Oracle ZA", price: 50000, daily: 5000, hourly: 208.33, total: 600000 },
+                { id: 6, name: "Oracle NG", price: 100000, daily: 10000, hourly: 416.67, total: 1200000 },
+                { id: 7, name: "Oracle IN", price: 150000, daily: 15000, hourly: 625, total: 1800000 },
+                { id: 8, name: "Oracle CN", price: 300000, daily: 30000, hourly: 1250, total: 3600000 },
+                { id: 9, name: "Oracle JP", price: 600000, daily: 60000, hourly: 2500, total: 7200000 },
+                { id: 10, name: "Oracle DE", price: 900000, daily: 90000, hourly: 3750, total: 10800000 },
+                { id: 11, name: "Oracle EUA", price: 1200000, daily: 120000, hourly: 5000, total: 14400000 }
+            ],
+            
+            // Inicialização
+            init() {
+                console.log('🟢 Oracle App iniciado');
+                this.checkAuth();
+                this.loadUserData();
+                this.setupPage();
+            },
+            
+            // ============================================
+            // SISTEMA DE AUTENTICAÇÃO
+            // ============================================
+            
+            checkAuth() {
+                const tokenData = this.getTokenData();
+                if (!tokenData || !tokenData.token) {
+                    this.showToast('🔐 Faça login para continuar', 'error');
+                    setTimeout(() => {
+                        window.location.href = 'https://orac-le.online/login';
+                    }, 2000);
+                    return false;
+                }
+                
+                if (Date.now() > tokenData.expiry) {
+                    this.clearAuth();
+                    this.showToast('🔐 Sessão expirada. Faça login novamente.', 'error');
+                    setTimeout(() => {
+                        window.location.href = 'https://orac-le.online/login';
+                    }, 2000);
+                    return false;
+                }
+                
+                return true;
+            },
+            
+            getTokenData() {
+                try {
+                    const tokenData = localStorage.getItem('user_token');
+                    if (!tokenData) return null;
+                    return JSON.parse(tokenData);
+                } catch (e) {
+                    return null;
+                }
+            },
+            
+            getToken() {
+                const tokenData = this.getTokenData();
+                return tokenData ? tokenData.token : null;
+            },
+            
+            getUserId() {
+                return localStorage.getItem('user_id');
+            },
+            
+            clearAuth() {
+                localStorage.removeItem('user_token');
+                localStorage.removeItem('user_id');
+                localStorage.removeItem('remembered_phone');
+            },
+            
+            // ============================================
+            // TOAST SYSTEM
+            // ============================================
+            showToast(message, type = 'info') {
+                const existing = document.querySelector('.oracle-toast');
+                if (existing) existing.remove();
+                
+                const toast = document.createElement('div');
+                toast.className = `oracle-toast ${type}`;
+                
+                if (type === 'loading') {
+                    toast.innerHTML = `
+                        <img src="img/loading.gif" class="toast-gif" alt="Carregando">
+                        <div class="toast-message">${message}</div>
+                    `;
+                } else {
+                    toast.innerHTML = `<div class="toast-message">${message}</div>`;
+                }
+                
+                document.body.appendChild(toast);
+                
+                if (type !== 'loading') {
+                    setTimeout(() => {
+                        if (toast.parentNode) {
+                            toast.style.opacity = '0';
+                            toast.style.transition = 'opacity 0.5s';
+                            setTimeout(() => toast.remove(), 500);
+                        }
+                    }, 3000);
+                }
+                
+                return toast;
+            },
+            
+            // ============================================
+            // LOADER SYSTEM
+            // ============================================
+            showLoader(text = 'Processando...') {
+                this.hideLoader();
+                
+                const loader = document.createElement('div');
+                loader.className = 'oracle-loader';
+                loader.id = 'oracle-loader-active';
+                loader.innerHTML = `
+                    <img src="img/loading.gif" alt="Carregando">
+                    <p>${text}</p>
+                `;
+                document.body.appendChild(loader);
+            },
+            
+            hideLoader() {
+                const loader = document.getElementById('oracle-loader-active');
+                if (loader) {
+                    loader.style.opacity = '0';
+                    setTimeout(() => {
+                        if (loader.parentNode) loader.remove();
+                    }, 300);
+                }
+            },
+            
+            // ============================================
+            // SISTEMA DE COMPRA CORRIGIDO
+            // ============================================
+            async buyPackage(planId, planName, price) {
+                console.log('=== DEBUG COMPRA ===');
+                console.log('Plan ID:', planId);
+                console.log('Plan Name:', planName);
+                console.log('Price:', price);
+                
+                if (!this.checkAuth()) return;
+                
+                const plan = this.plans.find(p => p.id === planId);
+                if (!plan) {
+                    this.showToast('❌ Plano não encontrado', 'error');
+                    return;
+                }
+                
+                this.disableBuyButtons(true);
+                
+                const loadingToast = this.showToast('Processando investimento...', 'loading');
+                
+                try {
+                    const token = this.getToken();
+                    
+                    // DADOS CORRETOS PARA A API
+                    const requestData = {
+                        product_id: planId.toString(),
+                        product_name: planName,
+                        amount: price,
+                        quantity: 1,
+                        daily_return: plan.daily,
+                        cycle_days: 120
+                    };
+                    
+                    console.log('📤 Enviando dados para API:', requestData);
+                    console.log('URL:', `${this.API_BASE}/api/purchase`);
+                    
+                    const response = await fetch(`${this.API_BASE}/api/purchase`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify(requestData)
+                    });
+                    
+                    if (loadingToast) loadingToast.remove();
+                    
+                    const data = await response.json();
+                    
+                    console.log('📥 Resposta da API:', data);
+                    
+                    this.disableBuyButtons(false);
+                    
+                    if (response.ok && data.success) {
+                        this.showToast(
+                            `✅ Investimento realizado!\n` +
+                            `Plano: ${planName}\n` +
+                            `Valor: KZ ${price.toLocaleString('pt-BR')}\n` +
+                            `Novo saldo: KZ ${data.data.new_balance.toLocaleString('pt-BR')}`, 
+                            'success'
+                        );
+                        
+                        this.updateBalance(data.data.new_balance);
+                        
+                        setTimeout(() => {
+                            this.loadUserData();
+                        }, 1000);
+                        
+                    } else {
+                        const errorMsg = data.message || 'Erro desconhecido';
+                        this.showToast(`❌ ${errorMsg}`, 'error');
+                    }
+                    
+                } catch (error) {
+                    console.error('Erro na compra:', error);
+                    this.hideLoader();
+                    this.disableBuyButtons(false);
+                    this.showToast('❌ Erro de conexão com o servidor', 'error');
+                }
+            },
+            
+            disableBuyButtons(disabled) {
+                const buttons = document.querySelectorAll('.buy-btn');
+                buttons.forEach(btn => {
+                    if (disabled) {
+                        btn.disabled = true;
+                        btn.classList.add('disabled');
+                        btn.innerHTML = 'Processando...';
+                    } else {
+                        btn.disabled = false;
+                        btn.classList.remove('disabled');
+                        btn.innerHTML = 'Comprar';
+                    }
+                });
+            },
+            
+            // ============================================
+            // CARREGAR DADOS DO USUÁRIO
+            // ============================================
+            async loadUserData() {
+                if (!this.checkAuth()) return;
+                
+                try {
+                    const token = this.getToken();
+                    
+                    const response = await fetch(`${this.API_BASE}/api/user/profile`, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        
+                        if (data.success && data.data) {
+                            this.updateUserInterface(data.data);
+                        }
+                    }
+                } catch (error) {
+                    console.error('Erro ao carregar dados:', error);
+                }
+            },
+            
+            updateUserInterface(userData) {
+                const balanceElement = document.getElementById('userBalance');
+                if (balanceElement && userData.wallet_balance !== undefined) {
+                    balanceElement.textContent = `KZ ${userData.wallet_balance.toLocaleString('pt-BR')}`;
+                }
+            },
+            
+            updateBalance(newBalance) {
+                const balanceElement = document.getElementById('userBalance');
+                if (balanceElement) {
+                    balanceElement.textContent = `KZ ${newBalance.toLocaleString('pt-BR')}`;
+                }
+            },
+            
+            // ============================================
+            // NAVEGAÇÃO
+            // ============================================
+            navigate(url) {
+                this.showLoader('Carregando...');
+                setTimeout(() => {
+                    window.location.href = url;
+                }, 500);
+            },
+            
+            setupPage() {
+                setTimeout(() => {
+                    const popup = document.getElementById('homePopup');
+                    if (popup && !sessionStorage.getItem('popupShown')) {
+                        popup.style.display = 'flex';
+                        sessionStorage.setItem('popupShown', 'true');
+                    }
+                }, 1000);
+            },
+            
+            closePopup() {
+                const popup = document.getElementById('homePopup');
+                if (popup) popup.style.display = 'none';
+            }
+        };
+        
+        // ============================================
+        // INICIALIZAÇÃO
+        // ============================================
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            OracleApp.init();
+            
+            window.closePopup = function() {
+                OracleApp.closePopup();
+            };
+            
+            document.onreadystatechange = function() {
+                if (document.readyState === "interactive") {
+                    document.getElementById("preloader").style.display = "flex";
+                    document.getElementById("blurred-background").style.display = "block";
+                } else if (document.readyState === "complete") {
+                    document.getElementById("preloader").style.display = "none";
+                    document.getElementById("blurred-background").style.display = "none";
+                    
+                    setTimeout(() => {
+                        if (OracleApp.checkAuth()) {
+                            OracleApp.showToast('🎉 Bem-vindo à Oracle Investments!', 'success');
+                        }
+                    }, 1000);
+                }
+            };
+        });
+        
+        window.onload = function() {
+            document.querySelector('.loaderd').style.display = 'none';
+        };
+        
+        // ============================================
+        // LOGS DO SISTEMA
+        // ============================================
+        
+        console.log('🚀 ============================================');
+        console.log('🚀 ORACLE INVESTMENTS - SISTEMA CORRIGIDO');
+        console.log('🚀 ============================================');
+        console.log('✅ Sistema de compra corrigido');
+        console.log('✅ Dados enviados corretamente para a API');
+        console.log('✅ Toast system funcional');
+        console.log('✅ Sem erros 400 Bad Request');
+        console.log('🚀 ============================================');
+        
+    </script>
+    
+    <!-- Seu script externo -->
+    <script src="https://orac-le.online/public/assets/p.js"></script>
+</body>
+</html>
