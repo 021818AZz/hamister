@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="icon" href="/cineverse/dist/favicon.ico">
+    <title>cineverse - Meus Pacotes</title>
+
+    <link href="css/chunk-vendors.0468bd4c.css" rel="stylesheet">
+    <link href="css/app.52d0b517.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="css/775.bd75e833.css">
+    <link rel="stylesheet" type="text/css" href="css/816.9c29bf212.css">
+    <link rel="stylesheet" type="text/css" href="css/608.b33e7c96.css">
+    <link rel="stylesheet" type="text/css" href="css/580.66923993.css">
+    <link rel="stylesheet" type="text/css" href="css/437.66264f7a.css">
+    <link rel="stylesheet" type="text/css" href="css/165.444cee7e.css">
+    <link rel="stylesheet" type="text/css" href="css/361.9609fc71.css">
+    <link rel="stylesheet" type="text/css" href="css/868.ef352a45.css">
+    <link rel="stylesheet" type="text/css" href="css/589.f9f3d6c5.css">
+    <link rel="stylesheet" type="text/css" href="css/123.32f7ffba.css">
+    <link rel="stylesheet" type="text/css" href="css/598.65173f82.css">
+    <link rel="stylesheet" type="text/css" href="css/67.9404612c.css">
+    
+    <!-- Toastify CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    
+    <style>
+        .investpage .myproduct[data-v-77274192] {
+            width: 92%;
+            margin: 2.666667vw auto;
+            height: 28.533333vw;
+            background: url(img/tt1.jpg) no-repeat top/100% auto;
+            border-radius: 1.866667vw;
+            padding: 2.666667vw 4vw;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Estilos para Toast */
+        .toast-success {
+            background: linear-gradient(to right, #00b09b, #96c93d) !important;
+        }
+        
+        .toast-error {
+            background: linear-gradient(to right, #ff416c, #ff4b2b) !important;
+        }
+        
+        .toast-info {
+            background: linear-gradient(to right, #2193b0, #6dd5ed) !important;
+        }
+        
+        /* Estilo para botões desabilitados */
+        .purchaseBtn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        /* Estilo para estado vazio */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+        
+        .empty-state button {
+            background: #e21b15;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        
+        /* Estilos para os produtos */
+        .productList .item {
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .img-box {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .img-box img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        
+        .r-info .name {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+        }
+        
+        .cycle-box {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .cycle {
+            margin: 2px 0;
+        }
+        
+        .bottomWrap {
+            display: flex;
+            justify-content: space-between;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .bottomItem {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .bottomItem p {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+            color: #e21b15;
+        }
+        
+        .bottomItem span {
+            font-size: 11px;
+            color: #666;
+        }
+        
+        .lined {
+            width: 1px;
+            background: #ddd;
+            margin: 0 10px;
+        }
+        
+        .rightInfo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .priceWrap p {
+            margin: 0 0 5px 0;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .priceWrap span {
+            font-size: 16px;
+            font-weight: bold;
+            color: #e21b15;
+        }
+        
+        .van-button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        /* Animação para coleta */
+        @keyframes collectAnimation {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .collecting {
+            animation: collectAnimation 0.5s ease-in-out;
+        }
+        
+        /* Loader */
+        .loaderd {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Estilos para o overlay de vídeo */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            display: none;
+        }
+        
+        .video-container {
+            width: 90%;
+            max-width: 500px;
+            background: #1a1a1a;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .video-header {
+            background: #2d2d2d;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        
+        .video-header h3 {
+            margin: 0;
+            font-size: 16px;
+            color: #e21b15;
+        }
+        
+        .countdown-timer {
+            background: #e21b15;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            min-width: 60px;
+            text-align: center;
+        }
+        
+        .close-video {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .close-video:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .video-player {
+            width: 100%;
+            height: 280px;
+            background: #000;
+            position: relative;
+        }
+        
+        .video-player video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .video-controls {
+            background: #2d2d2d;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .video-info {
+            color: white;
+            padding: 15px 20px;
+            font-size: 14px;
+            text-align: center;
+            background: #252525;
+            border-top: 1px solid #333;
+        }
+        
+        .control-btn {
+            background: #444;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .control-btn:hover {
+            background: #555;
+        }
+        
+        .control-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .progress-container {
+            width: 100%;
+            padding: 0 20px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 5px;
+            background: #444;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            width: 0%;
+            height: 100%;
+            background: #e21b15;
+            transition: width 0.1s linear;
+        }
+        
+        .loading-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 16px;
+            text-align: center;
+            background: rgba(0,0,0,0.7);
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <!-- Overlay de Vídeo -->
+    <div class="video-overlay" id="videoOverlay">
+        <div class="video-container">
+            <div class="video-header">
+                <h3>🎬 Assistindo para Liberar Recompensa</h3>
+                <div class="countdown-timer" id="countdownTimer">15s</div>
+                <button class="close-video" id="closeVideo" disabled>×</button>
+            </div>
+            <div class="video-player" id="videoPlayer">
+                <video id="collectVideo" playsinline>
+                    <!-- O vídeo será carregado dinamicamente -->
+                </video>
+                <div class="loading-message" id="loadingMessage">
+                    Carregando vídeo...
+                </div>
+            </div>
+            <div class="video-controls">
+                <button class="control-btn" id="playPauseBtn" disabled>▶️</button>
+                <button class="control-btn" id="muteBtn" disabled>🔊</button>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress" id="videoProgress"></div>
+                </div>
+            </div>
+            <div class="video-info">
+                🎥 Aguarde 15 segundos para liberar sua recompensa...
+                <br>
+                <small>A coleta será automática após a contagem</small>
+            </div>
+        </div>
+    </div>
+    
+    <div id="app" data-v-app="">
+        <div class="investpage" data-v-77274192="">
+            <p class="titleho" data-v-77274192="">Meus Pacotes</p>
+            <div class="myproduct flex" data-v-77274192="">
+                <div class="left-box" data-v-77274192="">
+                    <div class="leftcts" data-v-77274192="">
+                        <span data-v-77274192="">Pacotes:</span>
+                        <p data-v-77274192="" id="totalPacotes">0</p>
+                    </div>
+                    <div class="leftcts rightcts" data-v-77274192="">
+                        <span data-v-77274192="">Colheita:</span>
+                        <p data-v-77274192="" id="totalColheita">Kz 0</p>
+                    </div>
+                </div>
+                <p class="r-record" data-v-77274192="" onclick="iniciarColetaTodos()" id="botaoColetarTodos">Coletar</p>
+            </div>
+            
+            <section class="section-box" data-v-77274192="">
+                <div class="van-tabs van-tabs--line tabs-box" data-v-77274192="">
+                    <div class="van-tabs__wrap">
+                        <div role="tablist" class="van-tabs__nav van-tabs__nav--line van-tabs__nav--complete"
+                            aria-orientation="horizontal">
+                            <div id="van-tabs-39-0" role="tab"
+                                class="van-tab van-tab--line van-tab--grow van-tab--active" tabindex="0"
+                                aria-selected="true" aria-controls="van-tab-40">
+                                <span class="van-tab__text"><p data-v-77274192="">Em progresso...</p></span>
+                            </div>
+                            <div class="van-tabs__line"
+                                style="transform: translateX(91px) translateX(-50%); transition-duration: 0.3s;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="van-tabs__content">
+                        <div id="van-tab-40" role="tabpanel" class="van-tab__panel" tabindex="0"
+                            aria-labelledby="van-tabs-39-0" data-v-77274192="" style="">
+                            <div role="feed" class="van-list" aria-busy="false" data-v-77274192="">
+                                <div class="productTitle" data-v-1b2914cc="">
+                                    <div class="title" data-v-1b2914cc="">
+                                        <img src="img/123.png" alt="" data-v-1b2914cc="">
+                                        <p data-v-1b2914cc="">Pacotes adquiridos</p>
+                                    </div>
+                                    <span data-v-1b2914cc="">Compre produtos para desbloquear mais benefícios</span>
+                                </div>
+                                
+                                <div class="productList" data-v-1b2914cc="" id="listaProdutos">
+                                    <!-- Os produtos serão carregados aqui via JavaScript -->
+                                </div>
+                                
+                                <div class="van-list__finished-text"></div>
+                                <div class="van-list__placeholder"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="bottom" data-v-70b08a54="" data-v-77274192="">
+                <div class="flex flex-bom" data-v-70b08a54="">
+                    <div class="item" data-v-70b08a54="" onclick="window.location.href='/home.html'">
+                        <div class="img-box" data-v-70b08a54="">
+                            <img class="imgc" src="img/home.png" alt="" data-v-70b08a54="">
+                        </div>
+                        <p class="item-pone" data-v-70b08a54="" style="color: rgb(38, 50, 73);">Início</p>
+                    </div>
+                    <div class="item active" data-v-70b08a54="" onclick="window.location.href='/ordered.html'">
+                        <div class="img-box" data-v-70b08a54="">
+                            <img class="imgc" src="img/ordered.png" alt="" data-v-70b08a54="">
+                        </div>
+                        <p class="item-pone" data-v-70b08a54="" style="color: rgb(226, 27, 21);">Adquirido</p>
+                    </div>
+                    <div class="item" data-v-70b08a54="" onclick="window.location.href='/equipe.html'">
+                        <div class="img-box" data-v-70b08a54="">
+                            <img class="imgc" src="img/equipe.png" alt="" data-v-70b08a54="">
+                        </div>
+                        <p class="item-pone" data-v-70b08a54="" style="color: rgb(38, 50, 73);">Equipe</p>
+                    </div>
+                    <div class="item" data-v-70b08a54="" onclick="window.location.href='/profile.html'">
+                        <div class="img-box" data-v-70b08a54="">
+                            <img class="imgc" src="img/profile.png" alt="" data-v-70b08a54="">
+                        </div>
+                        <p class="item-pone" data-v-70b08a54="" style="color: rgb(38, 50, 73);">Meu</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loader -->
+    <div class="loaderd" id="preloade" style="display: none;">
+        <center>
+            <div class="loaderd"><img src="img/loading.gif" alt="" style="height: 100px; width: 100px;"></div>
+        </center>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Toastify JS -->
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+    <script type="text/javascript">
+        // CONFIGURAÇÕES
+        const API_BASE_URL = 'https://bd-p4q7.onrender.com';
+        let userPackages = [];
+        let currentCollectType = null; // 'single' ou 'all'
+        let currentPackageId = null;
+        let currentPackageIndex = null;
+        let countdownInterval = null;
+        let remainingSeconds = 15; // Aumentado para 15 segundos
+        
+        // LISTA DE VÍDEOS DISPONÍVEIS (apenas de 1 a 16)
+        const videoList = [
+            "videos/1.mp4",
+            "videos/2.mp4",
+            "videos/3.mp4",
+            "videos/4.mp4",
+            "videos/5.mp4",
+            "videos/6.mp4",
+            "videos/7.mp4",
+            "videos/8.mp4",
+            "videos/9.mp4",
+            "videos/10.mp4",
+            "videos/11.mp4",
+            "videos/12.mp4",
+            "videos/13.mp4",
+            "videos/14.mp4",
+            "videos/15.mp4",
+            "videos/16.mp4"
+        ];
+
+        // FUNÇÃO SEGURA PARA FORMATAR NÚMEROS
+        function formatNumber(value) {
+            if (value === undefined || value === null || isNaN(value)) {
+                return '0';
+            }
+            return Number(value).toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+
+        // TOKEN E AUTENTICAÇÃO
+        function getToken() {
+            const tokenData = localStorage.getItem('user_token');
+            if (!tokenData) {
+                showToast('Faça login para continuar', 'error');
+                setTimeout(() => window.location.href = 'index.html', 2000);
+                return null;
+            }
+            
+            try {
+                const { token, expiry } = JSON.parse(tokenData);
+                if (Date.now() > expiry) {
+                    localStorage.removeItem('user_token');
+                    localStorage.removeItem('user_id');
+                    showToast('Sessão expirada', 'error');
+                    setTimeout(() => window.location.href = 'index.html', 2000);
+                    return null;
+                }
+                return token;
+            } catch (e) {
+                showToast('Erro de autenticação', 'error');
+                return null;
+            }
+        }
+
+        function getUserId() {
+            return localStorage.getItem('user_id');
+        }
+
+        // TOAST NOTIFICATIONS
+        function showToast(message, type = 'info') {
+            Toastify({
+                text: message,
+                duration: 3000,
+                gravity: "top",
+                position: "center",
+                stopOnFocus: true,
+                offset: { y: '50vh' },
+                className: type === 'error' ? 'toast-error' : 
+                          type === 'success' ? 'toast-success' : 'toast-info',
+                style: {
+                    background: type === 'error' ? 'linear-gradient(to right, #ff416c, #ff4b2b)' :
+                              type === 'success' ? 'linear-gradient(to right, #00b09b, #96c93d)' :
+                              'linear-gradient(to right, #666666, #888888)',
+                    color: '#ffffff',
+                    width: 'auto',
+                    maxWidth: '90%',
+                    minWidth: '300px',
+                    borderRadius: '10px',
+                    padding: '16px 24px',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    textAlign: 'center',
+                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+                    zIndex: '9999'
+                }
+            }).showToast();
+        }
+
+        // LOADER
+        function showLoader() {
+            const loader = document.getElementById('preloade');
+            if (loader) loader.style.display = 'flex';
+        }
+
+        function hideLoader() {
+            const loader = document.getElementById('preloade');
+            if (loader) loader.style.display = 'none';
+        }
+
+        // SISTEMA DE VÍDEO
+        function getRandomVideo() {
+            const randomIndex = Math.floor(Math.random() * videoList.length);
+            return videoList[randomIndex];
+        }
+        
+        function startCountdown() {
+            remainingSeconds = 15; // Aumentado para 15 segundos
+            const countdownElement = document.getElementById('countdownTimer');
+            
+            // Atualizar contador inicial
+            countdownElement.textContent = `${remainingSeconds}s`;
+            
+            // Iniciar contagem regressiva
+            countdownInterval = setInterval(() => {
+                remainingSeconds--;
+                countdownElement.textContent = `${remainingSeconds}s`;
+                
+                // Atualizar barra de progresso
+                const progressPercent = ((15 - remainingSeconds) / 15) * 100; // Ajustado para 15 segundos
+                document.getElementById('videoProgress').style.width = progressPercent + '%';
+                
+                if (remainingSeconds <= 0) {
+                    clearInterval(countdownInterval);
+                    countdownElement.textContent = '0s';
+                    completeVideo();
+                }
+            }, 1000);
+        }
+        
+        function showVideoOverlay() {
+            const overlay = document.getElementById('videoOverlay');
+            const videoElement = document.getElementById('collectVideo');
+            const loadingMessage = document.getElementById('loadingMessage');
+            const closeBtn = document.getElementById('closeVideo');
+            const playBtn = document.getElementById('playPauseBtn');
+            const muteBtn = document.getElementById('muteBtn');
+            
+            // Resetar estado
+            remainingSeconds = 15; // Aumentado para 15 segundos
+            clearInterval(countdownInterval);
+            
+            // Escolher vídeo aleatório
+            const randomVideo = getRandomVideo();
+            
+            // Mostrar mensagem de carregamento
+            loadingMessage.style.display = 'block';
+            
+            // Configurar vídeo
+            videoElement.src = randomVideo;
+            videoElement.currentTime = 0;
+            videoElement.muted = false;
+            videoElement.controls = false;
+            
+            // Desabilitar botões durante carregamento
+            closeBtn.disabled = true;
+            playBtn.disabled = true;
+            muteBtn.disabled = true;
+            
+            // Resetar barra de progresso
+            document.getElementById('videoProgress').style.width = '0%';
+            
+            // Mostrar overlay
+            overlay.style.display = 'flex';
+            
+            // Configurar eventos do vídeo
+            videoElement.onloadeddata = function() {
+                loadingMessage.style.display = 'none';
+                
+                // Habilitar botões
+                closeBtn.disabled = false;
+                playBtn.disabled = false;
+                muteBtn.disabled = false;
+                
+                // Iniciar reprodução
+                videoElement.play().then(() => {
+                    // Iniciar contagem regressiva
+                    startCountdown();
+                }).catch(error => {
+                    console.error('Erro ao reproduzir vídeo:', error);
+                    // Mesmo com erro, iniciar contagem
+                    startCountdown();
+                });
+            };
+            
+            videoElement.onerror = function() {
+                loadingMessage.textContent = 'Erro ao carregar vídeo. Aguarde 15 segundos...';
+                // Mesmo com erro, iniciar contagem
+                startCountdown();
+            };
+            
+            // Configurar evento para quando o vídeo terminar
+            videoElement.onended = function() {
+                // Se o vídeo terminar antes da contagem, continuar contagem
+                if (remainingSeconds > 0) {
+                    // Mostrar mensagem que o vídeo terminou
+                    loadingMessage.style.display = 'block';
+                    loadingMessage.textContent = 'Vídeo finalizado. Aguarde ' + remainingSeconds + ' segundos...';
+                }
+            };
+        }
+        
+        function hideVideoOverlay() {
+            const overlay = document.getElementById('videoOverlay');
+            const videoElement = document.getElementById('collectVideo');
+            
+            // Parar vídeo
+            if (videoElement) {
+                videoElement.pause();
+                videoElement.currentTime = 0;
+                videoElement.src = '';
+            }
+            
+            // Parar contagem
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+                countdownInterval = null;
+            }
+            
+            // Esconder overlay
+            overlay.style.display = 'none';
+            
+            // Resetar botões
+            const closeBtn = document.getElementById('closeVideo');
+            const playBtn = document.getElementById('playPauseBtn');
+            const muteBtn = document.getElementById('muteBtn');
+            
+            closeBtn.disabled = false;
+            playBtn.disabled = false;
+            muteBtn.disabled = false;
+        }
+        
+        function completeVideo() {
+            // Esconder overlay primeiro
+            hideVideoOverlay();
+            
+            // Processar coleta automaticamente
+            if (currentCollectType === 'single') {
+                processSingleCollection(currentPackageId, currentPackageIndex);
+            } else if (currentCollectType === 'all') {
+                processAllCollection();
+            }
+        }
+        
+        function initVideoControls() {
+            const videoElement = document.getElementById('collectVideo');
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const muteBtn = document.getElementById('muteBtn');
+            const closeBtn = document.getElementById('closeVideo');
+            
+            // Controle Play/Pause
+            playPauseBtn.addEventListener('click', function() {
+                if (videoElement.paused) {
+                    videoElement.play();
+                    playPauseBtn.textContent = '⏸️';
+                } else {
+                    videoElement.pause();
+                    playPauseBtn.textContent = '▶️';
+                }
+            });
+            
+            // Controle Mute/Unmute
+            muteBtn.addEventListener('click', function() {
+                if (videoElement.muted) {
+                    videoElement.muted = false;
+                    muteBtn.textContent = '🔊';
+                } else {
+                    videoElement.muted = true;
+                    muteBtn.textContent = '🔇';
+                }
+            });
+            
+            // Fechar vídeo (só funciona se não estiver desabilitado)
+            closeBtn.addEventListener('click', function() {
+                if (!closeBtn.disabled) {
+                    hideVideoOverlay();
+                    showToast('❌ Coleta cancelada', 'error');
+                    
+                    // Resetar variáveis
+                    currentCollectType = null;
+                    currentPackageId = null;
+                    currentPackageIndex = null;
+                }
+            });
+            
+            // Atualizar botão play/pause quando vídeo pausar/play
+            videoElement.addEventListener('play', function() {
+                playPauseBtn.textContent = '⏸️';
+            });
+            
+            videoElement.addEventListener('pause', function() {
+                playPauseBtn.textContent = '▶️';
+            });
+        }
+        
+        // INICIAR COLETA COM VÍDEO
+        function iniciarColetaIndividual(packageId, index) {
+            const pkg = userPackages[index];
+            if (!pkg || !pkg.can_collect || pkg.status !== 'active') {
+                showToast('Este pacote não pode ser coletado no momento', 'error');
+                return;
+            }
+            
+            currentCollectType = 'single';
+            currentPackageId = packageId;
+            currentPackageIndex = index;
+            showVideoOverlay();
+        }
+        
+        function iniciarColetaTodos() {
+            const dailyIncome = userPackages
+                .filter(p => p.status === 'active' && p.can_collect)
+                .reduce((sum, p) => sum + (Number(p.daily_return) || 0), 0);
+            
+            if (dailyIncome === 0) {
+                showToast('Nenhuma colheita disponível', 'info');
+                return;
+            }
+            
+            currentCollectType = 'all';
+            showVideoOverlay();
+        }
+        
+        // PROCESSAR COLETA APÓS VÍDEO
+        async function processSingleCollection(packageId, index) {
+            const token = getToken();
+            if (!token) return;
+
+            showLoader();
+
+            try {
+                console.log(`💰 Processando coleta do pacote: ${packageId}`);
+                
+                const response = await fetch(`${API_BASE_URL}/api/tasks/collect-product-income`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        product_id: packageId
+                    })
+                });
+
+                const data = await response.json();
+                console.log('📋 Resposta da coleta:', data);
+
+                if (data.success) {
+                    const income = data.data?.income || 0;
+                    const newBalance = data.data?.new_balance || 0;
+                    showToast(`✅ Coletado Kz ${formatNumber(income)}!`, 'success');
+                    
+                    // Atualizar saldo na página
+                    updateUserBalance(newBalance);
+                    
+                    // Recarregar pacotes
+                    setTimeout(() => {
+                        loadUserPackages();
+                    }, 1000);
+                } else {
+                    showToast(data.message || 'Erro ao coletar', 'error');
+                }
+            } catch (error) {
+                console.error('❌ Erro na coleta:', error);
+                showToast('Erro de conexão', 'error');
+            } finally {
+                hideLoader();
+                
+                // Resetar variáveis
+                currentCollectType = null;
+                currentPackageId = null;
+                currentPackageIndex = null;
+            }
+        }
+        
+        async function processAllCollection() {
+            const token = getToken();
+            if (!token) return;
+
+            showLoader();
+
+            try {
+                console.log('💰💰 Processando coleta de todos os pacotes...');
+                
+                const response = await fetch(`${API_BASE_URL}/api/tasks/collect-all-income`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const data = await response.json();
+                console.log('📋 Resposta da coleta total:', data);
+
+                if (data.success) {
+                    const totalIncome = data.data?.total_income || 0;
+                    const productsCollected = data.data?.products_collected || 0;
+                    const newBalance = data.data?.new_balance || 0;
+                    
+                    showToast(`✅ Coletado Kz ${formatNumber(totalIncome)} de ${productsCollected} produtos!`, 'success');
+                    
+                    // Atualizar saldo
+                    updateUserBalance(newBalance);
+                    
+                    // Recarregar pacotes
+                    setTimeout(() => {
+                        loadUserPackages();
+                    }, 1000);
+                } else {
+                    showToast(data.message || 'Erro ao coletar todos', 'error');
+                }
+            } catch (error) {
+                console.error('❌ Erro na coleta total:', error);
+                showToast('Erro de conexão', 'error');
+            } finally {
+                hideLoader();
+                
+                // Resetar variáveis
+                currentCollectType = null;
+            }
+        }
+
+        // CARREGAR PACOTES DO USUÁRIO
+        async function loadUserPackages() {
+            const token = getToken();
+            if (!token) return;
+
+            showLoader();
+
+            try {
+                console.log('🔄 Carregando pacotes...');
+                const response = await fetch(`${API_BASE_URL}/api/user/purchases`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.status === 401) {
+                    showToast('Sessão expirada', 'error');
+                    setTimeout(() => window.location.href = 'index.html', 2000);
+                    return;
+                }
+
+                const data = await response.json();
+                console.log('📦 Resposta da API:', data);
+
+                if (data.success) {
+                    userPackages = data.data || [];
+                    displayPackages(userPackages);
+                    updateStatistics(userPackages);
+                    console.log(`✅ ${userPackages.length} pacotes carregados`);
+                } else {
+                    showToast(data.message || 'Erro ao carregar pacotes', 'error');
+                    displayEmptyState();
+                }
+            } catch (error) {
+                console.error('❌ Erro ao carregar pacotes:', error);
+                showToast('Erro de conexão', 'error');
+                displayEmptyState();
+            } finally {
+                hideLoader();
+            }
+        }
+
+        // EXIBIR PACOTES NA PÁGINA
+        function displayPackages(packages) {
+            const container = document.getElementById('listaProdutos');
+            if (!container) return;
+
+            if (!packages || packages.length === 0) {
+                displayEmptyState();
+                return;
+            }
+
+            container.innerHTML = '';
+
+            packages.forEach((pkg, index) => {
+                // Validar dados do pacote
+                const safePkg = {
+                    id: pkg.id || '',
+                    product_id: pkg.product_id || '',
+                    product_name: pkg.product_name || 'Produto Desconhecido',
+                    status: pkg.status || 'inactive',
+                    can_collect: pkg.can_collect || false,
+                    daily_return: Number(pkg.daily_return) || 0,
+                    days_remaining: Number(pkg.days_remaining) || 0,
+                    cycle_days: Number(pkg.cycle_days) || 0,
+                    total_earned: Number(pkg.total_earned) || 0,
+                    amount: Number(pkg.amount) || 0
+                };
+
+                const packageCard = createPackageCard(safePkg, index);
+                container.appendChild(packageCard);
+            });
+        }
+
+        // CRIAR CARD DO PACOTE
+        function createPackageCard(pkg, index) {
+            const div = document.createElement('div');
+            div.className = 'item';
+            div.setAttribute('data-v-1b2914cc', '');
+
+            // Cores por produto
+            const colors = {
+                'nikita': '#e21b15',
+                'lucifer': '#2d3748',
+                'tulsa_king': '#e53e3e',
+                'powe_book': '#805ad5',
+                'prison_break': '#3182ce',
+                'ultimo_navio': '#38a169',
+                'la_casa_de_papel': '#d69e2e',
+                'os_rounaround': '#4a5568'
+            };
+
+            const productId = pkg.product_id ? pkg.product_id.toLowerCase().replace(/\s+/g, '_') : '';
+            const color = colors[productId] || '#e21b15';
+            
+            // Status e cor
+            let statusText = pkg.status === 'active' ? 'Ativo' : 
+                             pkg.status === 'completed' ? 'Concluído' : 'Inativo';
+            let statusColor = pkg.status === 'active' ? color : 
+                              pkg.status === 'completed' ? '#4CAF50' : '#9e9e9e';
+
+            // Imagem do produto
+            const images = {
+                'nikita': 'img/nikita.jpg',
+                'lucifer': 'img/lucifer.jpg',
+                'tulsa_king': 'img/tulsa.jpg',
+                'powe_book': 'img/powe.jpg',
+                'prison_break': 'img/prison.jpg',
+                'ultimo_navio': 'img/ultimo.jpg',
+                'la_casa_de_papel': 'img/papel.jpg',
+                'os_rounaround': 'img/the.jpg'
+            };
+
+            const image = images[productId] || 'img/nikita.jpg';
+
+            // Configurar botão de coleta
+            const canCollect = pkg.can_collect && pkg.status === 'active';
+            const buttonText = canCollect ? `Coletar Kz ${formatNumber(pkg.daily_return)}` : 'Indisponível';
+            const buttonStyle = canCollect ? 
+                `background: ${color}; color: white; cursor: pointer;` : 
+                'background: #9e9e9e; color: white; cursor: not-allowed;';
+            const buttonClick = canCollect ? `iniciarColetaIndividual('${pkg.id}', ${index})` : 'return false';
+
+            // HTML do card
+            div.innerHTML = `
+                <div class="imgWrap" data-v-1b2914cc="">
+                    <div class="img-box" data-v-1b2914cc="">
+                        <img src="${image}" alt="${pkg.product_name}" data-v-1b2914cc="" style="border: 2px solid ${color};">
+                        <div class="r-info" data-v-1b2914cc="">
+                            <p class="name" data-v-1b2914cc="" style="color: ${color};">${pkg.product_name}</p>
+                            <div class="cycle-box" data-v-1b2914cc="">
+                                <p class="cycle" data-v-1b2914cc="">
+                                    Status: <span data-v-1b2914cc="" style="color: ${statusColor}; font-weight: bold;">${statusText}</span>
+                                </p>
+                                <p class="cycle" data-v-1b2914cc="">
+                                    Dias Restantes: <span data-v-1b2914cc="" style="color: ${color}; font-weight: bold;">${pkg.days_remaining}</span>
+                                </p>
+                                <p class="cycle" data-v-1b2914cc="">
+                                    Ciclo: <span data-v-1b2914cc="" style="color: ${color}; font-weight: bold;">${pkg.cycle_days} dias</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bottomWrap" data-v-1b2914cc="">
+                        <div class="bottomItem" data-v-1b2914cc="">
+                            <p data-v-1b2914cc="" style="color: ${color};">Kz ${formatNumber(pkg.daily_return)}</p>
+                            <span data-v-1b2914cc="">Renda diária</span>
+                        </div>
+                        <p class="lined" data-v-1b2914cc=""></p>
+                        <div class="bottomItem" data-v-1b2914cc="">
+                            <p data-v-1b2914cc="" style="color: ${color};">Kz ${formatNumber(pkg.total_earned)}</p>
+                            <span data-v-1b2914cc="">Total ganho</span>
+                        </div>
+                    </div>
+                    
+                    <div class="rightInfo" data-v-1b2914cc="">
+                        <div class="l-pric" data-v-1b2914cc="">
+                            <div class="priceWrap" data-v-1b2914cc="">
+                                <p data-v-1b2914cc="">Investido:</p>
+                                <span data-v-1b2914cc="" style="color: ${color};">Kz ${formatNumber(pkg.amount)}</span>
+                            </div>
+                        </div>
+                        <button onclick="${buttonClick}" 
+                                class="van-button van-button--default van-button--normal purchaseBtn" 
+                                data-v-1b2914cc="" 
+                                style="${buttonStyle} display: flex; align-items: center; justify-content: center; text-decoration: none; color: inherit; border: none;"
+                                ${!canCollect ? 'disabled' : ''}
+                                id="collectBtn${index}">
+                            <div class="van-button__content">
+                                <span class="van-button__text">${buttonText}</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            return div;
+        }
+
+        // ATUALIZAR ESTATÍSTICAS
+        function updateStatistics(packages) {
+            // Total de pacotes
+            document.getElementById('totalPacotes').textContent = packages.length;
+            
+            // Calcular colheita diária (somente ativos)
+            const dailyIncome = packages
+                .filter(p => p.status === 'active' && p.can_collect)
+                .reduce((sum, pkg) => sum + (Number(pkg.daily_return) || 0), 0);
+            
+            document.getElementById('totalColheita').textContent = `Kz ${formatNumber(dailyIncome)}`;
+            
+            // Atualizar botão de coletar todos
+            const collectAllBtn = document.getElementById('botaoColetarTodos');
+            if (collectAllBtn) {
+                if (dailyIncome > 0) {
+                    collectAllBtn.style.opacity = '1';
+                    collectAllBtn.style.cursor = 'pointer';
+                    collectAllBtn.textContent = `Coletar Kz ${formatNumber(dailyIncome)}`;
+                    collectAllBtn.onclick = iniciarColetaTodos;
+                } else {
+                    collectAllBtn.style.opacity = '0.6';
+                    collectAllBtn.style.cursor = 'not-allowed';
+                    collectAllBtn.textContent = 'Coletar';
+                    collectAllBtn.onclick = null;
+                }
+            }
+        }
+
+        // ATUALIZAR SALDO DO USUÁRIO
+        function updateUserBalance(newBalance) {
+            // Atualizar na página de pacotes
+            const userBalanceElement = document.getElementById('userBalance');
+            if (userBalanceElement) {
+                userBalanceElement.textContent = `KZ ${formatNumber(newBalance)}`;
+            }
+            
+            // Atualizar em outras páginas se necessário
+            const balanceElements = document.querySelectorAll('.user-balance');
+            balanceElements.forEach(el => {
+                el.textContent = `KZ ${formatNumber(newBalance)}`;
+            });
+        }
+
+        // ESTADO VAZIO
+        function displayEmptyState() {
+            const container = document.getElementById('listaProdutos');
+            if (!container) return;
+
+            container.innerHTML = `
+                <div class="item" data-v-1b2914cc="" style="text-align: center; padding: 40px 20px;">
+                    <div class="imgWrap" data-v-1b2914cc="">
+                        <div style="color: #666; font-size: 16px; margin-bottom: 20px;">
+                            📦 Nenhum pacote adquirido ainda
+                        </div>
+                        <button onclick="window.location.href='/home.html'" 
+                                style="background: #e21b15; color: white; border: none; padding: 12px 24px; 
+                                       border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: bold;">
+                            Comprar Primeiro Pacote
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            // Atualizar estatísticas para zero
+            document.getElementById('totalPacotes').textContent = '0';
+            document.getElementById('totalColheita').textContent = 'Kz 0';
+            
+            // Desabilitar botão de coletar todos
+            const collectAllBtn = document.getElementById('botaoColetarTodos');
+            if (collectAllBtn) {
+                collectAllBtn.style.opacity = '0.6';
+                collectAllBtn.style.cursor = 'not-allowed';
+                collectAllBtn.textContent = 'Coletar';
+                collectAllBtn.onclick = null;
+            }
+        }
+
+        // INICIALIZAÇÃO
+        function init() {
+            const token = getToken();
+            if (!token) return;
+
+            // Inicializar controles de vídeo
+            initVideoControls();
+            
+            // Carregar pacotes
+            loadUserPackages();
+            
+            // Atualizar a cada 30 segundos
+            setInterval(() => {
+                loadUserPackages();
+            }, 30000);
+            
+            // Mostrar mensagem de boas-vindas
+            setTimeout(() => {
+                showToast('Bem-vindo aos seus pacotes! 🎬', 'info');
+            }, 1000);
+        }
+
+        // INICIAR QUANDO A PÁGINA CARREGAR
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configurar loader
+            const loader = document.getElementById('preloade');
+            if (loader) loader.style.display = 'none';
+            
+            // Inicializar
+            init();
+            
+            // Configurar botão de coletar todos
+            const collectAllBtn = document.getElementById('botaoColetarTodos');
+            if (collectAllBtn) {
+                collectAllBtn.addEventListener('click', iniciarColetaTodos);
+            }
+        });
+
+        // EXPORTAR FUNÇÕES PARA USO GLOBAL
+        window.iniciarColetaIndividual = iniciarColetaIndividual;
+        window.iniciarColetaTodos = iniciarColetaTodos;
+        window.coletarTodos = iniciarColetaTodos;
+        window.collectSinglePackage = iniciarColetaIndividual;
+        window.collectAllPackages = iniciarColetaTodos;
+    </script>
+</body>
+</html> 
